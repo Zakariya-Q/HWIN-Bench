@@ -398,7 +398,7 @@ Transfer learning evaluation (GRQA Northeast-matched → STORET RI)
 
 ## Version Control
 
-All code referenced above is from the **HWIN_Bench_v1_RELEASE** repository at the tagged commit for v1.0.
+All code referenced above is from the **HWIN-Bench** repository (https://github.com/Zakariya-Q/HWIN-Bench) at the tagged commit for v1.0.
 
 **Tag**: `v1.0.0` 
 **Key Commit**: Canonical pipeline freeze after COMP-006 fix (GroupKFold correction)

@@ -59,7 +59,7 @@ HWIN-Bench solves this by providing a **single, frozen, immutable benchmark prot
 
 - This release includes the **HWIN-Bench harmonized (CBS) versions** of all datasets
 - Raw source data is also included where licenses permit (all 5 datasets)
-- **Exception**: GRQA v1.4 `observations.csv` (5.7 GB) exceeds GitHub's 2 GB LFS limit and is **not included in this GitHub repository**. It is deposited separately to Zenodo.
+- **Exception**: GRQA v1.4 `observations.csv` (5.7 GB) exceeds GitHub's 2 GB LFS file size limit and is **not included in this GitHub repository**. It is deposited separately to Zenodo.
 - Users are encouraged to download fresh copies from original providers for production use
 - See `data/README.md` for download instructions and checksums
 
@@ -67,23 +67,23 @@ HWIN-Bench solves this by providing a **single, frozen, immutable benchmark prot
 
 ## Harmonized Variables
 
-HWIN-Bench maps 100+ source variable names across 5 datasets to **49 canonical variables** (HWIN-VAR-001 through HWIN-VAR-049). The **11 benchmarkable variables** (meeting MIN_SAMPLES ≥ 100 in GRQA) are:
+HWIN-Bench maps 100+ source variable names across 5 datasets to **49 canonical variables** (HWIN-VAR-001 through HWIN-VAR-049). The **11 benchmarkable variables** (meeting MIN_SAMPLES ≥ 100 in GRQA and selected for the v1.0 canonical regression benchmark) are:
 
 | Variable ID | Canonical Name | GRQA Observations |
 |-------------|----------------|-------------------|
 | HWIN-VAR-001 | Water Temperature | 5,508,690 |
 | HWIN-VAR-002 | pH | 4,702,926 |
 | HWIN-VAR-003 | Dissolved Oxygen | 2,758,590 |
-| HWIN-VAR-004 | Turbidity | ≥100 |
-| HWIN-VAR-005 | Specific Conductance | ≥100 |
 | HWIN-VAR-008 | Nitrate Nitrogen | 2,343,593 |
 | HWIN-VAR-009 | Ammonium Nitrogen | 999,283 |
 | HWIN-VAR-010 | Phosphate Phosphorus | 2,858,114 |
 | HWIN-VAR-014 | DO Percent Saturation | 1,690,075 |
 | HWIN-VAR-015 | Total Suspended Solids | 1,308,520 |
-| HWIN-VAR-022 | Biochemical Oxygen Demand | ≥100 |
-| HWIN-VAR-023 | Chemical Oxygen Demand | 119,220 |
+| HWIN-VAR-028 | Total Nitrogen | 1,755,110 |
+| HWIN-VAR-031 | Total Ammonia Nitrogen | 615,870 |
 | HWIN-VAR-033 | Nitrite Nitrogen | 1,310,136 |
+
+**Important distinction**: HWIN-Bench v1.0 defines a **49-variable Canonical Variable Ontology (CVO)**, but the **canonical v1.0 regression benchmark** includes only **11 variables** that met all eligibility criteria (MIN_SAMPLES ≥ 100 in GRQA, valid source mappings, sufficient harmonized observations). The remaining 38 ontology variables were not included in the v1.0 regression benchmark due to insufficient harmonized GRQA observations, missing source mappings, or zero harmonized observations.
 
 **Full ontology**: `ontology/canonical_variable_ontology.csv` (49 variables)  
 **Synonym dictionary**: `ontology/variable_synonym_dictionary.csv` (89 mappings)  
@@ -218,7 +218,7 @@ If you use HWIN-Bench, please cite:
   author = {HWIN-Bench Consortium},
   year = {2026},
   version = {1.0.0},
-  doi = {10.5281/zenodo.XXXXXXX},
+  doi = {10.5281/zenodo.21877825},
   url = {https://github.com/Zakariya-Q/HWIN-Bench}
 }
 ```
