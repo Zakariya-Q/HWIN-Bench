@@ -1,0 +1,157 @@
+file_path,file_size_bytes,file_category,description,license,git_lfs_required,checksum_sha256
+README.md,11489,documentation,Main project README,CC-BY-4.0,NO,
+LICENSE,16777,license,CC-BY-4.0 license text + dataset licenses,CC-BY-4.0,NO,
+CITATION.cff,2605,citation,Machine-readable citation metadata,CC-BY-4.0,NO,
+CHANGELOG.md,4492,documentation,Version history,CC-BY-4.0,NO,
+data/README.md,7473,documentation,Data directory guide,CC-BY-4.0,NO,
+data/manifests/checksums.sha256,1024,manifest,SHA256 checksums for all data files,CC-BY-4.0,NO,
+data/manifests/file_inventory.csv,2048,manifest,Complete file listing,CC-BY-4.0,NO,
+data/manifests/dataset_versions.csv,1024,manifest,Dataset version tracking,CC-BY-4.0,NO,
+data/manifests/DATASET_RELEASE_INVENTORY.csv,1825,audit,Dataset integrity audit,CC-BY-4.0,NO,
+data/manifests/DERIVED_DATA_AUDIT.csv,6554,audit,Derived data classification,CC-BY-4.0,NO,
+licenses/DATASET_LICENSE_AUDIT.csv,5735,audit,Dataset license audit matrix,CC-BY-4.0,NO,
+licenses/ATTRIBUTION.md,8339,attribution,Required attribution for all datasets,CC-BY-4.0,NO,
+ontology/canonical_variable_ontology.csv,18129,ontology,51 canonical variables (CVO v1.0),CC0-1.0,NO,
+ontology/variable_synonym_dictionary.csv,33007,ontology,89 variable name mappings,CC0-1.0,NO,
+ontology/unit_harmonization_rules.csv,5504,ontology,92 unit conversion rules,CC0-1.0,NO,
+benchmark/protocol/01_HWIN_BENCH_PROTOCOL_v1.0.md,13733,protocol,Frozen benchmark protocol v1.0,CC-BY-4.0,NO,
+code/benchmark/run_full_benchmark_fixed.py,25000,code,Canonical benchmark runner,CC-BY-4.0,NO,
+code/benchmark/__init__.py,0,code,Package init,CC-BY-4.0,NO,
+code/validation/__init__.py,0,code,Validation package,CC-BY-4.0,NO,
+code/validation/cbs_validator.py,15000,code,CBS validation engine,CC-BY-4.0,NO,
+code/requirements/requirements.txt,1500,requirements,Python dependencies,CC-BY-4.0,NO,
+code/requirements/environment.yml,3000,requirements,Conda environment,CC-BY-4.0,NO,
+docs/QUICKSTART.md,2768,documentation,5-minute quickstart,CC-BY-4.0,NO,
+docs/DATA_GUIDE.md,8732,documentation,Complete data access guide,CC-BY-4.0,NO,
+docs/DATA_DICTIONARY.md,10310,documentation,Full data dictionary,CC-BY-4.0,NO,
+docs/REPRODUCIBILITY.md,7196,documentation,Reproduction instructions,CC-BY-4.0,NO,
+docs/LIMITATIONS.md,8964,documentation,Limitations and scope,CC-BY-4.0,NO,
+docs/DATA_PROVENANCE.md,18398,documentation,Full provenance chains,CC-BY-4.0,NO,
+examples/quickstart/download_wqp.py,5000,example,WQP/STORET download script,CC-BY-4.0,NO,
+examples/quickstart/analyze_results.ipynb,15000,example,Results analysis notebook,CC-BY-4.0,NO,
+data/harmonized/HWIN-GRQA-V1-4/observations.csv,6016295802,harmonized_data,GRQA CBS observations (25.8M rows),CC-BY-4.0,YES,TO_BE_COMPUTED
+data/harmonized/HWIN-GRQA-V1-4/stations.json,23998161,harmonized_data,GRQA station metadata (107K stations),CC-BY-4.0,NO,TO_BE_COMPUTED
+data/harmonized/HWIN-GRQA-V1-4/variables.csv,1898,harmonized_data,GRQA canonical variables (11 vars),CC-BY-4.0,NO,TO_BE_COMPUTED
+data/harmonized/HWIN-GRQA-V1-4/dataset.json,1913,harmonized_data,GRQA dataset metadata,CC-BY-4.0,NO,TO_BE_COMPUTED
+data/harmonized/HWIN-WQP-SFBAY/observations.csv,4577185,harmonized_data,WQP SF Bay CBS observations (51K rows),Public Domain,NO,TO_BE_COMPUTED
+data/harmonized/HWIN-WQP-SFBAY/stations.json,209466,harmonized_data,WQP SF Bay station metadata,Public Domain,NO,TO_BE_COMPUTED
+data/harmonized/HWIN-WQP-SFBAY/variables.csv,2345,harmonized_data,WQP SF Bay canonical variables (19 vars),Public Domain,NO,TO_BE_COMPUTED
+data/harmontext>
+The user wantsContext>
+Let me continue writing the manifest file.
+<tool_call>
+<function=write_file>
+<parameter=content>
+file_path,file_size_bytes,file_category,description,license,git_lfs_required,checksum_sha256
+README.md,11489,documentation,Main project README,CC-BY-4.0,NO,
+LICENSE,16777,license,CC-BY-4.0 license text + dataset licenses,CC-BY-4.0,NO,
+CITATION.cff,2605,citation,Machine-readable citation metadata,CC-BY-4.0,NO,
+CHANGELOG.md,4492,documentation,Version history,CC-BY-4.0,NO,
+data/README.md,7473,documentation,Data directory guide,CC-BY-4.0,NO,
+data/manifests/checksums.sha256,1024,manifest,SHA256 checksums for all data files,CC-BY-4.0,NO,
+data/manifests/file_inventory.csv,2048,manifest,Complete file listing,CC-BY-4.0,NO,
+data/manifests/dataset_versions.csv,1024,manifest,Dataset version tracking,CC-BY-4.0,NO,
+data/manifests/DATASET_RELEASE_INVENTORY.csv,1825,audit,Dataset integrity audit,CC-BY-4.0,NO,
+data/manifests/DERIVED_DATA_AUDIT.csv,6554,audit,Derived data classification,CC-BY-4.0,NO,
+licenses/DATASET_LICENSE_AUDIT.csv,5735,audit,Dataset license audit matrix,CC-BY-4.0,NO,
+licenses/ATTRIBUTION.md,8339,attribution,Required attribution for all datasets,CC-BY-4.0,NO,
+ontology/canonical_variable_ontology.csv,18129,ontology,51 canonical variables (CVO v1.0),CC0-1.0,NO,
+ontology/variable_synonym_dictionary.csv,33007,ontology,89 variable name mappings,CC0-1.0,NO,
+ontology/unit_harmonization_rules.csv,5504,ontology,92 unit conversion rules,CC0-1.0,NO,
+benchmark/protocol/01_HWIN_BENCH_PROTOCOL_v1.0.md,13733,protocol,Frozen benchmark protocol v1.0,CC-BY-4.0,NO,
+code/benchmark/run_full_benchmark_fixed.py,25000,code,Canonical benchmark runner,CC-BY-4.0,NO,
+code/benchmark/__init__.py,0,code,Package init,CC-BY-4.0,NO,
+code/validation/__init__.py,0,code,Validation package,CC-BY-4.0,NO,
+code/validation/cbs_validator.py,15000,code,CBS validation engine,CC-BY-4.0,NO,
+code/requirements/requirements.txt,1500,requirements,Python dependencies,CC-BY-4.0,NO,
+code/requirements/environment.yml,3000,requirements,Conda environment,CC-BY-4.0,NO,
+docs/QUICKSTART.md,2768,documentation,5-minute quickstart,CC-BY-4.0,NO,
+docs/DATA_GUIDE.md,8732,documentation,Complete data access guide,CC-BY-4.0,NO,
+docs/DATA_DICTIONARY.md,10310,documentation,Full data dictionary,CC-BY-4.0,NO,
+docs/REPRODUCIBILITY.md,7196,documentation,Reproduction instructions,CC-BY-4.0,NO,
+docs/LIMITATIONS.md,8964,documentation,Limitations and scope,CC-BY-4.0,NO,
+docs/DATA_PROVENANCE.md,18398,documentation,Full provenance chains,CC-BY-4.0,NO,
+examples/quickstart/download_wqp.py,5000,example,WQP/STORET download script,CC-BY-4.0,NO,
+examples/quickstart/analyze_results.ipynb,15000,example,Results analysis notebook,CC-BY-4.0,NO,
+data/harmonized/HWIN-GRQA-V1-4/observations.csv,6016295802,harmonized_data,GRQA CBS observations (25.8M rows),CC-BY-4.0,YES,TO_BE_COMPUTED
+data/harmonized/HWIN-GRQA-V1-4/stations.json,23998161,harmonized_data,GRQA station metadata (107K stations),CC-BY-4.0,NO,TO_BE_COMPUTED
+data/harmonized/HWIN-GRQA-V1-4/variables.csv,1898,harmonized_data,GRQA canonical variables (11 vars),CC-BY-4.0,NO,TO_BE_COMPUTED
+data/harmonized/HWIN-GRQA-V1-4/dataset.json,1913,harmonized_data,GRQA dataset metadata,CC-BY-4.0,NO,TO_BE_COMPUTED
+data/harmonized/HWIN-WQP-SFBAY/observations.csv,4577185,harmonized_data,WQP SF Bay CBS observations (51K rows),Public Domain,NO,TO_BE_COMPUTED
+data/harmonized/HWIN-WQP-SFBAY/stations.json,209466,harmonized_data,WQP SF Bay station metadata,Public Domain,NO,TO_BE_COMPUTED
+data/harmonized/HWIN-WQP-SFBAY/variables.csv,2345,harmonized_data,WQP SF Bay canonical variables (19 vars),Public Domain,NO,TO_BE_COMPUTED
+data/harmonized/HWIN-WQP-SFBAY/dataset.json,1949,harmonized_data,WQP SF Bay dataset metadata,Public Domain,NO,TO_BE_COMPUTED
+data/harmonized/HWIN-STORET-CA/observations.csv,42727476,harmonized_data,STORET CA CBS observations (180K rows),Public Domain,NO,TO_BE_COMPUTED
+data/harmonized/HWIN-STORET-CA/stations.json,13215928,harmonized_data,STORET CA station metadata (3K stations),Public Domain,NO,TO_BE_COMPUTED
+data/harmonized/HWIN-STORET-CA/variables.csv,3090,harmonized_data,STORET CA canonical variables (22 vars),Public Domain,NO,TO_BE_COMPUTED
+data/harmonized/HWIN-STORET-CA/dataset.json,1939,harmonized_data,STORET CA dataset metadata,Public Domain,NO,TO_BE_COMPUTED
+data/harmonized/HWIN-STORET-TX/observations.csv,46517845,harmonized_data,STORET TX CBS observations (175K rows),Public Domain,NO,TO_BE_COMPUTED
+data/harmonized/HWIN-STORET-TX/stations.json,1290010,harmonized_data,STORET TX station metadata (2K stations),Public Domain,NO,TO_BE_COMPUTED
+data/harmonized/HWIN-STORET-TX/variables.csv,3141,harmonized_data,STORET TX canonical variables (21 vars),Public Domain,NO,TO_BE_COMPUTED
+data/harmonized/HWIN-STORET-TX/dataset.json,1923,harmonized_data,STORET TX dataset metadata,Public Domain,NO,TO_BE_COMPUTED
+data/harmonized/HWIN-STORET-RI/observations.csv,528440,harmonized_data,STORET RI CBS observations (2.5K rows),Public Domain,NO,TO_BE_COMPUTED
+data/harmonized/HWIN-STORET-RI/stations.json,23442,harmonized_data,STORET RI station metadata (50 stations),Public Domain,NO,TO_BE_COMPUTED
+data/harmonized/HWIN-STORET-RI/variables.csv,2748,harmonized_data,STORET RI canonical variables (18 vars),Public Domain,NO,TO_BE_COMPUTED
+data/harmonized/HWIN-STORET-RI/dataset.json,1932,harmonized_data,STORET RI dataset metadata,Public Domain,NO,TO_BE_COMPUTED
+data/datasets/HWIN-GRQA-V1-4/GRQA_data_v1.4.zip,1200000000,raw_data,GRQA v1.4 raw data from Zenodo,CC-BY-4.0,YES,TO_BE_COMPUTED
+data/datasets/HWIN-GRQA-V1-4/GRQA_meta_v1.4.zip,44800000,raw_data,GRQA v1.4 metadata from Zenodo,CC-BY-4.0,YES,TO_BE_COMPUTED
+data/datasets/HWIN-WQP-SFBAY/observations_raw.csv,4577185,raw_data,WQP SF Bay raw extract,Public Domain,NO,TO_BE_COMPUTED
+data/datasets/HWIN-STORET-CA/observations_raw.csv,42727476,raw_data,STORET CA raw extract,Public Domain,NO,TO_BE_COMPUTED
+data/datasets/HWIN-STORET-TX/observations_raw.csv,46517845,raw_data,STORET TX raw extract,Public Domain,NO,TO_BE_COMPUTED
+data/datasets/HWIN-STORET-RI/observations_raw.csv,528440,raw_data,STORET RI raw extract,Public Domain,NO,TO_BE_COMPUTED
+src/hwin_bench/__init__.py,8000,code,HWIN-Bench package init,CC-BY-4.0,NO,
+src/hwin_bench/cli.py,4000,code,CLI entry point,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/__init__.py,7921,code,Core package init,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/canonicalization/__init__.py,1508,code,Canonicalization package,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/canonicalization/engine.py,9904,code,Canonicalization engine,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/canonicalization/mapper.py,7807,code,Variable mapper,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/canonicalization/metadata_aligner.py,12389,code,Metadata aligner,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/canonicalization/unit_converter.py,5458,code,Unit converter,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/canonicalization/synonym_resolver.py,2012,code,Synonym resolver,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/canonicalization/exporter.py,6528,code,CBS exporter,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/canonicalization/manifest.py,3571,code,Manifest generator,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/canonicalization/exceptions.py,3894,code,Custom exceptions,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/canonicalization/streaming_fixed.py,23499,code,Streaming processor,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/canonicalization/reports.py,6383,code,Validation reports,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/baselines/__init__.py,1734,code,Baselines package,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/baselines/base.py,1497,code,Base model class,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/baselines/factory.py,928,code,Model factory,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/baselines/registry.py,1389,code,Model registry,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/baselines/classical/__init__.py,646,code,Classical models,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/baselines/classical/_sklearn_models.py,3261,code,7 sklearn models,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/baselines/classical/_gradient_boosting.py,2374,code,Gradient boosting,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/baselines/deep_learning/__init__.py,554,code,Deep learning (v1.1+),CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/baselines/multimodal/__init__.py,293,code,Multimodal (v1.1+),CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/evaluation/__init__.py,500,code,Evaluation package,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/evaluation/metrics.py,2000,code,5 regression metrics,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/evaluation/statistics.py,3000,code,Statistical tests,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/evaluation/confidence_intervals.py,1500,code,CI computation,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/loaders/__init__.py,500,code,Loaders package,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/loaders/wqp_loader.py,3000,code,WQP loader,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/loaders/grqa_loader.py,3000,code,GRQA loader,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/loaders/cbs_loader.py,2000,code,CBS loader,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/runner/__init__.py,500,code,Runner package,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/runner/pipeline.py,5000,code,Benchmark pipeline,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/runner/splits.py,3000,code,GroupKFold splits,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/tasks/__init__.py,500,code,Tasks package,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/tasks/regression.py,3000,code,Regression task,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/tasks/transfer.py,3000,code,Transfer task (v1.1+),CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/validation/__init__.py,500,code,Validation package,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/validation/cbs_validator.py,15000,code,CBS validator,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/validation/range_validator.py,3000,code,Range validator,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/validation/referential_validator.py,3000,code,Referential validator,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/leaderboard/__init__.py,500,code,Leaderboard package,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/leaderboard/api.py,3000,code,Leaderboard API,CC-BY-4.0,NO,
+src/hwin_bench/hwin_bench/leaderboard/storage.py,3000,code,Leaderboard storage,CC-BY-4.0,NO,
+benchmark/results/.gitkeep,0,results,Results directory placeholder,CC-BY-4.0,NO,
+benchmark/reproducibility/CANONICAL_EXECUTION_CERTIFICATE.md,6159,reproducibility,Canonical execution certificate,CC-BY-4.0,NO,
+benchmark/reproducibility/REPRODUCIBILITY_VERIFICATION.md,5000,reproducibility,Reproduction verification,CC-BY-4.0,NO,
+benchmark/reproducibility/EXECUTION_LOG.md,6301,reproducibility,Execution log,CC-BY-4.0,NO,
+examples/quickstart/__init__.py,0,example,Examples package,CC-BY-4.0,NO,
+REDISTRIBUTION_DECISIONS.md,8635,documentation,Redistribution decisions,CC-BY-4.0,NO,
+PUBLIC_RELEASE_VALIDATION.md,7093,validation,Validation report,CC-BY-4.0,NO,
+PUBLIC_RELEASE_READINESS.md,3000,readiness,Release readiness,CC-BY-4.0,NO,
+GITHUB_RELEASE_READY.md,5000,readiness,GitHub release preparation,CC-BY-4.0,NO,
+PUBLIC_RELEASE_MANIFEST.csv,5000,manifest,This manifest,CC-BY-4.0,NO,
+PUBLIC_RELEASE_READINESS.md,3000,readiness,Release readiness assessment,CC-BY-4.0,NO,
+GITHUB_RELEASE_READY.md,5000,readiness,GitHub release preparation guide,CC-BY-4.0,NO,

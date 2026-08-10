@@ -1,0 +1,23 @@
+name: hwin-bench
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - numpy=1.26
+  - pandas=2.2
+  - scikit-learn=1.5
+  - scipy=1.13
+  - pyarrow=16
+  - fastparquet=2024.5
+  - pyyaml=6.0
+  - tomli=2.0
+  - tomli-w=1.0
+  - typer=0.12
+  - rich=13.7
+  - jsonschema=4.22
+  - tqdm=4.66
+  - python-dateutil=2.9
+  - pip=24.0
+  - pip:
+      - -e .

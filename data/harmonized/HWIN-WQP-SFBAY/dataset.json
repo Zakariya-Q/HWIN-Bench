@@ -1,0 +1,69 @@
+{
+  "dataset_id": "HWIN-WQP-SFBAY",
+  "version": "1.0.0",
+  "title": "Water Quality Portal - San Francisco Bay - HWIN-Bench Harmonized Version",
+  "description": "Harmonized subset of USGS/EPA Water Quality Portal (WQP) data for the San Francisco Bay area, mapped to the HWIN Canonical Variable Ontology (CVO v1.0) and Canonical Benchmark Schema (CBS). Contains 19 canonical water quality variables from 1,000+ stations.",
+  "license": "Public Domain (17 USC 105)",
+  "license_uri": "https://www.usa.gov/government-works",
+  "cv_mapping_id": "HWIN-CVO-v1.0",
+  "metadata_standard": "ISO 19115-3",
+  "creators": [
+    {
+      "name": "HWIN-Bench Team",
+      "affiliation": "HWIN-Bench Consortium",
+      "orcid": "0000-0000-0000-0000"
+    }
+  ],
+  "publication_year": 2026,
+  "publisher": "Zenodo",
+  "funding": [
+    {
+      "funder": "[FUNDER NAME TO BE ADDED]",
+      "award_number": "[AWARD NUMBER TO BE ADDED]"
+    }
+  ],
+  "related_identifiers": [
+    {
+      "relation": "isDerivedFrom",
+      "identifier": "https://www.waterqualitydata.us",
+      "identifier_type": "URL",
+      "description": "USGS/EPA Water Quality Portal"
+    }
+  ],
+  "spatial_coverage": {
+    "type": "regional",
+    "region": "San Francisco Bay, California, USA",
+    "countries": 1,
+    "stations": 1000,
+    "bbox": [
+      -123.5,
+      37.0,
+      -121.5,
+      38.5
+    ]
+  },
+  "temporal_coverage": {
+    "start": "1950-01-01",
+    "end": "2024-12-31"
+  },
+  "variables": 19,
+  "observations": {
+    "canonical_total": 51000,
+    "benchmarked_max_per_variable": 51000,
+    "benchmarked_total": 51000
+  },
+  "checksums": {
+    "observations.csv": "07d6dfbb350099bc6b9faa6767f085f966d5fa9d4fcf87224a80f273c1f8143c",
+    "stations.json": "9790e631bede49e27602715c9822d924b79fed6701190449d8a9c0ef9e9b992e",
+    "variables.csv": "d4bef10f9730a047ade4d0194648334b8ff60e6c2fd83433142df3c6ae1ccaec"
+  },
+  "version_history": [
+    {
+      "version": "1.0.0",
+      "date": "2026-07-08",
+      "changes": "Initial harmonized release for HWIN-Bench v1.0"
+    }
+  ],
+  "doi": "10.5281/zenodo.XXXXX",
+  "is_published": false
+}

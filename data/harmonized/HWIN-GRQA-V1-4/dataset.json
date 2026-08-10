@@ -1,0 +1,68 @@
+{
+  "dataset_id": "HWIN-GRQA-V1-4",
+  "version": "1.4.0",
+  "title": "Global River Water Quality Archive (GRQA) v1.4 - HWIN-Bench Harmonized Version",
+  "description": "Harmonized version of the Global River Water Quality Archive (GRQA) v1.4, mapped to the HWIN Canonical Variable Ontology (CVO v1.0) and Canonical Benchmark Schema (CBS). Contains 11 canonical water quality variables across ~107,000 stations in 69 countries, spanning 1894-2023.",
+  "license": "CC-BY-4.0",
+  "license_uri": "https://creativecommons.org/licenses/by/4.0/",
+  "cv_mapping_id": "HWIN-CVO-v1.0",
+  "metadata_standard": "ISO 19115-3",
+  "creators": [
+    {
+      "name": "HWIN-Bench Team",
+      "affiliation": "HWIN-Bench Consortium",
+      "orcid": "0000-0000-0000-0000"
+    }
+  ],
+  "publication_year": 2026,
+  "publisher": "Zenodo",
+  "funding": [
+    {
+      "funder": "[FUNDER NAME TO BE ADDED]",
+      "award_number": "[AWARD NUMBER TO BE ADDED]"
+    }
+  ],
+  "related_identifiers": [
+    {
+      "relation": "isDerivedFrom",
+      "identifier": "10.5194/essd-16-1787-2024",
+      "identifier_type": "DOI",
+      "description": "Original GRQA v1.4 publication"
+    }
+  ],
+  "spatial_coverage": {
+    "type": "global",
+    "countries": 69,
+    "stations": 107000,
+    "bbox": [
+      -180,
+      -90,
+      180,
+      90
+    ]
+  },
+  "temporal_coverage": {
+    "start": "1894-01-01",
+    "end": "2023-12-31"
+  },
+  "variables": 11,
+  "observations": {
+    "canonical_total": 25800000,
+    "benchmarked_max_per_variable": 200000,
+    "benchmarked_total": 2519220
+  },
+  "checksums": {
+    "observations.csv": "989e5a6ba07499d81443c8819ef7f1e786fdef8a52661474a2bf5cc4a2ed6f8f",
+    "stations.json": "467a5ea94b2fbaa77ef1ece15ba366526f21921ca0883440bfc9eba00cf119d8",
+    "variables.csv": "90732827cfcae56508f84a5ec34192ad76bc990b012d41785e525e2462d28a9e"
+  },
+  "version_history": [
+    {
+      "version": "1.4.0",
+      "date": "2026-07-08",
+      "changes": "Initial harmonized release for HWIN-Bench v1.0"
+    }
+  ],
+  "doi": "10.5281/zenodo.XXXXX",
+  "is_published": false
+}

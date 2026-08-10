@@ -1,0 +1,14 @@
+\begin{table}
+\caption{Benchmark task definitions in HWIN-Bench.}
+\label{tab:tasks}
+\begin{tabular}{llllll}
+\toprule
+Task Family & Modality & Prediction Type & Example Target & Primary Metrics & Split Strategy \\
+\midrule
+Regression & Tabular (in situ) & Continuous & Nitrate N (mg/L) & MAE, RMSE, R2, MAPE & Station-based \\
+Classification & Tabular (in situ) & Binary (threshold) & Nitrate > 10 mg/L & Accuracy, F1, ROC-AUC, PR-AUC & Station-based (stratified) \\
+Forecasting & Time series (sensor) & Continuous (multi-step) & Temperature (7-day) & MASE, sMAPE, RMSE & Temporal \\
+Ranking & Multi-station & Ordinal & Station risk rank & NDCG, MAP, MRR & Spatial (basin) \\
+\bottomrule
+\end{tabular}
+\end{table}

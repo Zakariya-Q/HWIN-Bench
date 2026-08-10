@@ -1,0 +1,305 @@
+{
+  "figure_mapping": {
+    "figures": [
+      {
+        "id": "Fig1",
+        "title": "HWIN-Bench Pipeline Architecture",
+        "type": "diagram",
+        "source": "Figure_1.png",
+        "section": "3.1",
+        "evidence": "knowledge/pipeline_architecture.md",
+        "status": "EXISTS"
+      },
+      {
+        "id": "Fig2",
+        "title": "Global Dataset Coverage",
+        "type": "map",
+        "source": "Figure_2.png",
+        "section": "4.2",
+        "evidence": "output/global/global_geographic_coverage.csv",
+        "status": "EXISTS"
+      },
+      {
+        "id": "Fig3",
+        "title": "Variable Availability Heatmap",
+        "type": "heatmap",
+        "source": "Figure_3.png",
+        "section": "4.5",
+        "evidence": "output/dataset_variable_inventory.csv",
+        "status": "EXISTS"
+      },
+      {
+        "id": "Fig4",
+        "title": "Temporal Coverage by Dataset",
+        "type": "timeline",
+        "section": "4.2",
+        "evidence": "output/global/global_temporal_coverage.csv",
+        "status": "NEEDS_GENERATION"
+      },
+      {
+        "id": "Fig5",
+        "title": "Benchmark Performance Comparison",
+        "type": "bar",
+        "section": "6.1",
+        "evidence": "output/benchmark_summary.md",
+        "status": "NEEDS_GENERATION"
+      },
+      {
+        "id": "Fig6",
+        "title": "Transfer Learning Matrix (GRQA -> STORET)",
+        "type": "heatmap",
+        "source": "transfer_heatmap.png",
+        "section": "6.3",
+        "evidence": "output/transfer_heatmap.png",
+        "status": "EXISTS"
+      },
+      {
+        "id": "Fig7",
+        "title": "Missing Data Robustness",
+        "type": "line",
+        "section": "6.4",
+        "evidence": "output/grqa_observation_accounting.csv",
+        "status": "NEEDS_GENERATION"
+      },
+      {
+        "id": "Fig8",
+        "title": "FAIR Assessment Radar",
+        "type": "radar",
+        "section": "7.5",
+        "evidence": "output/FAIR_report.md",
+        "status": "NEEDS_GENERATION"
+      }
+    ]
+  },
+  "table_mapping": {
+    "tables": [
+      {
+        "id": "Table1",
+        "title": "Integrated Datasets Summary",
+        "section": "4.1",
+        "evidence": "output/global/global_dataset_inventory.csv",
+        "status": "EXISTS"
+      },
+      {
+        "id": "Table2",
+        "title": "Canonical Variable Inventory",
+        "section": "4.5",
+        "evidence": "output/global/global_variable_inventory.csv",
+        "status": "EXISTS"
+      },
+      {
+        "id": "Table3",
+        "title": "Metadata Completeness by Dataset",
+        "section": "4.6",
+        "evidence": "output/global/global_metadata_summary.csv",
+        "status": "EXISTS"
+      },
+      {
+        "id": "Table4",
+        "title": "Benchmark Task Definitions",
+        "section": "5.1",
+        "evidence": "knowledge/benchmark_task_framework.md",
+        "status": "EXISTS"
+      },
+      {
+        "id": "Table5",
+        "title": "GRQA Full Benchmark Results",
+        "section": "6.1",
+        "evidence": "output/GRQA_FULL_BENCHMARK_REPORT.md",
+        "status": "EXISTS"
+      },
+      {
+        "id": "Table6",
+        "title": "STORET Benchmark Results (CA, TX, RI)",
+        "section": "6.2",
+        "evidence": "output/benchmark_summary.md",
+        "status": "EXISTS"
+      },
+      {
+        "id": "Table7",
+        "title": "Cross-Dataset Transfer Results",
+        "section": "6.3",
+        "evidence": "output/transfer_matrix_raw.csv",
+        "status": "EXISTS"
+      },
+      {
+        "id": "Table8",
+        "title": "FAIR Self-Assessment Scores",
+        "section": "7.5",
+        "evidence": "output/FAIR_report.md",
+        "status": "EXISTS"
+      },
+      {
+        "id": "Table9",
+        "title": "Computational Requirements",
+        "section": "5.3",
+        "evidence": "output/memory_pipeline_audit.md",
+        "status": "NEEDS_GENERATION"
+      }
+    ]
+  },
+  "evidence_index": {
+    "canonical_datasets": {
+      "GRQA": {
+        "path": "output/real_hwin_bench_rc1/canonical/HWIN-GRQA-V1-4/",
+        "observations": "6.0 GB (14M obs, 38 vars)",
+        "stations": "24 MB metadata",
+        "variables": "1898 bytes",
+        "reports": [
+          "output/GRQA_FORENSIC_AUDIT.md",
+          "output/GRQA_FULL_BENCHMARK_REPORT.md",
+          "output/grqa_observation_accounting.csv"
+        ]
+      },
+      "WQP_SFBay": {
+        "path": "output/real_hwin_bench_rc1/canonical/HWIN-WQP-SFBAY/",
+        "observations": "4.6 MB",
+        "stations": "209 KB",
+        "variables": "2345 bytes",
+        "reports": [
+          "output/benchmark_report_WQP_SFBay.md"
+        ]
+      },
+      "STORET_CA": {
+        "path": "output/real_hwin_bench_rc1/STORET_CA/STORET_CA/",
+        "observations": "42.7 MB",
+        "stations": "13.2 MB",
+        "variables": "3090 bytes"
+      },
+      "STORET_TX": {
+        "path": "output/real_hwin_bench_rc1/STORET_TX/STORET_TX/",
+        "observations": "46.5 MB",
+        "stations": "1.3 MB",
+        "variables": "3141 bytes"
+      },
+      "STORET_RI": {
+        "path": "output/real_hwin_bench_rc1/STORET_RI/STORET_RI/",
+        "observations": "0.5 MB",
+        "stations": "23 KB",
+        "variables": "2748 bytes"
+      }
+    },
+    "global_inventories": {
+      "global_dataset_inventory": "output/global/global_dataset_inventory.csv",
+      "global_variable_inventory": "output/global/global_variable_inventory.csv",
+      "global_station_inventory": "output/global/global_station_inventory.csv",
+      "global_metadata_summary": "output/global/global_metadata_summary.csv",
+      "global_quality_summary": "output/global/global_quality_summary.csv",
+      "global_license_matrix": "output/global/global_license_matrix.csv",
+      "global_geographic_coverage": "output/global/global_geographic_coverage.csv",
+      "global_temporal_coverage": "output/global/global_temporal_coverage.csv",
+      "global_variable_coverage": "output/global/global_variable_coverage.csv",
+      "global_task_matrix": "output/global/global_task_matrix.csv",
+      "global_split_registry": "output/global/global_split_registry.csv"
+    },
+    "benchmark_results": {
+      "benchmark_summary": "output/benchmark_summary.md",
+      "GRQA_full_report": "output/GRQA_FULL_BENCHMARK_REPORT.md",
+      "benchmark_execution_report": "output/real_hwin_bench_rc1/reports/benchmark_execution_report.md",
+      "transfer_experiments": "output/transfer_experiments/transfer_GRQA_to_STORET_RI.json",
+      "transfer_matrix": "output/transfer_matrix_raw.csv",
+      "transfer_heatmap": "output/transfer_heatmap.png"
+    },
+    "validation_provenance": {
+      "validation_report": "output/real_hwin_bench_rc1/reports/validation_report.md",
+      "provenance_chain": "output/real_hwin_bench_rc1/reports/provenance_chain.md",
+      "dataset_authenticity": "output/real_hwin_bench_rc1/reports/dataset_authenticity_report.md",
+      "FAIR_assessment": "output/FAIR_report.md",
+      "data_descriptor": "output/DATA_DESCRIPTOR.md",
+      "certification": "output/HWIN_BENCH_V1_CERTIFICATION.md",
+      "readiness_checklist": "output/publication_readiness_checklist.md"
+    }
+  },
+  "writing_rules": {
+    "number_format": "Use SI units. Observations in millions (M), stations in thousands (k). Percentages to 1 decimal. P-values < 0.001 reported as <0.001.",
+    "dataset_names": "GRQA v1.4, WQP-SFBay, STORET-CA, STORET-TX, STORET-RI (always with version/region)",
+    "model_names": "Use full names: Random Forest, XGBoost, LightGBM, MLP, CNN-1D, LSTM, GRU, Transformer, Early Fusion, Late Fusion, Feature Concat",
+    "metric_names": "MAE, RMSE, R2, MAPE, MedianAE, Accuracy, Precision, Recall, F1, ROC-AUC, PR-AUC, Balanced Accuracy, MCC, MASE, sMAPE, NDCG, MAP, MRR",
+    "confidence_intervals": "Report 95% CI in brackets: 0.85 [0.82, 0.88]",
+    "statistical_tests": "Report test name, statistic, p-value. Use paired tests for same data splits.",
+    "cross_references": "Figures: Figure 1, Figure 2a-b. Tables: Table 1, Table 2. Sections: Section 3.1. Equations: Eq. (1).",
+    "abbreviations": "Define at first use: Canonical Variable Ontology (CVO), Canonical Benchmark Schema (CBS), Benchmark Execution Layer (BEL), Official Split Engine (OSE), Gradient Boosting (GB), Random Forest (RF)",
+    "no_placeholder_text": "Every number must trace to evidence_inventory.csv. No X observations without source.",
+    "tense": "Past tense for methods/results. Present tense for framework description and general truths."
+  },
+  "section_evidence_map": {
+    "abstract": [
+      "output/global/global_dataset_inventory.csv",
+      "output/benchmark_summary.md"
+    ],
+    "1_intro": [
+      "knowledge/benchmark_task_framework.md",
+      "knowledge/pipeline_architecture.md"
+    ],
+    "2_related": [
+      "output/FAIR_report.md"
+    ],
+    "3_methods": [
+      "knowledge/canonical_benchmark_schema.md",
+      "knowledge/pipeline_architecture.md",
+      "src/hwin_bench/validation/",
+      "src/hwin_bench/canonicalization/"
+    ],
+    "4_data": [
+      "output/real_hwin_bench_rc1/canonical/HWIN-GRQA-V1-4/",
+      "output/real_hwin_bench_rc1/canonical/HWIN-WQP-SFBAY/",
+      "output/real_hwin_bench_rc1/STORET_CA/",
+      "output/real_hwin_bench_rc1/STORET_TX/",
+      "output/real_hwin_bench_rc1/STORET_RI/",
+      "output/global/global_variable_inventory.csv",
+      "output/global/global_dataset_inventory.csv",
+      "output/DATA_DESCRIPTOR.md",
+      "output/GRQA_FORENSIC_AUDIT.md",
+      "output/dataset_variable_inventory.csv"
+    ],
+    "5_benchmarks": [
+      "knowledge/benchmark_task_framework.md",
+      "output/real_hwin_bench_rc1/reports/benchmark_execution_report.md",
+      "output/benchmark_summary.md",
+      "output/transfer_experiments/transfer_GRQA_to_STORET_RI.json"
+    ],
+    "6_results": [
+      "output/real_hwin_bench_rc1/reports/benchmark_execution_report.md",
+      "output/benchmark_summary.md",
+      "output/GRQA_FULL_BENCHMARK_REPORT.md",
+      "output/transfer_experiments/transfer_GRQA_to_STORET_RI.json",
+      "output/transfer_matrix_raw.csv",
+      "output/transfer_matrix.png",
+      "output/transfer_heatmap.png"
+    ],
+    "7_fair": [
+      "output/FAIR_report.md",
+      "output/FAIR_assessment.md"
+    ],
+    "8_discussion": [
+      "output/HWIN_BENCH_V1_CERTIFICATION.md",
+      "output/publication_readiness_checklist.md"
+    ],
+    "9_conclusion": [],
+    "data_avail": [
+      "output/real_hwin_bench_rc1/README.md"
+    ],
+    "code_avail": [
+      "src/",
+      "README.md"
+    ]
+  },
+  "gaps": {
+    "figures_needed": [
+      "Fig4 (temporal coverage)",
+      "Fig5 (benchmark comparison)",
+      "Fig7 (missing data robustness)",
+      "Fig8 (FAIR radar)"
+    ],
+    "tables_needed": [
+      "Table9 (computational requirements)"
+    ],
+    "analyses_needed": [
+      "Temporal coverage analysis per dataset",
+      "Benchmark comparison across all baselines",
+      "Missing data robustness analysis",
+      "FAIR radar chart generation",
+      "Computational requirements table"
+    ]
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "dataset_id": "HWIN-STORET-RI",
+  "version": "2024.1.0",
+  "title": "EPA STORET Rhode Island - HWIN-Bench Harmonized Version",
+  "description": "Harmonized subset of EPA STORET water quality monitoring data for Rhode Island, mapped to the HWIN Canonical Variable Ontology (CVO v1.0) and Canonical Benchmark Schema (CBS). Contains 18 canonical water quality variables from ~50 stations.",
+  "license": "Public Domain (17 USC 105)",
+  "license_uri": "https://www.usa.gov/government-works",
+  "cv_mapping_id": "HWIN-CVO-v1.0",
+  "metadata_standard": "ISO 19115-3",
+  "creators": [
+    {
+      "name": "HWIN-Bench Team",
+      "affiliation": "HWIN-Bench Consortium",
+      "orcid": "0000-0000-0000-0000"
+    }
+  ],
+  "publication_year": 2026,
+  "publisher": "Zenodo",
+  "funding": [
+    {
+      "funder": "[FUNDER NAME TO BE ADDED]",
+      "award_number": "[AWARD NUMBER TO BE ADDED]"
+    }
+  ],
+  "related_identifiers": [
+    {
+      "relation": "isDerivedFrom",
+      "identifier": "https://www.epa.gov/waterdata/storage-and-retrieval-and-water-quality-exchange",
+      "identifier_type": "URL",
+      "description": "EPA STORET Warehouse"
+    }
+  ],
+  "spatial_coverage": {
+    "type": "state",
+    "region": "Rhode Island, USA",
+    "countries": 1,
+    "stations": 50,
+    "bbox": [
+      -71.9,
+      41.1,
+      -71.1,
+      42.0
+    ]
+  },
+  "temporal_coverage": {
+    "start": "1950-01-01",
+    "end": "2024-12-31"
+  },
+  "variables": 18,
+  "observations": {
+    "canonical_total": 2500,
+    "benchmarked_max_per_variable": 2500,
+    "benchmarked_total": 2500
+  },
+  "checksums": {
+    "observations.csv": "55d848d2aea36bb3d0d39359087ade9552668d3159a33c3a0590c4964c935e1c",
+    "stations.json": "9d8f8ac5d4fff00996be78b52ef3529e4e941ca9c05cded1ff9a9fde1b36040d",
+    "variables.csv": "73e1cea45997cfaef89e7f5e4f23fb89c09c0055ed8c75cddfeccfa2be211ca8"
+  },
+  "version_history": [
+    {
+      "version": "2024.1.0",
+      "date": "2026-07-08",
+      "changes": "Initial harmonized release for HWIN-Bench v1.0"
+    }
+  ],
+  "doi": "10.5281/zenodo.XXXXX",
+  "is_published": false
+}

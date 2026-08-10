@@ -1,0 +1,35 @@
+phase,check,status,evidence
+Phase 1 - Release Directory,Directory identified,PASS,FINAL_RELEASE_TARGET.md
+Phase 1 - Release Directory,No competing directories,PASS,Only one authoritative directory
+Phase 2 - File Inventory,Inventory complete,PASS,FINAL_RELEASE_FILE_INVENTORY.csv (69 files)
+Phase 3 - Required Artifacts,All categories present,PASS,All 6 categories verified
+Phase 3 - Required Artifacts,Canonical runner present,PASS,Copied from RELEASE
+Phase 3 - Required Artifacts,Benchmark statistics present,PASS,Copied from RELEASE
+Phase 3 - Required Artifacts,Environment spec present,PASS,Copied from RELEASE
+Phase 3 - Required Artifacts,Correction evidence present,PASS,Copied from RELEASE
+Phase 3 - Required Artifacts,Final tables present,PASS,Copied from RELEASE
+Phase 3 - Required Artifacts,Figure/table docs present,PASS,Copied from RELEASE
+Phase 4 - Dataset Integrity,All 5 datasets PASS,PASS,FINAL_DATASET_INTEGRITY.csv
+Phase 4 - Dataset Integrity,Checksums match,PASS,5/5 datasets verified
+Phase 5 - CVO/Variable Integrity,CVO count 49,PASS,ontology/canonical_variable_ontology.csv
+Phase 5 - CVO/Variable Integrity,GRQA mappings 36,PASS,variable_synonym_dictionary.csv
+Phase 5 - CVO/Variable Integrity,Benchmark variables 11,PASS,MIN_SAMPLES >= 100 in harmonized GRQA
+Phase 5 - CVO/Variable Integrity,All 11 variables consistent,PASS,Across all artifacts
+Phase 6 - Numerical Integrity,Point estimates 385/385 match,PASS,0 differences > 1e-12
+Phase 6 - Numerical Integrity,CI records 385/385 verified,PASS,n=5, df=4
+Phase 7 - CI Final Check,Zero stale public CI claims,PASS,Zero stale public claims
+Phase 8 - Figure/Table Check,Fig 5 corrected,PASS,Regenerated with n=5 CIs
+Phase 8 - Figure/Table Check,Fig 7 resolved,PASS,Generated from canonical evidence
+Phase 8 - Figure/Table Check,Table 5 regenerated,PASS,Table5_grqa_CORRECTED.tex
+Phase 9 - Protocol Consistency,v1.0 frozen/v1.1 clarification,PASS,PROTOCOL_CLARIFICATION_v1.1.md
+Phase 10 - Documentation Search,Zero stale public claims,PASS,Zero stale public claims
+Phase 11 - License/Redistribution,All 5 datasets licensed,PASS,Authoritative sources
+Phase 12 - Checksum Finalization,Manifest created,PASS,FINAL_RELEASE_SHA256_MANIFEST.txt
+Phase 13 - Security Scan,No secrets/PII,PASS,Clean scan
+Phase 14 - Smoke Test,Imports/loads/parses OK,PASS,Lightweight test passed
+Phase 15 - Content Purity,No REMOVE_BEFORE_RELEASE files,PASS,Clean package
+Phase 16 - DOI Readiness,Placeholders only,PASS,No fabricated DOIs
+Phase 16 - DOI Readiness,CITATION.cff valid,PASS,Syntactically valid
+Phase 17 - Release Hash,Manifest SHA256 complete,PASS,FINAL_RELEASE_SHA256_MANIFEST.txt
+Phase 17 - Release Hash,Identity doc created,PASS,FINAL_RELEASE_IDENTITY.md
+Phase 18 - Final Decision,A - RELEASE APPROVED,DECISION,No blockers remain

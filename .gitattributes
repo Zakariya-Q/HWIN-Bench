@@ -1,0 +1,61 @@
+# Git LFS Configuration for HWIN-Bench v1.0
+# Large data files tracked by Git LFS
+data/harmonized/HWIN-GRQA-V1-4/observations.csv filter=lfs diff=lfs merge=lfs -text
+data/datasets/HWIN-GRQA-V1-4/GRQA_data_v1.4.zip filter=lfs diff=lfs merge=lfs -text
+data/datasets/HWIN-GRQA-V1-4/GRQA_meta_v1.4.zip filter=lfs diff=lfs merge=lfs -text
+data/harmonized/HWIN-STORET-CA/observations.csv filter=lfs diff=lfs merge=lfs -text
+data/harmonized/HWIN-STORET-TX/observations.csv filter=lfs diff=lfs merge=lfs -text
+# Explicitly track text files as text (prevents CRLF issues)
+*.md text
+*.txt text
+*.csv text
+*.py text
+*.yml text
+*.yaml text
+*.json text
+*.cff text
+*.xml text
+*.html text
+*.css text
+*.js text
+*.sh text
+*.bat text
+*.ps1 text
+*.rst text
+*.tex text
+*.bib text
+*.cfg text
+*.ini text
+*.conf text
+*.toml text
+*.lock text
+# Binary files (explicitly marked)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.gz binary
+*.tar binary
+*.tgz binary
+*.whl binary
+*.so binary
+*.dll binary
+*.exe binary
+*.pkl binary
+*.npy binary
+*.npz binary
+*.h5 binary
+*.hdf5 binary
+*.parquet binary
+*.feather binary
+*.ipynb binary
+*.docx binary
+*.xlsx binary
+*.pptx binary
+data/harmonized/HWIN-STORET-CA/stations.json filter=lfs diff=lfs merge=lfs -text
+paper/figures/fig5_benchmark_CORRECTED.png filter=lfs diff=lfs merge=lfs -text
+paper/figures/fig7_missing_data_robustness.png filter=lfs diff=lfs merge=lfs -text
+data/harmonized/HWIN-GRQA-V1-4/stations.json filter=lfs diff=lfs merge=lfs -text

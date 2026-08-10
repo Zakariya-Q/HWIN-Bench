@@ -1,0 +1,17 @@
+\begin{table}
+\caption{Cross-dataset transfer results: GRQA-trained models evaluated on STORET regions. R2 (higher is better).}
+\label{tab:transfer}
+\begin{tabular}{lcccc}
+\toprule
+Model & STORET-CA R2 & STORET-TX R2 & STORET-RI R2 & Avg R2 \\
+\midrule
+Random Forest & 0.020000 & 0.020000 & 0.030000 & 0.023000 \\
+Extra Trees & 0.020000 & 0.020000 & 0.020000 & 0.020000 \\
+Gradient Boosting & 0.010000 & 0.010000 & 0.010000 & 0.010000 \\
+Ridge & -0.240000 & -0.050000 & -0.040000 & -0.110000 \\
+ElasticNet & -0.150000 & -0.040000 & -0.030000 & -0.073000 \\
+Lasso & -0.160000 & -0.020000 & -0.030000 & -0.070000 \\
+Linear Regression & -0.240000 & -0.050000 & -0.040000 & -0.110000 \\
+\bottomrule
+\end{tabular}
+\end{table}

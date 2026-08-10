@@ -1,0 +1,69 @@
+{
+  "dataset_id": "HWIN-STORET-TX",
+  "version": "2024.1.0",
+  "title": "EPA STORET Texas - HWIN-Bench Harmonized Version",
+  "description": "Harmonized subset of EPA STORET water quality monitoring data for Texas, mapped to the HWIN Canonical Variable Ontology (CVO v1.0) and Canonical Benchmark Schema (CBS). Contains 21 canonical water quality variables from ~2,000 stations.",
+  "license": "Public Domain (17 USC 105)",
+  "license_uri": "https://www.usa.gov/government-works",
+  "cv_mapping_id": "HWIN-CVO-v1.0",
+  "metadata_standard": "ISO 19115-3",
+  "creators": [
+    {
+      "name": "HWIN-Bench Team",
+      "affiliation": "HWIN-Bench Consortium",
+      "orcid": "0000-0000-0000-0000"
+    }
+  ],
+  "publication_year": 2026,
+  "publisher": "Zenodo",
+  "funding": [
+    {
+      "funder": "[FUNDER NAME TO BE ADDED]",
+      "award_number": "[AWARD NUMBER TO BE ADDED]"
+    }
+  ],
+  "related_identifiers": [
+    {
+      "relation": "isDerivedFrom",
+      "identifier": "https://www.epa.gov/waterdata/storage-and-retrieval-and-water-quality-exchange",
+      "identifier_type": "URL",
+      "description": "EPA STORET Warehouse"
+    }
+  ],
+  "spatial_coverage": {
+    "type": "state",
+    "region": "Texas, USA",
+    "countries": 1,
+    "stations": 2000,
+    "bbox": [
+      -106.6,
+      25.8,
+      -93.5,
+      36.5
+    ]
+  },
+  "temporal_coverage": {
+    "start": "1950-01-01",
+    "end": "2024-12-31"
+  },
+  "variables": 21,
+  "observations": {
+    "canonical_total": 175000,
+    "benchmarked_max_per_variable": 175000,
+    "benchmarked_total": 175000
+  },
+  "checksums": {
+    "observations.csv": "da0c3526b3cdbda68ea1f3e329800289840ae3e0563dedfd924106674e52e047",
+    "stations.json": "0bb0323261175f0a912a7eba377460111339c655056486c578dfd48020fc9036",
+    "variables.csv": "9eef0b7c7dff1ee928357cf35dd493492d2dec70990958afd631d88bdd3f0cfd"
+  },
+  "version_history": [
+    {
+      "version": "2024.1.0",
+      "date": "2026-07-08",
+      "changes": "Initial harmonized release for HWIN-Bench v1.0"
+    }
+  ],
+  "doi": "10.5281/zenodo.XXXXX",
+  "is_published": false
+}

@@ -1,0 +1,406 @@
+Synonym,Canonical_ID,Canonical_Name,Source_Dataset,Source_Variable_Name,Notes
+Temp,HWIN-VAR-001,Water Temperature,GEMS_Water,Water Temperature,Common abbreviation
+Wtemperature,HWIN-VAR-001,Water Temperature,WQP_2023,WTemperature,Variant spelling
+WTEMP,HWIN-VAR-001,Water Temperature,NEON_AQUATIC,WTMP,NEON-specific code
+Temperature,HWIN-VAR-001,Water Temperature,GLORIA,temp_simple,Generic term
+T_water,HWIN-VAR-001,Water Temperature,QUADICA,T_water,Underscore notation
+TEMP,HWIN-VAR-001,Water Temperature,GRQA_v1.4,TEMP,GRQA parameter code
+pH,HWIN-VAR-002,pH,GEMS_Water,pH,Standard notation
+pH_value,HWIN-VAR-002,pH,WQP_2023,pH_Value,With underscore
+pH_field,HWIN-VAR-002,pH,NEON_AQUATIC,field_pH,Field measurement distinction
+pH,HWIN-VAR-002,pH,GRQA_v1.4,pH,GRQA parameter code
+DO,HWIN-VAR-003,Dissolved Oxygen,GEMS_Water,Dissolved Oxygen,Full name
+DO_mg/L,HWIN-VAR-003,Dissolved Oxygen,WQP_2023,DO_mg/L,With units
+ODO,HWIN-VAR-003,Dissolved Oxygen,NEON_AQUATIC,ODO,Optical DO abbreviation
+O2_conc,HWIN-VAR-003,Dissolved Oxygen,GLORIA,O2_concentration,Alternative naming
+DissolvedOxygen,HWIN-VAR-003,Dissolved Oxygen,QUADICA,DissolvedOxygen,CamelCase
+DO,HWIN-VAR-003,Dissolved Oxygen,GRQA_v1.4,DO,GRQA parameter code
+Turbidity,HWIN-VAR-004,Turbidity,GEMS_Water,Turbidity,Standard
+Turb,HWIN-VAR-004,Turbidity,WQP_2023,Turb,Abbreviated
+FNU,HWIN-VAR-004,Turbidity,NEON_AQUATIC,FNU,Formazin Nephelometric Units
+NTU,HWIN-VAR-004,Turbidity,GLORIA,NTU,Standard unit as variable name
+SpCond,HWIN-VAR-005,Specific Conductance,GEMS_Water,Specific Conductance,Full name
+EC,HWIN-VAR-005,Specific Conductance,WQP_2023,EC,Electrical Conductivity abbreviation
+Cond_uS/cm,HWIN-VAR-005,Specific Conductance,NEON_AQUATIC,Conductivity_uS/cm,With units
+Conductivity,HWIN-VAR-005,Specific Conductance,GLORIA,conductivity,Lowercase
+SC,HWIN-VAR-005,Specific Conductance,QUADICA,SC,Common abbreviation
+Flow,HWIN-VAR-006,Flow Rate,GEMS_Water,Flow Rate,Standard
+FlowRate_cfs,HWIN-VAR-006,Flow Rate,WQP_2023,FlowRate_cfs,With units
+Discharge,HWIN-VAR-006,Flow Rate,NEON_AQUATIC,Discharge,Hydrological term
+Q,HWIN-VAR-006,Flow Rate,GLORIA,Q,Engineering symbol
+Flow_m3s,HWIN-VAR-006,Flow Rate,QUADICA,Flow_m3s,With units
+Depth,HWIN-VAR-007,Water Depth,GEMS_Water,Depth,Standard
+Water_Depth_m,HWIN-VAR-007,Water Depth,WQP_2023,Water_Depth_m,With units
+Stage,HWIN-VAR-007,Water Depth,NEON_AQUATIC,Stage,Hydrological term (elevation)
+z_water,HWIN-VAR-007,Water Depth,GLORIA,z_water,Coordinate notation
+Depth_m,HWIN-VAR-007,Water Depth,QUADICA,Depth_m,With units
+NO3_N,HWIN-VAR-008,Nitrate Nitrogen,GEMS_Water,Nitrate as N,Standard notation
+NO3mgL,HWIN-VAR-008,Nitrate Nitrogen,WQP_2023,NO3mgL,Concatenated units
+nitrate_N,HWIN-VAR-008,Nitrate Nitrogen,NEON_AQUATIC,nitrate_N,Underscore + units
+NO3-N,HWIN-VAR-008,Nitrate Nitrogen,GLORIA,NO3-N,Hyphenated notation
+NO3N,HWIN-VAR-008,Nitrate Nitrogen,QUADICA,NO3N,No separator
+NO3N,HWIN-VAR-008,Nitrate Nitrogen,GRQA_v1.4,NO3N,GRQA parameter code
+NH4_N,HWIN-VAR-009,Ammonium Nitrogen,GEMS_Water,Ammonium as N,Standard
+NH4mgL,HWIN-VAR-009,Ammonium Nitrogen,WQP_2023,NH4mgL,Concatenated
+ammonium_N,HWIN-VAR-009,Ammonium Nitrogen,NEON_AQUATIC,ammonium_N,Underscore
+NH4-N,HWIN-VAR-009,Ammonium Nitrogen,GLORIA,NH4-N,Hyphenated
+NH4N,HWIN-VAR-009,Ammonium Nitrogen,QUADICA,NH4N,No separator
+NH4N,HWIN-VAR-009,Ammonium Nitrogen,GRQA_v1.4,NH4N,GRQA parameter code
+NH3N,HWIN-VAR-009,Ammonium Nitrogen,GRQA_v1.4,NH3N,GRQA parameter code
+PO4_P,HWIN-VAR-010,Phosphate Phosphorus,GEMS_Water,Phosphate as P,Standard
+PO4mgL,HWIN-VAR-010,Phosphate Phosphorus,WQP_2023,PO4mgL,Concatenated
+phosphate_P,HWIN-VAR-010,Phosphate Phosphorus,NEON_AQUATIC,phosphate_P,Underscale
+PO4-P,HWIN-VAR-010,Phosphate Phosphorus,GLORIA,PO4-P,Hyphenated
+PO4P,HWIN-VAR-010,Phosphate Phosphorus,QUADICA,PO4P,No separator
+TP,HWIN-VAR-010,Phosphate Phosphorus,GRQA_v1.4,TP,GRQA parameter code
+DOP,HWIN-VAR-010,Phosphate Phosphorus,GRQA_v1.4,DOP,GRQA parameter code
+Chla,HWIN-VAR-011,Chlorophyll-a,GEMS_Water,Chlorophyll a,Standard abbreviation
+Chlorophylla,HWIN-VAR-011,Chlorophyll-a,WQP_2023,Chlorophyll a,Spelled out
+CHLORO,HWIN-VAR-011,Chlorophyll-a,NEON_AQUATIC,CHLORO,NEON code
+chla_ugL,HWIN-VAR-011,Chlorophyll-a,GLORIA,chla_ugL,With units
+Chla_ugl,HWIN-VAR-011,Chlorophyll-a,QUADICA,Chla_ugl,Variant casing
+Fecal_Coliform,HWIN-VAR-012,Fecal Coliforms,GEMS_Water,Fecal Coliform,Underscore
+FC_100mL,HWIN-VAR-012,Fecal Coliforms,WQP_2023,FC_100mL,With units
+fecal_coli,HWIN-VAR-012,Fecal Coliforms,NEON_AQUATIC,fecal_coli,Short form
+ThermoColiform,HWIN-VAR-012,Fecal Coliforms,GLORIA,ThermoColiform,Alternative name
+FecalColif,HWIN-VAR-012,Fecal Coliforms,QUADICA,FecalColif,Abbreviated
+Temp_5m,HWIN-VAR-013,Water Temperature at Depth,GEMS_Water,Temp_5m,Depth-specific
+Temp_10m,HWIN-VAR-013,Water Temperature at Depth,WQP_2023,Temp_10m,Depth-specific
+WTMP_5m,HWIN-VAR-013,Water Temperature at Depth,NEON_AQUATIC,WTMP_5m,NEON depth code
+temp_5m,HWIN-VAR-013,Water Temperature at Depth,GLORIA,temp_5m,Lowercase
+T_5m,HWIN-VAR-013,Water Temperature at Depth,QUADICA,T_5m,Abbreviated depth
+DO_percent,HWIN-VAR-014,Dissolved Oxygen Percent Saturation,GEMS_Water,DO_percent,Standard
+DO_sat_percent,HWIN-VAR-014,Dissolved Oxygen Percent Saturation,WQP_2023,DO_sat_percent,Explicit
+DO_percent_sat,HWIN-VAR-014,Dissolved Oxygen Percent Saturation,NEON_AQUATIC,DO_percent_sat,Word order
+DO_sat%,HWIN-VAR-014,Dissolved Oxygen Percent Saturation,GLORIA,DO_sat%,Percent symbol
+DO_sat,HWIN-VAR-014,Dissolved Oxygen Percent Saturation,QUADICA,DO_sat,Abbreviated
+DOSAT,HWIN-VAR-014,Dissolved Oxygen Percent Saturation,GRQA_v1.4,DOSAT,GRQA parameter code
+TSS,HWIN-VAR-015,Total Suspended Solids,GEMS_Water,TSS,Standard abbreviation
+TSS_mgL,HWIN-VAR-015,Total Suspended Solids,WQP_2023,TSS_mgL,With units
+suspended_solids,HWIN-VAR-015,Total Suspended Solids,NEON_AQUATIC,suspended_solids,Spelled out
+TSS_H2O,HWIN-VAR-015,Total Suspended Solids,GLORIA,TSS_H2O,With water indicator
+TSS_mg_per_L,HWIN-VAR-015,Total Suspended Solids,QUADICA,TSS_mg_per_L,Full units
+TSS,HWIN-VAR-015,Total Suspended Solids,GRQA_v1.4,TSS,GRQA parameter code
+AirTemp,HWIN-VAR-016,Air Temperature,GEMS_Water,Air Temperature,Standard
+Temp_air,HWIN-VAR-016,Air Temperature,WQP_2023,Temp_air,Underscore
+air_temp_C,HWIN-VAR-016,Air Temperature,NEON_AQUATIC,air_temp_C,With units
+temperature_air,HWIN-VAR-016,Air Temperature,GLORIA,temperature_air,Full name
+ATemp,HWIN-VAR-016,Air Temperature,QUADICA,ATemp,Abbreviated
+"Temperature, water",HWIN-VAR-001,Water Temperature,WQP,"Temperature, water",WQP standard name
+Water Temperature,HWIN-VAR-001,Water Temperature,WQP,Water Temperature,WQP alternative
+Dissolved oxygen (DO),HWIN-VAR-003,Dissolved Oxygen,WQP,Dissolved oxygen (DO),WQP standard
+Dissolved oxygen saturation,HWIN-VAR-014,Dissolved Oxygen Percent Saturation,WQP,Dissolved oxygen saturation,WQP standard
+Specific conductance,HWIN-VAR-005,Specific Conductance,WQP,Specific conductance,WQP standard
+Nitrate,HWIN-VAR-008,Nitrate Nitrogen,WQP,Nitrate,WQP standard
+Nitrate + Nitrite,HWIN-VAR-008,Nitrate Nitrogen,WQP,Nitrate + Nitrite,WQP combined
+Nitrite,HWIN-VAR-008,Nitrate Nitrogen,WQP,Nitrite,WQP - could map to nitrate
+Ammonia,HWIN-VAR-009,Ammonium Nitrogen,WQP,Ammonia,WQP standard
+Ammonium,HWIN-VAR-009,Ammonium Nitrogen,WQP,Ammonium,WQP standard
+Ammonia and ammonium,HWIN-VAR-009,Ammonium Nitrogen,WQP,Ammonia and ammonium,WQP combined
+Orthophosphate,HWIN-VAR-010,Phosphate Phosphorus,WQP,Orthophosphate,WQP standard
+Orthophosphate as PO4,HWIN-VAR-010,Phosphate Phosphorus,WQP,Orthophosphate as PO4,WQP as PO4
+Phosphate-phosphorus,HWIN-VAR-010,Phosphate Phosphorus,WQP,Phosphate-phosphorus,WQP as P
+Phosphorus,HWIN-VAR-010,Phosphate Phosphorus,WQP,Phosphorus,WQP total P
+"Total Phosphorus, mixed forms",HWIN-VAR-010,Phosphate Phosphorus,WQP,"Total Phosphorus, mixed forms",WQP total P
+Chlorophyll a,HWIN-VAR-011,Chlorophyll-a,WQP,Chlorophyll a,WQP standard
+Fecal Coliform,HWIN-VAR-012,Fecal Coliforms,WQP,Fecal Coliform,WQP standard
+Escherichia coli,HWIN-VAR-012,Fecal Coliforms,WQP,Escherichia coli,WQP E. coli
+Enterococcus,HWIN-VAR-012,Fecal Coliforms,WQP,Enterococcus,WQP Enterococcus
+Total suspended solids,HWIN-VAR-015,Total Suspended Solids,WQP,Total suspended solids,WQP standard
+Total dissolved solids,HWIN-VAR-021,Total Dissolved Solids,WQP,Total dissolved solids,WQP TDS
+BOD,HWIN-VAR-022,Biochemical Oxygen Demand,GRQA_v1.4,BOD,GRQA parameter code
+BOD5,HWIN-VAR-022,Biochemical Oxygen Demand,GRQA_v1.4,BOD5,GRQA parameter code
+BOD7,HWIN-VAR-022,Biochemical Oxygen Demand,GRQA_v1.4,BOD7,GRQA parameter code
+COD,HWIN-VAR-023,Chemical Oxygen Demand,GRQA_v1.4,COD,GRQA parameter code
+CODCr,HWIN-VAR-023,Chemical Oxygen Demand,GRQA_v1.4,CODCr,GRQA parameter code
+CODMn,HWIN-VAR-023,Chemical Oxygen Demand,GRQA_v1.4,CODMn,GRQA parameter code
+DIN,HWIN-VAR-024,Dissolved Inorganic Nitrogen,GRQA_v1.4,DIN,GRQA parameter code
+TDN,HWIN-VAR-025,Total Dissolved Nitrogen,GRQA_v1.4,TDN,GRQA parameter code
+TIN,HWIN-VAR-026,Total Inorganic Nitrogen,GRQA_v1.4,TIN,GRQA parameter code
+TKN,HWIN-VAR-027,Total Kjeldahl Nitrogen,GRQA_v1.4,TKN,GRQA parameter code
+TN,HWIN-VAR-028,Total Nitrogen,GRQA_v1.4,TN,GRQA parameter code
+DON,HWIN-VAR-029,Dissolved Organic Nitrogen,GRQA_v1.4,DON,GRQA parameter code
+TON,HWIN-VAR-030,Total Organic Nitrogen,GRQA_v1.4,TON,GRQA parameter code
+TAN,HWIN-VAR-031,Total Ammonia Nitrogen,GRQA_v1.4,TAN,GRQA parameter code
+DKN,HWIN-VAR-032,Dissolved Kjeldahl Nitrogen,GRQA_v1.4,DKN,GRQA parameter code
+NO2N,HWIN-VAR-033,Nitrite Nitrogen,GRQA_v1.4,NO2N,GRQA parameter code
+DIP,HWIN-VAR-034,Dissolved Inorganic Phosphorus,GRQA_v1.4,DIP,GRQA parameter code
+TDP,HWIN-VAR-035,Total Dissolved Phosphorus,GRQA_v1.4,TDP,GRQA parameter code
+TIP,HWIN-VAR-036,Total Inorganic Phosphorus,GRQA_v1.4,TIP,GRQA parameter code
+TOP,HWIN-VAR-037,Total Organic Phosphorus,GRQA_v1.4,TOP,GRQA parameter code
+POP,HWIN-VAR-038,Particulate Organic Phosphorus,GRQA_v1.4,POP,GRQA parameter code
+TPP,HWIN-VAR-039,Total Particulate Phosphorus,GRQA_v1.4,TPP,GRQA parameter code
+TC,HWIN-VAR-040,Total Carbon,GRQA_v1.4,TC,GRQA parameter code
+DIC,HWIN-VAR-041,Dissolved Inorganic Carbon,GRQA_v1.4,DIC,GRQA parameter code
+DOC,HWIN-VAR-042,Dissolved Organic Carbon,GRQA_v1.4,DOC,GRQA parameter code
+TIC,HWIN-VAR-043,Total Inorganic Carbon,GRQA_v1.4,TIC,GRQA parameter code
+TOC,HWIN-VAR-044,Total Organic Carbon,GRQA_v1.4,TOC,GRQA parameter code
+PC,HWIN-VAR-045,Particulate Carbon,GRQA_v1.4,PC,GRQA parameter code
+PIC,HWIN-VAR-046,Particulate Inorganic Carbon,GRQA_v1.4,PIC,GRQA parameter code
+POC,HWIN-VAR-047,Particulate Organic Carbon,GRQA_v1.4,POC,GRQA parameter code
+PN,HWIN-VAR-048,Particulate Nitrogen,GRQA_v1.4,PN,GRQA parameter code
+PON,HWIN-VAR-049,Particulate Organic Nitrogen,GRQA_v1.4,PON,GRQA parameter code
+DC,HWIN-VAR-041,Dissolved Inorganic Carbon,GRQA_v1.4,DC,GRQA parameter code alias for DIC
+TEMP,HWIN-VAR-001,Water Temperature,STORET,00010,Water temperature Celsius
+TEMP_FAHN,HWIN-VAR-001,Water Temperature,STORET,00011,Water temperature Fahrenheit
+AIR_TEMP_FAHN,HWIN-VAR-016,Air Temperature,STORET,00021,Air temperature Fahrenheit
+AIR_TEMP_CENT,HWIN-VAR-016,Air Temperature,STORET,00020,Air temperature Celsius
+DO_MG_L,HWIN-VAR-003,Dissolved Oxygen,STORET,00300,Dissolved oxygen mg/L
+DO_SAT_PERCENT,HWIN-VAR-014,Dissolved Oxygen Percent Saturation,STORET,00301,Dissolved oxygen percent saturation
+DOSAT,HWIN-VAR-014,Dissolved Oxygen Percent Saturation,STORET,DOSAT,GRQA alias
+BOD5,HWIN-VAR-022,Biochemical Oxygen Demand,STORET,00310,BOD 5-day
+BOD_DISS_5DAY,HWIN-VAR-022,Biochemical Oxygen Demand,STORET,00311,Dissolved BOD 5-day
+BOD_INH_5DAY_DISS,HWIN-VAR-022,Biochemical Oxygen Demand,STORET,00307,BOD nitrogen inhibited dissolved 5-day
+BOD_INH_5DAY_TOTAL,HWIN-VAR-022,Biochemical Oxygen Demand,STORET,00314,BOD nitrogen inhibited total 5-day
+BOD_INH_20DAY_DISS,HWIN-VAR-022,Biochemical Oxygen Demand,STORET,00309,BOD nitrogen inhibited dissolved 20-day
+BOD_INH_20DAY_TOTAL,HWIN-VAR-022,Biochemical Oxygen Demand,STORET,00308,BOD nitrogen inhibited total 20-day
+BOD_20DAY,HWIN-VAR-022,Biochemical Oxygen Demand,STORET,00324,BOD 20-day
+COD_LOWLEVEL,HWIN-VAR-023,Chemical Oxygen Demand,STORET,00335,COD low level
+COD_HILEVEL,HWIN-VAR-023,Chemical Oxygen Demand,STORET,00340,COD high level
+COD_MUD,HWIN-VAR-023,Chemical Oxygen Demand,STORET,00339,COD bottom deposits
+PH_SU,HWIN-VAR-002,pH,STORET,00400,pH standard units
+PH_LAB_SU,HWIN-VAR-002,pH,STORET,00403,pH lab standard units
+CO2_MG_L,HWIN-VAR-041,Dissolved Inorganic Carbon,STORET,00405,Carbon dioxide mg/L
+ALK_TOT_GRAN_UEQ_L,HWIN-VAR-020,Alkalinity,STORET,00409,Alkalinity total Gran analysis
+ALK_TOT_CACO3_MG_L,HWIN-VAR-020,Alkalinity,STORET,00410,Alkalinity total as CaCO3
+ALK_PHEN_CACO3_MG_L,HWIN-VAR-020,Alkalinity,STORET,00415,Alkalinity phenolphthalein
+HCO3_ION_MG_L,HWIN-VAR-020,Alkalinity,STORET,00440,Bicarbonate ion
+CO3_ION_MG_L,HWIN-VAR-020,Alkalinity,STORET,00445,Carbonate ion
+SALINITY_PPTH,HWIN-VAR-005,Specific Conductance,STORET,00480,Salinity parts per thousand
+SPCOND_FIELD_US_CM,HWIN-VAR-005,Specific Conductance,STORET,00094,Specific conductance field uhos/cm
+SPCOND_25C_US_CM,HWIN-VAR-005,Specific Conductance,STORET,00095,Specific conductance at 25C uhos/cm
+TURB_JTU,HWIN-VAR-004,Turbidity,STORET,00070,Turbidity Jackson candle units
+TURB_HACH_FTU,HWIN-VAR-004,Turbidity,STORET,00076,Turbidity Hach FTU
+TURB_TRANSMIT_PCT,HWIN-VAR-004,Turbidity,STORET,00074,Turbidity transmissometer percent
+TURB_LAB_NTU,HWIN-VAR-004,Turbidity,STORET,82079,Turbidity lab NTU
+SECCHI_INCHES,HWIN-VAR-004,Turbidity,STORET,00077,Secchi disk inches
+SECCHI_METERS,HWIN-VAR-004,Turbidity,STORET,00078,Secchi disk meters
+COLOR_PTCO,HWIN-VAR-004,Turbidity,STORET,00080,Color platinum-cobalt
+COLOR_APPT_PTCO,HWIN-VAR-004,Turbidity,STORET,00081,Apparent color platinum-cobalt
+ODOR_THRESHOLD,HWIN-VAR-004,Turbidity,STORET,00085,Odor threshold
+RESIDUE_TOTAL_MG_L,HWIN-VAR-021,Total Dissolved Solids,STORET,00500,Residue total
+RESIDUE_DISS_105C_MG_L,HWIN-VAR-021,Total Dissolved Solids,STORET,00515,Residue dissolved 105C
+RESIDUE_TOT_NFLT_MG_L,HWIN-VAR-015,Total Suspended Solids,STORET,00530,Residue total nonfilterable
+RESIDUE_VOL_NFLT_MG_L,HWIN-VAR-015,Total Suspended Solids,STORET,00535,Residue volatile nonfilterable
+RESIDUE_FIX_NFLT_MG_L,HWIN-VAR-015,Total Suspended Solids,STORET,00540,Residue fixed nonfilterable
+TSS,HWIN-VAR-015,Total Suspended Solids,STORET,TSS,GRQA alias
+OIL_GREASE_FREON_MG_L,HWIN-VAR-015,Total Suspended Solids,STORET,00556,Oil & grease freon extraction
+OIL_GREASE_MUD_HEX_MG_KG,HWIN-VAR-015,Total Suspended Solids,STORET,00553,Oil & grease sediment hexane
+OIL_GREASE_MUD_FREON_MG_KG,HWIN-VAR-015,Total Suspended Solids,STORET,00557,Oil & grease sediment freon
+OIL_GREASE_MUD_IR_MG_KG,HWIN-VAR-015,Total Suspended Solids,STORET,00561,Oil & grease sediment IR
+NH3_NH4_N_TOTAL_MG_L,HWIN-VAR-009,Ammonium Nitrogen,STORET,00610,Ammonia total as N
+NH3_NH4_N_DISS_MG_L,HWIN-VAR-009,Ammonium Nitrogen,STORET,00608,Ammonia dissolved as N
+NH4N,HWIN-VAR-009,Ammonium Nitrogen,STORET,NH4N,GRQA alias
+NH3N,HWIN-VAR-009,Ammonium Nitrogen,STORET,NH3N,GRQA alias
+UNIONIZED_NH3_N_MG_L,HWIN-VAR-031,Total Ammonia Nitrogen,STORET,00612,Unionized ammonia as N
+UNIONIZED_NH3_NH3_MG_L,HWIN-VAR-031,Total Ammonia Nitrogen,STORET,00619,Unionized ammonia NH3
+NO2_N_TOTAL_MG_L,HWIN-VAR-033,Nitrite Nitrogen,STORET,00615,Nitrite total as N
+NO2_N_DISS_MG_L,HWIN-VAR-033,Nitrite Nitrogen,STORET,00613,Nitrite dissolved as N
+NO2N,HWIN-VAR-033,Nitrite Nitrogen,STORET,NO2N,GRQA alias
+NO3_N_TOTAL_MG_L,HWIN-VAR-008,Nitrate Nitrogen,STORET,00620,Nitrate total as N
+NO3_N_DISS_MG_L,HWIN-VAR-008,Nitrate Nitrogen,STORET,00618,Nitrate dissolved as N
+NO3N,HWIN-VAR-008,Nitrate Nitrogen,STORET,NO3N,GRQA alias
+NO2_NO3_N_TOTAL_MG_L,HWIN-VAR-024,Dissolved Inorganic Nitrogen,STORET,00630,Nitrite + nitrate total
+NO2_NO3_N_DISS_MG_L,HWIN-VAR-024,Dissolved Inorganic Nitrogen,STORET,00631,Nitrite + nitrate dissolved
+DIN,HWIN-VAR-024,Dissolved Inorganic Nitrogen,STORET,DIN,GRQA alias
+ORG_N_TOTAL_MG_L,HWIN-VAR-029,Dissolved Organic Nitrogen,STORET,00605,Organic nitrogen total
+ORG_N_MUD_MG_KG_N,HWIN-VAR-030,Total Organic Nitrogen,STORET,00626,Organic nitrogen Kjeldahl sediment
+KJEL_N_TOTAL_MG_L,HWIN-VAR-027,Total Kjeldahl Nitrogen,STORET,00625,Kjeldahl nitrogen total
+KJEL_N_DISS_MG_L,HWIN-VAR-032,Dissolved Kjeldahl Nitrogen,STORET,00623,Kjeldahl nitrogen dissolved
+TKN,HWIN-VAR-027,Total Kjeldahl Nitrogen,STORET,TKN,GRQA alias
+DKN,HWIN-VAR-032,Dissolved Kjeldahl Nitrogen,STORET,DKN,GRQA alias
+TOTAL_N_MG_L,HWIN-VAR-028,Total Nitrogen,STORET,00625,Total nitrogen (via Kjeldahl)
+TN,HWIN-VAR-028,Total Nitrogen,STORET,TN,GRQA alias
+TOT_P_PO4_MG_L,HWIN-VAR-035,Total Dissolved Phosphorus,STORET,00650,Phosphate total as PO4
+ORTHOPO4_PO4_MG_L,HWIN-VAR-034,Dissolved Inorganic Phosphorus,STORET,00660,Orthophosphate as PO4
+PHOS_WTR_TOT_REC_UG_L,HWIN-VAR-035,Total Dissolved Phosphorus,STORET,00662,Phosphorus total recoverable
+PHOS_TOT_MG_L_P,HWIN-VAR-035,Total Dissolved Phosphorus,STORET,00665,Phosphorus total as P
+TP,HWIN-VAR-035,Total Dissolved Phosphorus,STORET,TP,GRQA alias
+PHOS_DIS_MG_L_P,HWIN-VAR-034,Dissolved Inorganic Phosphorus,STORET,00666,Phosphorus dissolved as P
+PHOS_MUD_MG_KG_P,HWIN-VAR-039,Total Particulate Phosphorus,STORET,00668,Phosphorus sediment
+PHOS_DIS_ORTHO_MG_L_P,HWIN-VAR-034,Dissolved Inorganic Phosphorus,STORET,00671,Phosphorus dissolved ortho as P
+DIP,HWIN-VAR-034,Dissolved Inorganic Phosphorus,STORET,DIP,GRQA alias
+TDP,HWIN-VAR-035,Total Dissolved Phosphorus,STORET,TDP,GRQA alias
+TOT_ORG_C_MG_L,HWIN-VAR-044,Total Organic Carbon,STORET,00680,Total organic carbon as C
+TOC,HWIN-VAR-044,Total Organic Carbon,STORET,TOC,GRQA alias
+DIS_ORG_C_MG_L,HWIN-VAR-042,Dissolved Organic Carbon,STORET,00681,Dissolved organic carbon as C
+DOC,HWIN-VAR-042,Dissolved Organic Carbon,STORET,DOC,GRQA alias
+DIS_ORG_C_WTM_GF_F_MG_L,HWIN-VAR-042,Dissolved Organic Carbon,STORET,00684,Dissolved organic carbon Whatman GF/F
+TOT_INORG_C_MG_L,HWIN-VAR-043,Total Inorganic Carbon,STORET,00685,Total inorganic carbon as C
+TIC,HWIN-VAR-043,Total Inorganic Carbon,STORET,TIC,GRQA alias
+DIC,HWIN-VAR-041,Dissolved Inorganic Carbon,STORET,DIC,GRQA alias
+DC,HWIN-VAR-041,Dissolved Inorganic Carbon,STORET,DC,GRQA alias
+TC,HWIN-VAR-040,Total Carbon,STORET,TC,GRQA alias
+HARDNESS_TOT_CACO3_MG_L,HWIN-VAR-020,Alkalinity,STORET,00900,Hardness total as CaCO3
+HARDNESS_CARB_CACO3_MG_L,HWIN-VAR-020,Alkalinity,STORET,00901,Hardness carbonate as CaCO3
+HARDNESS_CALC_CACO3_MG_L,HWIN-VAR-020,Alkalinity,STORET,46570,Hardness Ca Mg calculated
+CALCIUM_DISS_MG_L,HWIN-VAR-017,Chloride,STORET,00915,Calcium dissolved as Ca
+CALCIUM_TOT_MG_L,HWIN-VAR-017,Chloride,STORET,00916,Calcium total as Ca
+CALCIUM_CACO3_MG_L,HWIN-VAR-017,Chloride,STORET,00910,Calcium as CaCO3
+MAGNESIUM_DISS_MG_L,HWIN-VAR-018,Sulfate,STORET,00925,Magnesium dissolved
+MAGNESIUM_TOT_MG_L,HWIN-VAR-018,Sulfate,STORET,00927,Magnesium total
+SODIUM_TOT_MG_L,HWIN-VAR-017,Chloride,STORET,00929,Sodium total
+SODIUM_DISS_MG_L,HWIN-VAR-017,Chloride,STORET,00930,Sodium dissolved
+POTASSIUM_DISS_MG_L,HWIN-VAR-018,Sulfate,STORET,00935,Potassium dissolved
+POTASSIUM_TOT_MG_L,HWIN-VAR-018,Sulfate,STORET,00937,Potassium total
+CHLORIDE_TOTAL_MG_L,HWIN-VAR-017,Chloride,STORET,00940,Chloride total
+CHLORIDE_DISS_MG_L,HWIN-VAR-017,Chloride,STORET,00941,Chloride dissolved
+SULFATE_SO4_DISS_MG_L,HWIN-VAR-018,Sulfate,STORET,00946,Sulfate dissolved as SO4
+SULFATE_AS_S_MG_L,HWIN-VAR-018,Sulfate,STORET,00154,Sulfate as S
+FLUORIDE_DISS_MG_L,HWIN-VAR-017,Chloride,STORET,00950,Fluoride dissolved
+SILICA_DISS_MG_L,HWIN-VAR-019,Silica,STORET,00955,Silica dissolved as SiO2
+SILICA_TOTAL_MG_L,HWIN-VAR-019,Silica,STORET,00956,Silica total
+FLOW_INST_CFS,HWIN-VAR-006,Flow Rate,STORET,00061,Flow instantaneous CFS
+FLOW_INST_MGD,HWIN-VAR-006,Flow Rate,STORET,50051,Flow instantaneous MGD
+FLOW_MEAN_DAILY_CFS,HWIN-VAR-006,Flow Rate,STORET,00060,Flow mean daily CFS
+STREAM_STAGE_FEET,HWIN-VAR-007,Water Depth,STORET,00065,Stream stage feet
+STREAM_DEPTH_MEAN_FT,HWIN-VAR-007,Water Depth,STORET,00064,Stream depth mean feet
+MAX_SAMP_DEPTH_FEET,HWIN-VAR-007,Water Depth,STORET,00068,Max sample depth feet
+TOP_DPTH_SMPL_METERS,HWIN-VAR-007,Water Depth,STORET,82047,Depth top of sampling interval
+ARSENIC_DISS_UG_L,HWIN-VAR-017,Chloride,STORET,01000,Arsenic dissolved
+ARSENIC_TOT_UG_L,HWIN-VAR-017,Chloride,STORET,01007,Arsenic total
+BARIUM_TOT_UG_L,HWIN-VAR-018,Sulfate,STORET,01007,Barium total
+BORON_TOT_UG_L,HWIN-VAR-018,Sulfate,STORET,01022,Boron total
+CADMIUM_DISS_UG_L,HWIN-VAR-017,Chloride,STORET,01025,Cadmium dissolved
+CADMIUM_TOT_UG_L,HWIN-VAR-017,Chloride,STORET,01027,Cadmium total
+CHROMIUM_DISS_UG_L,HWIN-VAR-017,Chloride,STORET,01030,Chromium dissolved
+CHROMIUM_HEX_UG_L,HWIN-VAR-017,Chloride,STORET,01032,Chromium hexavalent
+CHROMIUM_TOT_UG_L,HWIN-VAR-017,Chloride,STORET,01034,Chromium total
+COPPER_DISS_UG_L,HWIN-VAR-017,Chloride,STORET,01040,Copper dissolved
+IRON_TOT_UG_L,HWIN-VAR-018,Sulfate,STORET,01045,Iron total
+IRON_UG_L,HWIN-VAR-018,Sulfate,STORET,71885,Iron
+LEAD_TOT_UG_L,HWIN-VAR-017,Chloride,STORET,01051,Lead total
+MANGANESE_TOT_UG_L,HWIN-VAR-018,Sulfate,STORET,01055,Manganese total
+MANGANESE_DISS_UG_L,HWIN-VAR-018,Sulfate,STORET,01056,Manganese dissolved
+NICKEL_DISS_UG_L,HWIN-VAR-017,Chloride,STORET,01065,Nickel dissolved
+NICKEL_TOT_UG_L,HWIN-VAR-017,Chloride,STORET,01067,Nickel total
+SILVER_TOT_UG_L,HWIN-VAR-017,Chloride,STORET,01077,Silver total
+ZINC_DISS_UG_L,HWIN-VAR-017,Chloride,STORET,01090,Zinc dissolved
+ZINC_TOT_UG_L,HWIN-VAR-017,Chloride,STORET,01092,Zinc total
+TIN_TOT_UG_L,HWIN-VAR-018,Sulfate,STORET,01102,Tin total
+ALUMINUM_TOT_UG_L,HWIN-VAR-018,Sulfate,STORET,01105,Aluminum total
+SELENIUM_TOT_UG_L,HWIN-VAR-018,Sulfate,STORET,01147,Selenium total
+TOT_COLI_MF_HARRIS_100ML,HWIN-VAR-012,Fecal Coliforms,STORET,31501,Total coliform membrane filter
+TOT_COLI_MF_LES_100ML,HWIN-VAR-012,Fecal Coliforms,STORET,31504,Total coliform MF LES
+TOT_COLI_MPN_CONF_100ML,HWIN-VAR-012,Fecal Coliforms,STORET,31505,Total coliform MPN confirmed
+TOT_COLI_MPN_COMP_100ML,HWIN-VAR-012,Fecal Coliforms,STORET,31507,Total coliform MPN completed
+FEC_COLI_MPN_EC_100ML,HWIN-VAR-012,Fecal Coliforms,STORET,31615,Fecal coliform MPN EC
+FEC_COLI_MF_MFC_100ML,HWIN-VAR-012,Fecal Coliforms,STORET,31616,Fecal coliform MF M-FC
+FEC_COLOIF,HWIN-VAR-012,Fecal Coliforms,STORET,FEC_COLOIF,QUADICA alias
+FECAL_COLIFORM,HWIN-VAR-012,Fecal Coliforms,STORET,Fecal Coliform,Various
+ECOLI,HWIN-VAR-012,Fecal Coliforms,STORET,Escherichia coli,WQP alias
+ENTEROCOCCUS,HWIN-VAR-012,Fecal Coliforms,STORET,Enterococcus,WQP alias
+TANNIN_LIGNIN_MG_L,HWIN-VAR-044,Total Organic Carbon,STORET,32240,Tannin & lignin
+PHENOLS_TOT_UG_L,HWIN-VAR-044,Total Organic Carbon,STORET,32730,Phenolics total
+PCB_1016_UG_L,HWIN-VAR-044,Total Organic Carbon,STORET,34671,PCB 1016
+MBAS_MG_L,HWIN-VAR-044,Total Organic Carbon,STORET,38260,MBAS detergents
+ALDRIN_UG_L,HWIN-VAR-044,Total Organic Carbon,STORET,39330,Aldrin
+CHLORDANE_UG_L,HWIN-VAR-044,Total Organic Carbon,STORET,39350,Chlordane
+CHLORDANE_MUD_UG_KG,HWIN-VAR-044,Total Organic Carbon,STORET,39351,Chlordane sediment
+DDD_MUD_UG_KG,HWIN-VAR-044,Total Organic Carbon,STORET,39363,DDD sediment
+DDE_MUD_UG_KG,HWIN-VAR-044,Total Organic Carbon,STORET,39368,DDE sediment
+DDT_WATER_UG_L,HWIN-VAR-044,Total Organic Carbon,STORET,39370,DDT water
+DDT_MUD_UG_KG,HWIN-VAR-044,Total Organic Carbon,STORET,39373,DDT sediment
+TOT_DDT_WATER_UG_L,HWIN-VAR-044,Total Organic Carbon,STORET,39379,Total DDT water
+DIELDRIN_WATER_UG_L,HWIN-VAR-044,Total Organic Carbon,STORET,39380,Dieldrin water
+DIELDRIN_SED_UG_KG,HWIN-VAR-044,Total Organic Carbon,STORET,39383,Dieldrin sediment
+ENDRIN_WATER_UG_L,HWIN-VAR-044,Total Organic Carbon,STORET,39390,Endrin water
+ETHION_WATER_UG_L,HWIN-VAR-044,Total Organic Carbon,STORET,39398,Ethion water
+TOXAPHENE_WATER_UG_L,HWIN-VAR-044,Total Organic Carbon,STORET,39400,Toxaphene water
+HEPTACHLOR_WATER_UG_L,HWIN-VAR-044,Total Organic Carbon,STORET,39410,Heptachlor water
+HEPT_EPOX_WATER_UG_L,HWIN-VAR-044,Total Organic Carbon,STORET,39420,Heptachlor epoxide water
+METHOXYCHLOR_WATER_UG_L,HWIN-VAR-044,Total Organic Carbon,STORET,39480,Methoxychlor water
+PCB_1016_SED_UG_KG,HWIN-VAR-044,Total Organic Carbon,STORET,39514,PCB 1016 sediment
+TWO_FOUR_D_WATER_UG_L,HWIN-VAR-044,Total Organic Carbon,STORET,39730,"2,4-D water"
+TWO_FOUR_FIVE_T_WATER_UG_L,HWIN-VAR-044,Total Organic Carbon,STORET,39740,"2,4,5-T water"
+LINDANE_WATER_UG_L,HWIN-VAR-044,Total Organic Carbon,STORET,39782,Lindane water
+CYANIDE_TOT_MG_L,HWIN-VAR-017,Chloride,STORET,00720,Cyanide total
+CYANIDE_SED_MG_KG,HWIN-VAR-017,Chloride,STORET,00721,Cyanide sediment
+SULFIDE_SED_MG_KG,HWIN-VAR-018,Sulfate,STORET,00747,Sulfide sediment
+MERCURY_TOT_UG_L,HWIN-VAR-017,Chloride,STORET,71900,Mercury total
+BROMIDE_MG_L,HWIN-VAR-017,Chloride,STORET,71870,Bromide
+NITRATE_DISS_NO3_MG_L,HWIN-VAR-008,Nitrate Nitrogen,STORET,71851,Nitrate dissolved as NO3
+REDOX_ORP_MV,HWIN-VAR-017,Chloride,STORET,00090,Redox ORP
+ALPHA_ACTIVITY_PC_MG,HWIN-VAR-044,Total Organic Carbon,STORET,80000,Alpha activity
+BETA_ACTIVITY_PC_MG,HWIN-VAR-044,Total Organic Carbon,STORET,80001,Beta activity
+ELEVATION_FT_MSL,HWIN-VAR-007,Water Depth,STORET,72020,Elevation feet MSL
+DRNAREA_SQMI,HWIN-VAR-007,Water Depth,STORET,81024,Drainage area sq mi
+SURFACE_AREA_SQKM,HWIN-VAR-007,Water Depth,STORET,70151,Surface area sq km
+LOSS_ON_IGNITION_MG_KG,HWIN-VAR-015,Total Suspended Solids,STORET,00496,Loss on ignition
+WIND_VELOCITY_MPH,HWIN-VAR-016,Air Temperature,STORET,00035,Wind velocity mph
+WIND_DIR_DEGREES,HWIN-VAR-016,Air Temperature,STORET,00036,Wind direction degrees
+BAROMETRIC_PRESSURE_MM_HG,HWIN-VAR-016,Air Temperature,STORET,00025,Barometric pressure
+WEATHER_WMO_CODE,HWIN-VAR-016,Air Temperature,STORET,00041,Weather WMO code
+CLOUD_TYPE_WMO,HWIN-VAR-016,Air Temperature,STORET,00043,Cloud type WMO
+TOXICS_EPA_ID_FY,HWIN-VAR-044,Total Organic Carbon,STORET,00026,Toxics EPA ID
+LAB_IDENT_NUMBER,HWIN-VAR-044,Total Organic Carbon,STORET,00008,Lab identification number
+SAMPLE_WEIGHT_GRAMS,HWIN-VAR-044,Total Organic Carbon,STORET,00019,Sample weight grams
+SAMPLE_LENGTH_MM,HWIN-VAR-044,Total Organic Carbon,STORET,00039,Sample length mm
+IND_FLOW_CHECKED,HWIN-VAR-006,Flow Rate,STORET,00057,Flow indicator checked
+STREAM_VELOCITY_FT_SEC,HWIN-VAR-006,Flow Rate,STORET,00055,Stream velocity ft/sec
+STREAM_FLOW_CFS,HWIN-VAR-006,Flow Rate,STORET,00060,Stream flow CFS
+00010,HWIN-VAR-001,Water Temperature,STORET,00010,STORET parameter code for Water Temperature (Celsius)
+00011,HWIN-VAR-001,Water Temperature,STORET,00011,STORET parameter code for Water Temperature (Fahrenheit)
+00020,HWIN-VAR-016,Air Temperature,STORET,00020,STORET parameter code for Air Temperature (Celsius)
+00400,HWIN-VAR-002,pH,STORET,00400,STORET parameter code for pH
+00403,HWIN-VAR-002,pH,STORET,00403,STORET parameter code for pH Lab
+00406,HWIN-VAR-002,pH,STORET,00406,STORET parameter code for pH Field
+00299,HWIN-VAR-003,Dissolved Oxygen,STORET,00299,STORET parameter code for DO Probe mg/L
+00300,HWIN-VAR-003,Dissolved Oxygen,STORET,00300,STORET parameter code for DO mg/L
+00301,HWIN-VAR-014,Dissolved Oxygen Percent Saturation,STORET,00301,STORET parameter code for DO Percent Saturation
+00094,HWIN-VAR-005,Specific Conductance,STORET,00094,STORET parameter code for Specific Conductance Field µS/cm
+00095,HWIN-VAR-005,Specific Conductance,STORET,00095,STORET parameter code for Specific Conductance @25C µS/cm
+00070,HWIN-VAR-004,Turbidity,STORET,00070,STORET parameter code for Turbidity JTU
+00076,HWIN-VAR-004,Turbidity,STORET,00076,STORET parameter code for Turbidity HACH FTU
+49901,HWIN-VAR-015,Total Suspended Solids,STORET,49901,STORET parameter code for TSS mg/L
+70297,HWIN-VAR-015,Total Suspended Solids,STORET,70297,STORET parameter code for TSS kg/1000 gallons
+00060,HWIN-VAR-006,Flow Rate,STORET,00060,STORET parameter code for Stream Flow CFS
+00061,HWIN-VAR-006,Flow Rate,STORET,00061,STORET parameter code for Stream Flow Instant CFS
+00940,HWIN-VAR-017,Chloride,STORET,00940,STORET parameter code for Chloride Total mg/L
+00941,HWIN-VAR-017,Chloride,STORET,00941,STORET parameter code for Chloride Dissolved mg/L
+00945,HWIN-VAR-018,Sulfate,STORET,00945,STORET parameter code for Sulfate (need to verify code in matrix)
+00640,HWIN-VAR-008,Nitrate Nitrogen,STORET,00640,STORET parameter code for Total Inorganic Nitrogen mg/L N
+00610,HWIN-VAR-031,Total Ammonia Nitrogen,STORET,00610,STORET parameter code for Ammonia Nitrogen (common code)
+00665,HWIN-VAR-010,Phosphate Phosphorus,STORET,00665,STORET parameter code for Phos-Tot mg/L P
+00666,HWIN-VAR-034,Dissolved Inorganic Phosphorus,STORET,00666,STORET parameter code for Phos-Dis mg/L P
+00671,HWIN-VAR-034,Dissolved Inorganic Phosphorus,STORET,00671,STORET parameter code for Phos-Dis Ortho mg/L P
+32211,HWIN-VAR-011,Chlorophyll-a,STORET,32211,STORET parameter code for Chlorophyll-a corrected µg/L
+00310,HWIN-VAR-022,Biochemical Oxygen Demand,STORET,00310,STORET parameter code for BOD 5-day mg/L
+00340,HWIN-VAR-023,Chemical Oxygen Demand,STORET,00340,STORET parameter code for COD (need to verify code)
+70304,HWIN-VAR-021,Total Dissolved Solids,STORET,70304,STORET parameter code for Solids Dissolved TM mg/L
+00410,HWIN-VAR-020,Alkalinity,STORET,00410,STORET parameter code for Alkalinity (need to verify)
+00075,HWIN-VAR-004,Turbidity,STORET,00075,STORET parameter code for Turbidity Hellige PPM SiO2
+00077,HWIN-VAR-004,Turbidity,STORET,00077,STORET parameter code for Transparency Secchi Inches
+00078,HWIN-VAR-004,Turbidity,STORET,00078,STORET parameter code for Transparency Secchi Meters
+00080,HWIN-VAR-004,Turbidity,STORET,00080,STORET parameter code for Color Pt-Co units
+00081,HWIN-VAR-004,Turbidity,STORET,00081,STORET parameter code for Color apparent Pt-Co
+00090,HWIN-VAR-003,Dissolved Oxygen,STORET,00090,STORET parameter code for Redox ORP mV
+00600,HWIN-VAR-028,Total Nitrogen,STORET,00600,STORET parameter code for Nitrogen total mg/L N (need to verify code)
+00602,HWIN-VAR-024,Dissolved Inorganic Nitrogen,STORET,00602,STORET parameter code for DISS NITROGEN mg/L N
+00613,HWIN-VAR-009,Ammonium Nitrogen,STORET,00613,STORET parameter code for Ammonium Nitrogen (need to verify)
+00618,HWIN-VAR-008,Nitrate Nitrogen,STORET,00618,STORET parameter code for Nitrate Nitrogen (need to verify)
+00619,HWIN-VAR-033,Nitrite Nitrogen,STORET,00619,STORET parameter code for Nitrite Nitrogen
+00620,HWIN-VAR-008,Nitrate Nitrogen,STORET,00620,STORET parameter code for Nitrate Nitrogen (common code)
+00630,HWIN-VAR-033,Nitrite Nitrogen,STORET,00630,STORET parameter code for Nitrite Nitrogen (common code)
+00672,HWIN-VAR-010,Phosphate Phosphorus,STORET,00672,STORET parameter code for Phos-Dis Hydro mg/L P
+00900,HWIN-VAR-005,Specific Conductance,STORET,00900,STORET parameter code for Hardness total mg/L as CaCO3 (proxy for conductance)
+00915,HWIN-VAR-017,Chloride,STORET,00915,STORET parameter code for Calcium dissolved mg/L (related to hardness/ions)
+00925,HWIN-VAR-018,Sulfate,STORET,00925,STORET parameter code for Magnesium dissolved mg/L
+00930,HWIN-VAR-017,Chloride,STORET,00930,STORET parameter code for Sodium dissolved mg/L
+00935,HWIN-VAR-017,Chloride,STORET,00935,STORET parameter code for Potassium diss mg/L
+00950,HWIN-VAR-017,Chloride,STORET,00950,STORET parameter code for Fluoride diss mg/L
+00955,HWIN-VAR-019,Silica,STORET,00955,STORET parameter code for Silica dissolved mg/L
+01002,HWIN-VAR-017,Chloride,STORET,01002,STORET parameter code for Arsenic total ug/L
+01007,HWIN-VAR-017,Chloride,STORET,01007,STORET parameter code for Barium total ug/L
+01020,HWIN-VAR-017,Chloride,STORET,01020,STORET parameter code for Cadmium total ug/L
+01025,HWIN-VAR-017,Chloride,STORET,01025,STORET parameter code for Chromium total ug/L
+01030,HWIN-VAR-017,Chloride,STORET,01030,STORET parameter code for Copper total ug/L
+01034,HWIN-VAR-017,Chloride,STORET,01034,STORET parameter code for Iron total ug/L
+01040,HWIN-VAR-017,Chloride,STORET,01040,STORET parameter code for Lead total ug/L
+01042,HWIN-VAR-017,Chloride,STORET,01042,STORET parameter code for Manganese total ug/L
+01051,HWIN-VAR-017,Chloride,STORET,01051,STORET parameter code for Selenium total ug/L
+01055,HWIN-VAR-017,Chloride,STORET,01055,STORET parameter code for Thallium total ug/L
+01056,HWIN-VAR-017,Chloride,STORET,01056,STORET parameter code for Zinc total ug/L
+01057,HWIN-VAR-017,Chloride,STORET,01057,STORET parameter code for Antimony total ug/L
+70300,HWIN-VAR-021,Total Dissolved Solids,STORET,70300,STORET parameter code for TDS total mg/L (residue at 180C)
+70301,HWIN-VAR-021,Total Dissolved Solids,STORET,70301,STORET parameter code for Solids dissolved TM mg/L

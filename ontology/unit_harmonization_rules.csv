@@ -1,0 +1,92 @@
+Variable_ID,Canonical_Unit,Source_Unit,Conversion_Factor,Conversion_Offset,Notes
+HWIN-VAR-001,K,°C,1,273.15,Kelvin = Celsius + 273.15
+HWIN-VAR-001,K,°F,5/9,255.37,Kelvin = (Fahrenheit + 459.67) * 5/9
+HWIN-VAR-001,K,K,1,0.0,Identity conversion
+HWIN-VAR-003,mol/m³,mg/L,0.03125,0.0,For O2: 1 mg/L = 0.03125 mol/m³ (molar mass 32 g/mol)
+HWIN-VAR-003,mg/L,mol/m³,32,0.0,For O2: 1 mol/m³ = 32 mg/L
+HWIN-VAR-005,S/m,µS/cm,0.0001,0.0,1 µS/cm = 0.0001 S/m
+HWIN-VAR-005,mS/m,µS/cm,0.001,0.0,1 µS/cm = 0.001 mS/m
+HWIN-VAR-005,S/m,mS/m,0.001,0.0,1 mS/m = 0.001 S/m
+HWIN-VAR-008,mol/m³,mg/L as N,0.0714,0.0,For NO3-N: 1 mg/L as N = 0.0714 mol/m³
+HWIN-VAR-008,mg/L as N,mol/m³,14,0.0,For NO3-N: 1 mol/m³ = 14 mg/L as N
+HWIN-VAR-009,mol/m³,mg/L as N,0.0556,0.0,For NH4-N: 1 mg/L as N = 0.0556 mol/m³
+HWIN-VAR-009,mg/L as N,mol/m³,18,0.0,For NH4-N: 1 mol/m³ = 18 mg/L as N
+HWIN-VAR-010,mol/m³,mg/L as P,0.0323,0.0,For PO4-P: 1 mg/L as P = 0.0323 mol/m³
+HWIN-VAR-010,mg/L as P,mol/m³,31,0.0,For PO4-P: 1 mol/m³ = 31 mg/L as P
+HWIN-VAR-011,mg/m³,µg/L,0.001,0.0,1 µg/L = 0.001 mg/m³
+HWIN-VAR-011,µg/L,mg/m³,1000,0.0,1 mg/m³ = 1000 µg/L
+HWIN-VAR-012,#/m³,CFU/100mL,10,0.0,1 CFU/100mL = 10 #/m³
+HWIN-VAR-012,#/m³,MPN/100mL,10,0.0,1 MPN/100mL = 10 #/m³
+HWIN-VAR-015,kg/m³,mg/L,0.001,0.0,1 mg/L = 0.001 kg/m³
+HWIN-VAR-015,g/m³,mg/L,1,0.0,1 mg/L = 1 g/m³
+HWIN-VAR-006,m³/s,cfs,0.0283168,0.0,1 cfs = 0.0283168 m³/s
+HWIN-VAR-006,m³/s,L/s,0.001,0.0,1 L/s = 0.001 m³/s
+HWIN-VAR-006,m³/s,gallons/min,0.00006309,0.0,1 gallon/min = 0.00006309 m³/s
+HWIN-VAR-007,m,ft,0.3048,0.0,1 ft = 0.3048 m
+HWIN-VAR-007,m,cm,0.01,0.0,1 cm = 0.01 m
+HWIN-VAR-016,K,°C,1,273.15,Kelvin = Celsius + 273.15
+HWIN-VAR-016,K,°F,5/9,255.37,Kelvin = (Fahrenheit + 459.67) * 5/9
+HWIN-VAR-016,K,K,1,0.0,Identity conversion
+HWIN-VAR-017,mol/m³,mg/L,0.0282,0.0,For Cl: 1 mg/L = 0.0282 mol/m³ (molar mass 35.45 g/mol)
+HWIN-VAR-017,mol/m³,mg/l,0.0282,0.0,For Cl: lowercase units
+HWIN-VAR-017,mg/L,mol/m³,35.45,0.0,For Cl: 1 mol/m³ = 35.45 mg/L
+HWIN-VAR-017,mg/L,mg/L,1.0,0.0,Identity
+HWIN-VAR-018,mol/m³,mg/L,0.0104,0.0,For SO4: 1 mg/L = 0.0104 mol/m³ (molar mass 96.06 g/mol)
+HWIN-VAR-018,mol/m³,mg/l,0.0104,0.0,Lowercase
+HWIN-VAR-018,mg/L,mol/m³,96.06,0.0,For SO4: 1 mol/m³ = 96.06 mg/L
+HWIN-VAR-018,mg/L,mg/L,1.0,0.0,Identity
+HWIN-VAR-019,mol/m³,mg/L as SiO2,0.01665,0.0,For SiO2: 1 mg/L = 0.01665 mol/m³ (molar mass 60.08 g/mol)
+HWIN-VAR-019,mol/m³,mg/l as SiO2,0.01665,0.0,Lowercase
+HWIN-VAR-019,mol/m³,mg/L,0.01665,0.0,Assume mg/L as SiO2
+HWIN-VAR-019,mg/L as SiO2,mol/m³,60.08,0.0,For SiO2: 1 mol/m³ = 60.08 mg/L
+HWIN-VAR-019,mg/L as SiO2,mg/L as SiO2,1.0,0.0,Identity
+HWIN-VAR-020,mol/m³,mg/L as CaCO3,0.02,0.0,For CaCO3: 1 mg/L = 0.02 mol/m³ (equiv. weight 50 g/mol)
+HWIN-VAR-020,mol/m³,mg/l as CaCO3,0.02,0.0,Lowercase
+HWIN-VAR-020,mol/m³,meq/L,1.0,0.0,1 meq/L = 1 mol/m³
+HWIN-VAR-020,mg/L as CaCO3,mol/m³,50.0,0.0,For CaCO3: 1 mol/m³ = 50 mg/L
+HWIN-VAR-020,mg/L as CaCO3,mg/L as CaCO3,1.0,0.0,Identity
+HWIN-VAR-021,kg/m³,mg/L,0.001,0.0,1 mg/L = 0.001 kg/m³
+HWIN-VAR-021,kg/m³,mg/l,0.001,0.0,Lowercase
+HWIN-VAR-021,kg/m³,g/m³,0.001,0.0,1 g/m³ = 0.001 kg/m³
+HWIN-VAR-021,mg/L,kg/m³,1000.0,0.0,1 kg/m³ = 1000 mg/L
+HWIN-VAR-021,mg/L,mg/L,1.0,0.0,Identity
+HWIN-VAR-001,K,deg C,1.0,273.15,WQP format for Celsius
+HWIN-VAR-001,K,deg c,1.0,273.15,Lowercase
+HWIN-VAR-002,pH unit,std units,1.0,0.0,Standard units for pH
+HWIN-VAR-002,pH unit,std unit,1.0,0.0,Singular
+HWIN-VAR-003,mol/mł,mg/l,0.03125,0.0,Lowercase mg/l for O2
+HWIN-VAR-005,S/m,uS/cm,0.0001,0.0,µS/cm (no prefix)
+HWIN-VAR-005,S/m,umho/cm,0.0001,0.0,µmho/cm = µS/cm
+HWIN-VAR-005,S/m,uS/cm @25C,0.0001,0.0,µS/cm at 25C
+HWIN-VAR-005,S/m,S/m,1.0,0.0,Already SI
+HWIN-VAR-005,S/m,µS/cm,0.0001,0.0,With micro symbol
+HWIN-VAR-008,mol/mł,mg/l as N,0.0714,0.0,Lowercase as N
+HWIN-VAR-008,mol/mł,mg/l asNO3,0.0161,0.0,As NO3 (molar mass 62)
+HWIN-VAR-009,mol/mł,mg/l as N,0.0556,0.0,Lowercase as N
+HWIN-VAR-010,mol/mł,mg/l as P,0.0323,0.0,Lowercase as P
+HWIN-VAR-010,mol/mł,mg/l asPO4,0.0105,0.0,As PO4 (molar mass 95)
+HWIN-VAR-011,mg/mł,ug/L,0.001,0.0,Uppercase ug/L
+HWIN-VAR-011,mg/mł,ug/l,0.001,0.0,Lowercase ug/l
+HWIN-VAR-011,mg/mł,mg/m3,0.001,0.0,mg/m³ = µg/L
+HWIN-VAR-011,mg/mł,mg/m2,0.001,0.0,mg/m² per meter depth approx
+HWIN-VAR-012,#/mł,cfu/100mL,10.0,0.0,CFU/100mL to #/m³
+HWIN-VAR-012,#/mł,MPN,1000.0,0.0,MPN to #/m³ (assume per 100mL)
+HWIN-VAR-004,m⁻¹,NTU,1.0,0.0,NTU ~ m⁻¹ (approximate)
+HWIN-VAR-004,m⁻¹,FNU,1.0,0.0,FNU same as NTU
+HWIN-VAR-004,m⁻¹,NTRU,1.0,0.0,NTRU same as NTU
+HWIN-VAR-015,kg/mł,mg/l,0.001,0.0,Lowercase
+HWIN-VAR-015,kg/mł,g/mł,0.001,0.0,g/m³ to kg/m³
+HWIN-VAR-015,kg/mł,mg/l,0.001,0.0,Already covered
+HWIN-VAR-021,kg/mł,g/mł,0.001,0.0,g/m³ to kg/m³
+HWIN-VAR-021,kg/mł,kg/mł,1.0,0.0,Already SI
+HWIN-VAR-006,mł/s,tons/ac ft,0.1233,0.0,Tons/acre-ft to m³/s (approx)
+HWIN-VAR-006,mł/s,tons/day,0.01157,0.0,Tons/day to m³/s (approx)
+HWIN-VAR-006,mł/s,mł/s,1.0,0.0,Already SI
+HWIN-VAR-006,mł/s,cfs,0.0283168,0.0,CFS to m³/s
+HWIN-VAR-006,mł/s,gal/min,6.309e-05,0.0,GPM to m³/s
+HWIN-VAR-007,m,m,1.0,0.0,Already SI
+HWIN-VAR-007,m,cm,0.01,0.0,cm to m
+HWIN-VAR-020,mol/mł,mg/l as CaCO3,0.02,0.0,Lowercase
+HWIN-VAR-017,mg/L,mg/l,1.0,0.0,Identity for mg/l
+HWIN-VAR-018,mg/L,mg/l,1.0,0.0,Identity for mg/l
+HWIN-VAR-019,mg/L as SiO2,mg/L,1.0,0.0,Assume mg/L as SiO2

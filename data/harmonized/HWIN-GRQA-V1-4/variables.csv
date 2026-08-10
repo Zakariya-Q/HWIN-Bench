@@ -1,0 +1,14 @@
+canonical_variable_id,canonical_name,definition,si_unit,preferred_datatype,expected_range
+HWIN-VAR-001,Water Temperature,The intensity of heat present in water," deg F,  K, K (typically reported in deg C)",Float,-2 to 40 deg C (liquid water range)
+HWIN-VAR-002,pH,Negative base-10 logarithm of hydrogen ion activity in water,pH unit,Float,0 to 14 (typically 0-14 for natural waters)
+HWIN-VAR-003,Dissolved Oxygen,Concentration of oxygen gas dissolved in water," % saturation, mol/m3 (SI) but typically mg/L",Float,0 to 20 mg/L (depending on temperature and pressure)
+HWIN-VAR-008,Nitrate Nitrogen,Concentration of nitrate (NO3-) in water," umol/L, mol/m3",Float,0 to 10+ mg/L as N (polluted to pristine)
+HWIN-VAR-009,Ammonium Nitrogen,Concentration of ammonium (NH4+) in water," umol/L, mol/m3",Float,0 to 5+ mg/L as N (typically low in oxic waters)
+HWIN-VAR-010,Phosphate Phosphorus,Concentration of phosphate (PO4 3-) in water," umol/L, mol/m3",Float,0 to 1+ mg/L as P (highly variable)
+HWIN-VAR-014,Dissolved Oxygen Percent Saturation,Ratio of measured DO to saturated DO at given temperature and pressure,dimensionless (ratio),Float,0 to 300% (supersaturation possible)
+HWIN-VAR-015,Total Suspended Solids,Mass of filterable particles per volume of water, g/m3,kg/m3,Float
+HWIN-VAR-022,Biochemical Oxygen Demand,Amount of dissolved oxygen consumed by microorganisms during decomposition of organic matter,mol/m3,Float,0 to 50+ mg/L
+HWIN-VAR-023,Chemical Oxygen Demand,Amount of oxygen required to chemically oxidize organic and inorganic matter,mol/m3,Float,0 to 500+ mg/L
+HWIN-VAR-028,Total Nitrogen,Sum of all nitrogen species in water,mol/m3,Float,0 to 20+ mg/L as N
+HWIN-VAR-031,Total Ammonia Nitrogen,Sum of ammonia (NH3) and ammonium (NH4+) nitrogen,mol/m3,Float,0 to 10+ mg/L as N
+HWIN-VAR-033,Nitrite Nitrogen,Concentration of nitrite (NO2-) in water, umol/L,mol/m3,Float

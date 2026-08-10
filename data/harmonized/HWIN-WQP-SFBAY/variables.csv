@@ -1,0 +1,19 @@
+canonical_variable_id,canonical_name,definition,si_unit,preferred_datatype,expected_range
+HWIN-VAR-002,pH,Negative base-10 logarithm of hydrogen ion activity in water,pH unit,Float,0 to 14 (typically 0-14 for natural waters)
+HWIN-VAR-007,Water Depth,Vertical distance from water surface to bottom,m,Float,0 to 1000+ m (ocean to puddle)
+HWIN-VAR-003,Dissolved Oxygen,Concentration of oxygen gas dissolved in water,mol/m³ (SI) but typically mg/L,Float,0 to 20 mg/L (depending on temperature and pressure)
+HWIN-VAR-010,Phosphate Phosphorus,Concentration of phosphate (PO4³-) in water,mol/m³,Float,0 to 1+ mg/L as P (highly variable)
+HWIN-VAR-021,Total Dissolved Solids,Concentration of all dissolved solids in water,kg/m³,Float,0 to 100000+ mg/L
+HWIN-VAR-018,Sulfate,Concentration of sulfate ion in water,mol/m³,Float,0 to 1000+ mg/L
+HWIN-VAR-019,Silica,Concentration of dissolved silica (SiO2) in water,mol/m³,Float,0 to 100+ mg/L as SiO2
+HWIN-VAR-008,Nitrate Nitrogen,Concentration of nitrate (NO3-) in water,mol/m³,Float,0 to 10+ mg/L as N (polluted to pristine)
+HWIN-VAR-012,Fecal Coliforms,Concentration of fecal coliform bacteria in water,#/m³,Integer,0 to 100000+ CFU/100mL
+HWIN-VAR-020,Alkalinity,Acid-neutralizing capacity of water,mol/m³,Float,0 to 500+ mg/L as CaCO3
+HWIN-VAR-011,Chlorophyll-a,Concentration of chlorophyll-a pigment in water,mg/m³,Float,0 to 100+ µg/L (oligotrophic to hypertrophic)
+HWIN-VAR-006,Flow Rate,Volume of water passing a point per unit time,m³/s,Float,0 to 10000+ m³/s (depending on water body)
+HWIN-VAR-015,Total Suspended Solids,Mass of filterable particles per volume of water,kg/m³,Float,0 to 1000+ mg/L
+HWIN-VAR-017,Chloride,Concentration of chloride ion in water,mol/m³,Float,0 to 1000+ mg/L
+HWIN-VAR-005,Specific Conductance,Measure of water's ability to conduct electrical current,S/m (SI),Float,0 to 100+ mS/m (fresh to saline water)
+HWIN-VAR-001,Water Temperature,The intensity of heat present in water,K (typically reported in °C),Float,-2 to 40 °C (liquid water range)
+HWIN-VAR-004,Turbidity,Measure of light scattering by suspended particles in water,m⁻¹ (SI) but typically NTU,Float,0 to 1000+ NTU (environmental range)
+HWIN-VAR-009,Ammonium Nitrogen,Concentration of ammonium (NH4+) in water,mol/m³,Float,0 to 5+ mg/L as N (typically low in oxic waters)

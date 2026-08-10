@@ -1,0 +1,69 @@
+{
+  "dataset_id": "HWIN-STORET-CA",
+  "version": "2024.1.0",
+  "title": "EPA STORET California - HWIN-Bench Harmonized Version",
+  "description": "Harmonized subset of EPA STORET water quality monitoring data for California, mapped to the HWIN Canonical Variable Ontology (CVO v1.0) and Canonical Benchmark Schema (CBS). Contains 22 canonical water quality variables from ~3,000 stations.",
+  "license": "Public Domain (17 USC 105)",
+  "license_uri": "https://www.usa.gov/government-works",
+  "cv_mapping_id": "HWIN-CVO-v1.0",
+  "metadata_standard": "ISO 19115-3",
+  "creators": [
+    {
+      "name": "HWIN-Bench Team",
+      "affiliation": "HWIN-Bench Consortium",
+      "orcid": "0000-0000-0000-0000"
+    }
+  ],
+  "publication_year": 2026,
+  "publisher": "Zenodo",
+  "funding": [
+    {
+      "funder": "[FUNDER NAME TO BE ADDED]",
+      "award_number": "[AWARD NUMBER TO BE ADDED]"
+    }
+  ],
+  "related_identifiers": [
+    {
+      "relation": "isDerivedFrom",
+      "identifier": "https://www.epa.gov/waterdata/storage-and-retrieval-and-water-quality-exchange",
+      "identifier_type": "URL",
+      "description": "EPA STORET Warehouse"
+    }
+  ],
+  "spatial_coverage": {
+    "type": "state",
+    "region": "California, USA",
+    "countries": 1,
+    "stations": 3000,
+    "bbox": [
+      -124.5,
+      32.5,
+      -114.1,
+      42.0
+    ]
+  },
+  "temporal_coverage": {
+    "start": "1950-01-01",
+    "end": "2024-12-31"
+  },
+  "variables": 22,
+  "observations": {
+    "canonical_total": 180000,
+    "benchmarked_max_per_variable": 180000,
+    "benchmarked_total": 180000
+  },
+  "checksums": {
+    "observations.csv": "66da67d737b17be22671fafa404bd0afd2aefbc0e7eab7b7fce94eb647ef1377",
+    "stations.json": "0e59945f202c6262371f450c9848f3e86edaf3f7172ff598e726d80a0fb61bcb",
+    "variables.csv": "5e85f9db2432c1a1c3922a8852208f822cf631bdd4c2eab3bab423a90cd1c3bb"
+  },
+  "version_history": [
+    {
+      "version": "2024.1.0",
+      "date": "2026-07-08",
+      "changes": "Initial harmonized release for HWIN-Bench v1.0"
+    }
+  ],
+  "doi": "10.5281/zenodo.XXXXX",
+  "is_published": false
+}

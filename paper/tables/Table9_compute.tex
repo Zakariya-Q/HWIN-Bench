@@ -1,0 +1,22 @@
+\begin{table}
+\caption{Computational requirements for baseline models. Linear models and tree ensembles evaluated on CPU (Intel Xeon 2.4 GHz); deep learning models on NVIDIA A100 (40 GB). Training time for 200K samples per variable (GRQA benchmark).}
+\label{tab:computational}
+\begin{tabular}{lllllll}
+\toprule
+Model Family & Model & Training Time (per variable, 200K samples) & Peak Memory (CPU/GPU) & Hardware & Samples/sec & Scalability \\
+\midrule
+Linear Models & Linear Regression & 1.1 s & < 1 GB & CPU & \textasciitilde 180K & O(n) \\
+Linear Models & Ridge & 0.8 s & < 1 GB & CPU & \textasciitilde 250K & O(n) \\
+Linear Models & Lasso & 8.3 s & < 1 GB & CPU & \textasciitilde 24K & O(n) \\
+Linear Models & ElasticNet & 6.6 s & < 1 GB & CPU & \textasciitilde 30K & O(n) \\
+Tree Ensembles & Random Forest & 569.5 s & 2-4 GB & CPU & \textasciitilde 350 & O(n log n) \\
+Tree Ensembles & Extra Trees & 314.8 s & 2-4 GB & CPU & \textasciitilde 635 & O(n log n) \\
+Tree Ensembles & Gradient Boosting & 583.5 s & 2-4 GB & CPU & \textasciitilde 340 & O(n log n) \\
+Deep Learning & MLP & \textasciitilde 45 min & 8-14 GB (GPU) & A100 GPU & \textasciitilde 4.5K & O(n) \\
+Deep Learning & CNN-1D & \textasciitilde 35 min & 8-14 GB (GPU) & A100 GPU & \textasciitilde 5.7K & O(n) \\
+Deep Learning & LSTM & \textasciitilde 50 min & 8-14 GB (GPU) & A100 GPU & \textasciitilde 3.3K & O(n) \\
+Deep Learning & GRU & \textasciitilde 45 min & 8-14 GB (GPU) & A100 GPU & \textasciitilde 3.7K & O(n) \\
+Deep Learning & Transformer & \textasciitilde 60 min & 10-16 GB (GPU) & A100 GPU & \textasciitilde 2.8K & O(n\textasciicircum 2) \\
+\bottomrule
+\end{tabular}
+\end{table}

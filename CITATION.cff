@@ -1,0 +1,83 @@
+cff-version: 1.2.0
+message: "If you use HWIN-Bench, please cite it as below."
+title: "HWIN-Bench v1.0: Heterogeneous Water Quality Intelligence Benchmark"
+version: 1.0.0
+doi: "10.5281/zenodo.XXXXXXX"
+date-released: 2026-08-09
+authors:
+  - family-names: "HWIN-Bench Consortium"
+    given-names: ""
+    affiliation: "HWIN-Bench Consortium"
+    orcid: "0000-0000-0000-0000"
+repository-code: "https://github.com/HWIN-Bench/HWIN-Bench-v1.0"
+url: "https://github.com/HWIN-Bench/HWIN-Bench-v1.0"
+license: "CC-BY-4.0"
+keywords:
+  - "water quality"
+  - "benchmark"
+  - "machine learning"
+  - "environmental science"
+  - "reproducibility"
+  - "heterogeneous data"
+  - "river water quality"
+  - "transfer learning"
+preferred-citation:
+  type: "software"
+  title: "HWIN-Bench v1.0: Heterogeneous Water Quality Intelligence Benchmark"
+  authors:
+    - family-names: "HWIN-Bench Consortium"
+      given-names: ""
+      affiliation: "HWIN-Bench Consortium"
+  year: 2026
+  version: "1.0.0"
+  doi: "10.5281/zenodo.XXXXXXX"
+  url: "https://github.com/HWIN-Bench/HWIN-Bench-v1.0"
+references:
+  - type: "dataset"
+    title: "Global River Water Quality Archive (GRQA) v1.4"
+    authors:
+      - family-names: "Virro"
+        given-names: "Holger"
+      - family-names: "Amatulli"
+        given-names: "Giuseppe"
+      - family-names: "Kmoch"
+        given-names: "Alexander"
+      - family-names: "Shen"
+        given-names: "Longzhu"
+      - family-names: "Uuemaa"
+        given-names: "Evelyn"
+    year: 2025
+    version: "1.4"
+    doi: "10.5281/zenodo.15335450"
+    url: "https://zenodo.org/records/15335450"
+  - type: "article"
+    title: "GRQA: Global River Water Quality Archive"
+    authors:
+      - family-names: "Virro"
+        given-names: "Holger"
+      - family-names: "Amatulli"
+        given-names: "Giuseppe"
+      - family-names: "Kmoch"
+        given-names: "Alexander"
+      - family-names: "Shen"
+        given-names: "Longzhu"
+      - family-names: "Uuemaa"
+        given-names: "Evelyn"
+    year: 2021
+    journal: "Earth System Science Data"
+    volume: "13"
+    pages: "5483-5507"
+    doi: "10.5194/essd-13-5483-2021"
+  - type: "dataset"
+    title: "Water Quality Portal (WQP) - USGS/EPA"
+    authors:
+      - name: "U.S. Geological Survey"
+      - name: "Environmental Protection Agency"
+    year: 2026
+    url: "https://www.waterqualitydata.us/"
+  - type: "dataset"
+    title: "EPA STORET Warehouse / Water Quality Exchange (WQX)"
+    authors:
+      - name: "U.S. Environmental Protection Agency"
+    year: 2026
+    url: "https://www.epa.gov/waterdata/storage-and-retrieval-and-water-quality-exchange"
