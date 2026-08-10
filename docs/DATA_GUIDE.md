@@ -92,15 +92,13 @@ HWIN-VAR-001,Water Temperature,The intensity of heat present in water,K,Float,-2
 - HWIN-VAR-001: Water Temperature (5.5M obs)
 - HWIN-VAR-002: pH (4.7M obs)
 - HWIN-VAR-003: Dissolved Oxygen (2.8M obs)
-- HWIN-VAR-004: Turbidity
-- HWIN-VAR-005: Specific Conductance
 - HWIN-VAR-008: Nitrate Nitrogen (2.3M obs)
 - HWIN-VAR-009: Ammonium Nitrogen (1.0M obs)
 - HWIN-VAR-010: Phosphate Phosphorus (2.9M obs)
 - HWIN-VAR-014: DO Percent Saturation (1.7M obs)
 - HWIN-VAR-015: Total Suspended Solids (1.3M obs)
-- HWIN-VAR-022: Biochemical Oxygen Demand
-- HWIN-VAR-023: Chemical Oxygen Demand (119K obs)
+- HWIN-VAR-028: Total Nitrogen (1.8M obs)
+- HWIN-VAR-031: Total Ammonia Nitrogen (0.6M obs)
 - HWIN-VAR-033: Nitrite Nitrogen (1.3M obs)
 
 ### 2. HWIN-WQP-SFBAY — Water Quality Portal: San Francisco Bay
@@ -129,7 +127,7 @@ HWIN-VAR-001,Water Temperature,The intensity of heat present in water,K,Float,-2
 **Variables**: 21 canonical  
 **Observations**: 175K total
 
-### 5. HWIN-STORET-RI — EPA STORET Rhode Island
+### 4. HWIN-STORET-RI — EPA STORET Rhode Island
 
 **Source**: Water Quality Portal API (statecode=US:44)  
 **License**: Public Domain (EPA STORET/WQX)  

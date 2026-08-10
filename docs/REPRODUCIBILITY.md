@@ -31,7 +31,7 @@ python -c "import hwin_bench; print(hwin_bench.__version__)"
 ### 1. Verify Data Integrity
 
 ```bash
-cd HWIN_Bench_v1_RELEASE
+cd HWIN-Bench
 
 # Check all harmonized datasets present
 ls data/harmonized/
@@ -54,6 +54,8 @@ print(f'Benchmarkable vars (MIN_SAMPLES>=100): {len(vars)}')
 "
 ```
 
+**Note**: GRQA `observations.csv` (5.7 GB) is not included in the GitHub repository due to GitHub's 2 GB LFS file size limit. Download from Zenodo or use the smoke test for quick validation.
+
 ### 2. Run Canonical Benchmark
 
 **This is the ONLY command for canonical reproduction:**
@@ -64,9 +66,10 @@ python run_full_benchmark_fixed.py
 ```
 
 **Expected execution:**
-- Runtime: ~5-6 hours on 8-core CPU
+- Wall-clock time: ~15.5 hours (932 min) on 8-core CPU
+- Aggregate model training time: ~8.8 hours (528 min)
 - Output directory: `../output/benchmark_results/grqa_full_final_groupkfold/`
-- Main result file: `GRQA_full_benchmark_complete.json`
+- Main result file: `GRQA_full_benchmark_complete_CORRECTED.json`
 - Per-variable results: `HWIN-VAR-XXX_results.json`
 
 **Do NOT:**
@@ -84,7 +87,7 @@ ls ../output/benchmark_results/grqa_full_final_groupkfold/
 # Verify key metrics present
 python -c "
 import json
-with open('../output/benchmark_results/grqa_full_final_groupkfold/GRQA_full_benchmark_complete.json') as f:
+with open('../output/benchmark_results/grqa_full_final_groupkfold/GRQA_full_benchmark_complete_CORRECTED.json') as f:
     results = json.load(f)
 print(f'Variables: {len(results)}')
 for var_id, var_results in list(results.items())[:3]:
@@ -99,15 +102,26 @@ for var_id, var_results in list(results.items())[:3]:
 
 The canonical execution produced these reference results (stored in `benchmark/results/`):
 
-| Variable | Best Model | R² (mean) | RMSE (mean) |
-|----------|------------|-----------|-------------|
-| HWIN-VAR-001 (Temp) | Gradient Boosting | ~0.89 | ~1.23 |
-| HWIN-VAR-002 (pH) | Random Forest | ~0.67 | ~0.34 |
-| HWIN-VAR-003 (DO) | Extra Trees | ~0.71 | ~0.89 |
-| HWIN-VAR-008 (NO3-N) | Gradient Boosting | ~0.78 | ~0.45 |
-| HWIN-VAR-010 (PO4-P) | Random Forest | ~0.65 | ~0.023 |
+| Variable | Best Model | R² (mean) | 95% CI (corrected, n=5) | RMSE (mean) |
+|----------|------------|-----------|--------------------------|-------------|
+| Water Temperature | Extra Trees | 0.6048 | [0.424, 0.786] | 6.586 |
+| pH | Gradient Boosting | 0.0278 | [-0.078, 0.134] | 0.454 |
+| Dissolved Oxygen | Ridge | 0.1575 | [0.052, 0.263] | 1.997 |
+| Nitrate Nitrogen | Random Forest | 0.3293 | [0.257, 0.402] | 0.839 |
+| Ammonium Nitrogen | Ridge | 0.0011 | [-0.002, 0.004] | 0.392 |
+| Phosphate Phosphorus | Linear Regression | 0.0026 | [-0.001, 0.007] | 0.399 |
+| DO Percent Saturation | Linear Regression | 0.0008 | [-0.001, 0.002] | 17.820 |
+| Total Suspended Solids | Linear Regression | 0.0005 | [-0.000, 0.001] | 187.242 |
+| Total Nitrogen | Gradient Boosting | 0.0216 | [-0.103, 0.146] | 1.969 |
+| Total Ammonia Nitrogen | Lasso | 0.0042 | [0.001, 0.007] | 0.718 |
+| Nitrite Nitrogen | Random Forest | 0.1703 | [0.082, 0.258] | 0.057 |
 
-**Acceptance criteria**: Your results should match within statistical uncertainty (95% CI overlap).
+**All confidence intervals are CORRECTED** to use n=5 (5 unique GroupKFold partitions), df=4, t=2.776. Original intervals used n=25 (df=24) and were approximately 3× too narrow.
+
+Full results: `benchmark/results/GRQA_full_benchmark_complete_CORRECTED.json`  
+Per-variable: `benchmark/results/HWIN-VAR-XXX_results.json`  
+Statistical tests: Reserved for v1.1+ (not executed in v1.0)  
+Certification: `benchmark/reproducibility/CANONICAL_EXECUTION_CERTIFICATE.md`
 
 ## Protocol Compliance Checklist
 
@@ -116,12 +130,12 @@ The frozen protocol (`benchmark/protocol/01_HWIN_BENCH_PROTOCOL_v1.0.md`) requir
 - [ ] **Data**: GRQA v1.4 only for regression benchmark (11 benchmark variables, MIN_SAMPLES=100)
 - [ ] **Sampling**: MAX_SAMPLES=200,000, random_state=42
 - [ ] **Features**: Exactly 7 features (lat, lon, year, month, doy, sin_doy, cos_doy)
-- [ ] **Splits**: 5×5 GroupKFold by station_id, seeds [42, 123, 256, 512, 1024]
+- [ ] **Splits**: 5 unique GroupKFold partitions by station_id, 5 deterministic repetitions with seeds [42, 123, 256, 512, 1024]
 - [ ] **Models**: Exactly 7 classical sklearn models with specified hyperparameters
 - [ ] **Metrics**: MAE, RMSE, R², MAPE, MedAE
-- [ ] **Statistics**: Kruskal-Wallis, Wilcoxon, Cliff's Delta, Holm-Bonferroni
-- [ ] **CI**: 95% t-distribution on 5 unique GroupKFold partitions × 5 deterministic repetitions means
+- [ ] **CI**: 95% t-distribution on 5 unique GroupKFold partitions (n=5, df=4, t=2.776)
 - [ ] **Output**: JSON format per protocol §11
+- [ ] **Statistical testing**: Reserved for v1.1+ (Kruskal-Wallis, Wilcoxon, Cliff's Delta, Holm-Bonferroni NOT executed in v1.0)
 
 **Any deviation = protocol violation.**
 
@@ -143,7 +157,7 @@ The frozen protocol (`benchmark/protocol/01_HWIN_BENCH_PROTOCOL_v1.0.md`) requir
 | Using `run_full_benchmark.py` (legacy) | Results invalid |
 | Changing seeds | Results not comparable |
 | Adding XGBoost/LightGBM | Not in v1.0 scope |
-| Omitting Holm-Bonferroni | Statistical claims invalid |
+| Omitting Holm-Bonferroni | Not executed in v1.0 (reserved for v1.1+) |
 | Reporting FAIR numeric scores | Protocol requires qualitative only |
 
 ### Environment Issues
@@ -209,7 +223,7 @@ The canonical execution was certified on 2026-07-24:
 - **Reproducibility verification**: `REPRODUCIBILITY_VERIFICATION.md`
 
 Your reproduction is successful if:
-1. All 2,275 model fits complete
+1. All 1,925 model fits complete
 2. Output structure matches protocol §11
 3. Key metrics fall within 95% CI of canonical results
 4. No protocol violations detected

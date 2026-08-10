@@ -1,178 +1,166 @@
-# Data Dictionary — HWIN-Bench v1.0
+# DATA_DICTIONARY.md — HWIN-Bench v1.0
 
-Complete reference for all columns, variables, and codes in HWIN-Bench datasets.
+Complete reference for variables, columns, and data structures in HWIN-Bench v1.0.
 
-## Canonical Benchmark Schema (CBS) — Observations
+---
 
-### `observations.csv` Columns
+## Canonical Benchmark Schema (CBS)
 
-| Column | Type | Required | Description | Example |
-|--------|------|----------|-------------|---------|
-| `observation_id` | UUID | Yes | Unique identifier generated during canonicalization | `1ea03179-93a2-5180-9a27-deeb1f1bfc18` |
-| `dataset_id` | String | Yes | HWIN dataset identifier | `HWIN-GRQA-V1-4` |
-| `station_id` | String | Yes | Original station identifier from source | `ARG00003` |
-| `canonical_variable_id` | String | Yes | CVO variable ID (HWIN-VAR-XXX) | `HWIN-VAR-001` |
-| `value` | Float | Yes | Harmonized value in canonical units | `17.6` |
-| `unit` | String | Yes | Canonical unit | `K` |
-| `timestamp` | ISO 8601 | Yes | UTC timestamp | `2018-08-22T10:45:00Z` |
-| `latitude` | Float | Yes | WGS84 decimal degrees | `-26.925888` |
-| `longitude` | Float | Yes | WGS84 decimal degrees | `-58.507027` |
-| `country` | String | Yes | ISO 3166-1 alpha-2 | `AR` |
-| `site_name` | String | No | Original station name | `Paraguay River - at Puerto Bermejo` |
-| `param_name` | String | No | Original parameter name from source | `Water Temperature` |
-| `source` | String | No | Source dataset within provider | `GEMSTAT` |
-| `quality_flag` | Integer | No | Original quality flag (0=good) | `0` |
-| `percentile` | Float | No | Percentile rank within station-variable | `45.2` |
-| `original_value` | Float | Yes | Value before unit conversion | `17.6` |
-| `original_unit` | String | Yes | Unit before conversion | `Deg C` |
-| `country_iso` | String | Yes | ISO 3166-1 alpha-2 (mirror of country) | `AR` |
+Every harmonized dataset follows the same CBS structure:
 
-## Stations Metadata
+### Observations (`observations.csv`)
 
-### `stations.json` Fields
+```csv
+observation_id,dataset_id,station_id,canonical_variable_id,value,unit,timestamp,latitude,longitude,country,site_name,param_name,source,quality_flag,percentile,original_value,original_unit,country_iso
+```
 
-| Field | Type | Required | Description | Example |
-|-------|------|----------|-------------|---------|
-| `station_id` | String | Yes | Unique station identifier | `ARG00003` |
-| `station_name` | String | Yes | Human-readable station name | `Paraguay River - at Puerto Bermejo` |
-| `latitude` | Float | Yes | WGS84 decimal degrees | `-26.925888` |
-| `longitude` | Float | Yes | WGS84 decimal degrees | `-58.507027` |
-| `station_type` | String | No | Water body type | `river` |
-| `country_code` | String | Yes | ISO 3166-1 alpha-2 | `AR` |
+| Column | Type | Description |
+|--------|------|-------------|
+| observation_id | UUID | Unique per observation (generated during canonicalization) |
+| dataset_id | String | HWIN dataset identifier (e.g., HWIN-GRQA-V1-4) |
+| station_id | String | Original station identifier |
+| canonical_variable_id | String | CVO variable ID (HWIN-VAR-XXX) |
+| value | Float | Harmonized value in SI/canonical units |
+| unit | String | Canonical unit (e.g., K, mg/L, pH unit) |
+| timestamp | ISO 8601 | UTC timestamp |
+| latitude | Float | WGS84 decimal degrees |
+| longitude | Float | WGS84 decimal degrees |
+| country | String | ISO 3166-1 alpha-2 country code |
+| site_name | String | Original station name |
+| param_name | String | Original parameter name from source |
+| source | String | Source dataset (GEMSTAT, WQP, GRQA_v1.4, etc.) |
+| quality_flag | Integer | Original quality flag (0=good, >0=various issues) |
+| percentile | Float | Optional: percentile rank within station-variable |
+| original_value | Float | Value before unit conversion |
+| original_unit | String | Unit before conversion |
+| country_iso | String | ISO 3166-1 alpha-2 (duplicate of country for convenience) |
 
-## Variables Metadata
+---
 
-### `variables.csv` Columns
+### Stations (`stations.json`)
 
-| Column | Type | Required | Description | Example |
-|--------|------|----------|-------------|---------|
-| `canonical_variable_id` | String | Yes | CVO identifier | `HWIN-VAR-001` |
-| `canonical_name` | String | Yes | Human-readable name | `Water Temperature` |
-| `definition` | String | Yes | Scientific definition | `The intensity of heat present in water` |
-| `si_unit` | String | Yes | SI/canonical unit | `K` |
-| `preferred_datatype` | String | Yes | Recommended data type | `Float` |
-| `expected_range` | String | No | Typical environmental range | `-2 to 40 deg C (liquid water range)` |
+```json
+[
+  {
+    "station_id": "ARG00003",
+    "station_name": "Paraguay River - at Puerto Bermejo",
+    "latitude": -26.925888,
+    "longitude": -58.507027,
+    "station_type": "river",
+    "country_code": "AR"
+  }
+]
+```
 
-### `accepted_units` (in CVO)
-List of source units that map to this canonical variable, pipe-separated: `K|deg C|deg F|deg c`
+| Field | Type | Description |
+|-------|------|-------------|
+| station_id | String | Original station identifier |
+| station_name | String | Original station name |
+| latitude | Float | WGS84 decimal degrees |
+| longitude | Float | WGS84 decimal degrees |
+| station_type | String | river, lake, estuary, groundwater, etc. |
+| country_code | String | ISO 3166-1 alpha-2 |
 
-## Dataset Metadata
+---
 
-### `dataset.json` Fields
+### Variables (`variables.csv`)
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `dataset_id` | String | Yes | HWIN dataset identifier |
-| `version` | String | Yes | Dataset version |
-| `title` | String | Yes | Full title |
-| `description` | String | Yes | Description |
-| `license` | String | Yes | License identifier |
-| `license_uri` | String | Yes | License URL |
-| `cv_mapping_id` | String | Yes | CVO version used |
-| `metadata_standard` | String | Yes | Metadata standard (ISO 19115-3) |
-| `creators` | Array | Yes | Creator information |
-| `publication_year` | Integer | Yes | Year of publication |
-| `publisher` | String | Yes | Publisher (Zenodo) |
-| `funding` | Array | No | Funding information |
-| `related_identifiers` | Array | Yes | Source dataset DOIs/URLs |
-| `spatial_coverage` | Object | Yes | Spatial extent |
-| `temporal_coverage` | Object | Yes | Temporal extent |
-| `variables` | Integer | Yes | Number of canonical variables |
-| `observations` | Object | Yes | Observation counts |
-| `checksums` | Object | Yes | SHA256 checksums |
-| `version_history` | Array | Yes | Version changelog |
-| `doi` | String | Yes | Zenodo DOI |
-| `is_published` | Boolean | Yes | Publication status |
+```csv
+canonical_variable_id,canonical_name,definition,si_unit,preferred_datatype,expected_range
+HWIN-VAR-001,Water Temperature,The intensity of heat present in water,K,Float,-2 to 40 deg C
+```
 
-## Canonical Variable Ontology (CVO)
+| Column | Type | Description |
+|--------|------|-------------|
+| canonical_variable_id | String | CVO variable ID (HWIN-VAR-XXX) |
+| canonical_name | String | Human-readable name |
+| definition | String | Scientific definition |
+| si_unit | String | SI unit |
+| preferred_datatype | String | Expected data type (Float, Integer) |
+| expected_range | String | Expected physical range |
 
-### `canonical_variable_ontology.csv` Columns
+---
 
-| Column | Description |
-|--------|-------------|
-| `Canonical_ID` | HWIN-VAR-XXX identifier |
-| `Canonical_Name` | Human-readable name |
-| `Definition` | Scientific definition |
-| `Scientific_Meaning` | Detailed scientific meaning |
-| `Accepted_Synonyms` | Comma-separated synonyms |
-| `Typical_Units` | Typical units in source data |
-| `SI_Unit` | SI unit |
-| `Preferred_Datatype` | Recommended data type |
-| `Expected_Range` | Expected environmental range |
-| `Measurement_Methods` | Common measurement methods |
-| `Common_Instruments` | Common instruments |
-| `Related_Variables` | Related canonical variables |
-| `Parent_Category` | Category (Physical, Chemical, Biological, Hydrological, Meteorological) |
-| `accepted_units` | Pipe-separated list of accepted source units |
+### Dataset Metadata (`dataset.json`)
 
-## Variable Synonym Dictionary
+```json
+{
+  "dataset_id": "HWIN-GRQA-V1-4",
+  "version": "1.4.0",
+  "title": "Global River Water Quality Archive (GRQA) v1.4 - HWIN-Bench Harmonized Version",
+  "license": "CC-BY-4.0",
+  "license_uri": "https://creativecommons.org/licenses/by/4.0/",
+  "spatial_coverage": {"type": "global", "countries": 69, "stations": 107000},
+  "temporal_coverage": {"start": "1894-01-01", "end": "2023-12-31"},
+  "variables": 11,
+  "observations": {"canonical_total": 25800000, "benchmarked_max_per_variable": 200000, "benchmarked_total": 2519220},
+  "checksums": {"observations.csv": "sha256:...", "stations.json": "sha256:...", "variables.csv": "sha256:..."}
+}
+```
 
-### `variable_synonym_dictionary.csv` Columns
+---
 
-| Column | Description |
-|--------|-------------|
-| `Synonym` | Source variable name |
-| `Canonical_ID` | Target CVO ID |
-| `Canonical_Name` | Target CVO name |
-| `Source_Dataset` | Source dataset name |
-| `Source_Variable_Name` | Original variable name in source |
-| `Notes` | Mapping notes |
+## Ontology Reference
 
-### Tier Classification
-- **Tier 1 (Exact)**: Direct exact match (52 mappings)
-- **Tier 2 (Synonym)**: Recognized synonym (28 mappings)
-- **Tier 3 (Expert)**: Expert judgment required (9 mappings)
+### Canonical Variable Ontology (CVO)
+**File**: `ontology/canonical_variable_ontology.csv`  
+49 variables (HWIN-VAR-001 to HWIN-VAR-049) with definitions, accepted synonyms, typical units, SI units, expected ranges, measurement methods.
 
-## Unit Harmonization Rules
+### Variable Synonym Dictionary
+**File**: `ontology/variable_synonym_dictionary.csv`  
+89 mappings from source variable names to canonical IDs:
+- Tier 1 (Exact): 52 mappings
+- Tier 2 (Synonym): 28 mappings  
+- Tier 3 (Expert): 9 mappings
 
-### `unit_harmonization_rules.csv` Columns
+Sources: GEMS_Water, WQP_2023, NEON_AQUATIC, GLORIA, QUADICA, GRQA_v1.4, STORET, WQP
 
-| Column | Description |
-|--------|-------------|
-| `Variable_ID` | CVO variable ID |
-| `Canonical_Unit` | Target canonical unit |
-| `Source_Unit` | Source unit to convert from |
-| `Conversion_Factor` | Multiplicative factor |
-| `Conversion_Offset` | Additive offset |
-| `Notes` | Conversion details |
+### Unit Harmonization Rules
+**File**: `ontology/unit_harmonization_rules.csv`  
+92 conversion rules from source units to SI/canonical units with conversion factors and offsets.
 
-**Formula**: `canonical_value = source_value * Conversion_Factor + Conversion_Offset`
+Example:
+```
+HWIN-VAR-001,K,°C,1,273.15,Kelvin = Celsius + 273.15
+HWIN-VAR-003,mol/m³,mg/L,0.03125,0.0,For O2: 1 mg/L = 0.03125 mol/m³
+HWIN-VAR-005,S/m,µS/cm,0.0001,0.0,1 µS/cm = 0.0001 S/m
+```
 
-Examples:
-- `HWIN-VAR-001`: K = °C × 1 + 273.15
-- `HWIN-VAR-003`: mol/m³ = mg/L × 0.03125 + 0.0
-- `HWIN-VAR-005`: S/m = µS/cm × 0.0001 + 0.0
+---
 
-## Benchmark Protocol Parameters
+## Benchmark Variables (11 Canonical)
 
-### Frozen Protocol Values (DO NOT CHANGE)
+| Variable ID | Canonical Name | GRQA Observations | SI Unit |
+|-------------|----------------|-------------------|---------|
+| HWIN-VAR-001 | Water Temperature | 5,508,690 | K |
+| HWIN-VAR-002 | pH | 4,702,926 | pH unit |
+| HWIN-VAR-003 | Dissolved Oxygen | 2,758,590 | mol/m³ |
+| HWIN-VAR-008 | Nitrate Nitrogen | 2,343,593 | mol/m³ |
+| HWIN-VAR-009 | Ammonium Nitrogen | 999,283 | mol/m³ |
+| HWIN-VAR-010 | Phosphate Phosphorus | 2,858,114 | mol/m³ |
+| HWIN-VAR-014 | DO Percent Saturation | 1,690,075 | dimensionless |
+| HWIN-VAR-015 | Total Suspended Solids | 1,308,520 | g/m³ |
+| HWIN-VAR-028 | Total Nitrogen | 1,755,110 | mol/m³ |
+| HWIN-VAR-031 | Total Ammonia Nitrogen | 615,871 | mol/m³ |
+| HWIN-VAR-033 | Nitrite Nitrogen | 1,310,136 | mol/m³ |
 
-| Parameter | Value | Location |
-|-----------|-------|----------|
-| `MIN_SAMPLES` | 100 | Protocol §4.2 |
-| `MAX_SAMPLES` | 200,000 | Protocol §4.1 |
-| `sampling_random_state` | 42 | Protocol §4.1 |
-| `GroupKFold_n_splits` | 5 | Protocol §6.1 |
-| `GroupKFold_group_var` | `station_id` | Protocol §6.1 |
-| `seeds` | `[42, 123, 256, 512, 1024]` | Protocol §6.2 |
-| `n_repetitions` | 5 | Protocol §6.1 |
-| `feature_random_state` | N/A (deterministic) | Protocol §5 |
-| `model_random_state` | 42 | Protocol §7 |
-| `n_jobs` | -1 (for RF/ET/GB) | Protocol §7 |
+---
 
-### Feature Engineering (Protocol §5)
+## Benchmark Features (7)
 
 | Feature | Source | Transformation |
 |---------|--------|----------------|
-| `latitude` | `latitude` | Direct (float32) |
-| `longitude` | `longitude` | Direct (float32) |
-| `year` | `timestamp` | `dt.dt.year.fillna(2000).astype(int)` |
-| `month` | `timestamp` | `dt.dt.month.fillna(6).astype(int)` |
-| `day_of_year` | `timestamp` | `dt.dt.dayofyear.fillna(180).astype(int)` |
-| `sin_doy` | `day_of_year` | `sin(2π × doy / 365.25)` |
-| `cos_doy` | `day_of_year` | `cos(2π × doy / 365.25)` |
+| latitude | `latitude` | Direct (float32) |
+| longitude | `longitude` | Direct (float32) |
+| year | `timestamp` | `dt.dt.year.fillna(2000).astype(int)` |
+| month | `timestamp` | `dt.dt.month.fillna(6).astype(int)` |
+| day_of_year | `timestamp` | `dt.dt.dayofyear.fillna(180).astype(int)` |
+| sin_doy | `day_of_year` | `sin(2π × doy / 365.25)` |
+| cos_doy | `day_of_year` | `cos(2π × doy / 365.25)` |
 
-### Models (Protocol §7)
+---
+
+## Benchmark Models (7)
 
 | Model | Class | Hyperparameters |
 |-------|-------|-----------------|
@@ -184,7 +172,65 @@ Examples:
 | Extra Trees | `ExtraTreesRegressor` | `n_estimators=200, max_depth=None, min_samples_split=2, random_state=42, n_jobs=-1` |
 | Gradient Boosting | `GradientBoostingRegressor` | `n_estimators=200, learning_rate=0.1, max_depth=3, random_state=42` |
 
-### Metrics (Protocol §8)
+---
+
+## Metrics (5 Regression Metrics)
+
+| Metric | Function | Formula |
+|--------|----------|---------|
+| MAE | `mean_absolute_error` | `mean(\|y_true - y_pred\|)` |
+| RMSE | `root_mean_squared_error` | `sqrt(mean((y_true - y_pred)²))` |
+| R² | `r2_score` | `1 - SS_res/SS_tot` (handles SS_tot=0) |
+| MAPE | `mean_absolute_percentage_error` | `mean(\|(y_true-y_pred)/y_true\|)*100` (y_true≠0) |
+| MedAE | `median_absolute_error` | `median(\|y_true - y_pred\|)` |
+
+---
+
+## Cross-Validation Design
+
+| Aspect | Value |
+|--------|-------|
+| Split Method | GroupKFold by `station_id` (string) |
+| Unique Partitions | 5 |
+| Seed Repetitions | 5 deterministic repetitions |
+| Seeds Used | [42, 123, 256, 512, 1024] |
+| Repetition Nature | Deterministic (identical folds across all seeds) |
+| Unique Fold Evaluations per Model-Variable | 5 |
+| Total Fold Evaluations per Model-Variable | 25 (5 unique × 5 identical repetitions) |
+| Total Model Fits | 1,925 |
+| CI Sample Size (n) | 5 |
+| CI Degrees of Freedom (df) | 4 |
+| CI t-critical (95%) | 2.776 |
+
+---
+
+## Confidence Intervals
+
+- **Method**: t-distribution CI for mean
+- **Confidence**: 95%
+- **Formula**: `mean ± t_{0.975, n-1} × SEM`
+- **Applied To**: Mean of 5 unique fold evaluations per model-variable
+- **Correction**: Changed from original n=25 (df=24) to n=5 (df=4)
+- **Width Ratio**: Corrected CIs are ~3.008× wider than originally reported
+
+---
+
+## Statistical Testing (v1.1+)
+
+The following statistical tests are specified in the protocol but **NOT implemented in v1.0**:
+
+| Test | Purpose | Status |
+|------|---------|--------|
+| Kruskal-Wallis | Across all models per variable | NOT IMPLEMENTED (v1.1+) |
+| Wilcoxon Signed-Rank | Pairwise model comparisons | NOT IMPLEMENTED (v1.1+) |
+| Cliff's Delta | Effect size for pairwise | NOT IMPLEMENTED (v1.1+) |
+| Holm-Bonferroni | Multiple testing correction | NOT IMPLEMENTED (v1.1+) |
+
+Reserved for v1.1+ implementation.
+
+---
+
+## Evaluation Metrics (Implemented)
 
 | Metric | Function | Formula |
 |--------|----------|---------|
@@ -194,54 +240,33 @@ Examples:
 | MAPE | `mean_absolute_percentage_error` | `mean(|(y_true-y_pred)/y_true|)*100` (y_true≠0) |
 | MedAE | `median_absolute_error` | `median(|y_true - y_pred|)` |
 
-### Statistical Testing (Protocol §9.3)
+---
 
-| Test | Purpose | Correction |
-|------|---------|------------|
-| Kruskal-Wallis | Across all models per variable | — |
-| Wilcoxon Signed-Rank | Pairwise model comparisons | Holm-Bonferroni |
-| Cliff's Delta | Effect size for pairwise | — |
-| Multiple Testing | 91 comparisons (7×13) | Holm-Bonferroni step-down |
+## CBS Validation (58 Rules)
 
-### Confidence Intervals (Protocol §10)
-
-| Parameter | Value |
-|-----------|-------|
-| Method | t-distribution |
-| Confidence | 95% |
-| Formula | `mean ± t_{0.975, n-1} × SEM` |
-| Applied to | Mean of 5 unique fold evaluations per model-variable |
-
-## Quality Flag Codes
-
-| Code | Meaning | Action |
-|------|---------|--------|
-| 0 | Good quality | Include |
-| 1 | Suspect | Include with caution |
-| 2 | Bad | Exclude |
-| 3 | Below detection limit | Special handling |
-| 4 | Above detection limit | Special handling |
-| 9 | Missing | Exclude |
-
-## Country Codes (ISO 3166-1 alpha-2)
-
-Examples in GRQA: `AR` (Argentina), `AU` (Australia), `BR` (Brazil), `CA` (Canada), `CN` (China), `DE` (Germany), `FR` (France), `GB` (UK), `IN` (India), `US` (USA), and 59 others.
-
-## Station Types
-
-| Type | Description |
-|------|-------------|
-| `river` | River/stream monitoring station |
-| `lake` | Lake/reservoir station |
-| `estuary` | Estuarine station |
-| `coastal` | Coastal marine station |
-| `groundwater` | Groundwater well |
-| `spring` | Spring |
-| `wetland` | Wetland |
-| `canal` | Canal/ditch |
+| Category | Rules | Description |
+|--------|-------|-------------|
+| Completeness | 8 | Required columns, non-null checks |
+| Range Validity | 38 | Physical ranges per variable |
+| Referential Integrity | 3 | Station IDs, variable IDs, dataset IDs |
+| Duplicate Detection | 2 | Observation IDs, station-variable-timestamp |
+| Temporal Consistency | 4 | Timestamp ordering, gaps |
+| Spatial Consistency | 3 | Coordinate bounds, station locations |
 
 ---
 
-**Version**: 1.0.0  
-**Protocol**: Frozen v1.0 (see `benchmark/protocol/01_HWIN_BENCH_PROTOCOL_v1.0.md`)  
-**Last Updated**: 2026-08-09
+## File Formats
+
+| File | Format | Description |
+|------|--------|-------------|
+| `observations.csv` | CSV | Canonical observations |
+| `stations.json` | JSON | Station metadata |
+| `variables.csv` | CSV | Variable metadata |
+| `dataset.json` | JSON | Dataset-level metadata |
+| `observations.csv` (LFS) | CSV | Large observation files |
+| `stations.json` (LFS) | JSON | Large station files |
+| `.tex` | LaTeX | Publication tables |
+| `.png/.pdf/.svg` | Image | Publication figures |
+| `.json` | JSON | Benchmark outputs, metadata |
+| `.csv` | CSV | Inventory, manifests, audit logs |
+| `.yml` | YAML | Configuration, environment |

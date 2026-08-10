@@ -2,10 +2,10 @@
 
 **Heterogeneous Water Quality Intelligence Benchmark — Version 1.0**
 
-[![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.XXXXXXX-blue)](https://doi.org/10.5281/zenodo.XXXXXXX)
 [![License](https://img.shields.io/badge/License-CC--BY--4.0-green)](LICENSE)
 [![Protocol](https://img.shields.io/badge/Protocol-FROZEN%20v1.0-red)](benchmark/protocol/01_HWIN_BENCH_PROTOCOL_v1.0.md)
 [![Reproducibility](https://img.shields.io/badge/Reproducibility-CERTIFIED-brightgreen)](benchmark/reproducibility/)
+[![DOI](https://img.shields.io/badge/DOI-pending-lightgrey)](https://zenodo.org)
 
 ---
 
@@ -14,12 +14,13 @@
 HWIN-Bench (Heterogeneous Water quality Intelligence Benchmark) is a **curated, reproducible benchmark suite** for evaluating machine learning models on real-world water quality prediction tasks. It addresses a critical gap: most ML benchmarks use synthetic or homogeneous data, while environmental water quality data is inherently heterogeneous — multi-source, multi-scale, sparse, and noisy.
 
 **HWIN-Bench v1.0** provides:
+
 - **5 canonical datasets** harmonized to a common schema (Canonical Benchmark Schema - CBS)
 - **49-variable ontology** (Canonical Variable Ontology - CVO) with 89 cross-dataset synonym mappings
 - **Frozen benchmark protocol** (v1.0) specifying every computational parameter
 - **11 benchmarkable water quality variables** on the Global River Quality Archive (GRQA v1.4)
 - **7 classical ML models** evaluated via 5 unique GroupKFold partitions × 5 deterministic repetitions (1,925 historical fits)
-- **Full statistical rigor**: Kruskal-Wallis, Wilcoxon signed-rank, Cliff's Delta, Holm-Bonferroni correction
+- **Corrected confidence intervals** (n=5, df=4) — all CIs ~3× wider than originally reported
 - **Certified reproducibility**: Canonical execution completed and independently verified
 
 ---
@@ -27,6 +28,7 @@ HWIN-Bench (Heterogeneous Water quality Intelligence Benchmark) is a **curated, 
 ## Why Does HWIN-Bench Exist?
 
 Water quality modeling is essential for environmental management, public health, and climate adaptation. Yet ML research on water quality suffers from:
+
 1. **No standard benchmark** — each paper uses different data, splits, metrics
 2. **Data heterogeneity ignored** — models tested on clean subsets, not real-world messiness
 3. **Reproducibility crisis** — results cannot be verified or compared
@@ -54,8 +56,10 @@ HWIN-Bench solves this by providing a **single, frozen, immutable benchmark prot
 - **WQP / STORET (CA, TX, RI)**: US Government works (USGS NWIS + EPA STORET/WQX) — **public domain** under 17 USC §105. No copyright restrictions.
 
 **However**, to respect original providers and ensure users get the latest versions:
+
 - This release includes the **HWIN-Bench harmonized (CBS) versions** of all datasets
 - Raw source data is also included where licenses permit (all 5 datasets)
+- **Exception**: GRQA v1.4 `observations.csv` (5.7 GB) exceeds GitHub's 2 GB LFS limit and is **not included in this GitHub repository**. It is deposited separately to Zenodo.
 - Users are encouraged to download fresh copies from original providers for production use
 - See `data/README.md` for download instructions and checksums
 
@@ -81,9 +85,9 @@ HWIN-Bench maps 100+ source variable names across 5 datasets to **49 canonical v
 | HWIN-VAR-023 | Chemical Oxygen Demand | 119,220 |
 | HWIN-VAR-033 | Nitrite Nitrogen | 1,310,136 |
 
-Full ontology: `ontology/canonical_variable_ontology.csv`  
-Synonym dictionary: `ontology/variable_synonym_dictionary.csv` (89 mappings)  
-Unit harmonization: `ontology/unit_harmonization_rules.csv` (92 rules)
+**Full ontology**: `ontology/canonical_variable_ontology.csv` (49 variables)  
+**Synonym dictionary**: `ontology/variable_synonym_dictionary.csv` (89 mappings)  
+**Unit harmonization**: `ontology/unit_harmonization_rules.csv` (92 rules)
 
 ---
 
@@ -91,8 +95,8 @@ Unit harmonization: `ontology/unit_harmonization_rules.csv` (92 rules)
 
 ```bash
 # Clone the repository
-git clone https://github.com/HWIN-Bench/HWIN-Bench-v1.0.git
-cd HWIN-Bench-v1.0
+git clone https://github.com/Zakariya-Q/HWIN-Bench.git
+cd HWIN-Bench
 
 # Create environment (Python 3.11+)
 conda env create -f environment.yml
@@ -118,6 +122,8 @@ The `data/harmonized/` directory contains all 5 datasets in the **Canonical Benc
 cd data/harmonized
 sha256sum -c manifests/checksums.sha256
 ```
+
+**Note**: GRQA v1.4 `observations.csv` (5.7 GB) is **not included** in this GitHub repository due to GitHub's 2 GB LFS file size limit. It is available in the Zenodo deposition.
 
 ### Option 2: Download Fresh from Original Providers
 
@@ -145,27 +151,31 @@ python -m hwin_bench.cli pipeline --all
 ## Reproducing the Benchmark
 
 ### Quick Smoke Test (5 minutes)
+
 ```bash
-cd HWIN_Bench_v1_RELEASE
-python benchmark/run_full_benchmark_fixed.py --smoke-test
+cd benchmark
+python run_full_benchmark_fixed.py --smoke-test
 ```
 
 ### Full Canonical Benchmark (5-6 hours on CPU)
+
 ```bash
-cd HWIN_Bench_v1_RELEASE
-python benchmark/run_full_benchmark_fixed.py
+cd benchmark
+python run_full_benchmark_fixed.py
 ```
 
-**Expected output**: `output/benchmark_results/grqa_full_final_groupkfold/GRQA_full_benchmark_complete.json`
+**Expected output**: `output/benchmark_results/grqa_full_final_groupkfold/GRQA_full_benchmark_complete_CORRECTED.json`
 
 ### Protocol Compliance
+
 The frozen protocol (`benchmark/protocol/01_HWIN_BENCH_PROTOCOL_v1.0.md`) specifies:
+
 - **Data**: GRQA v1.4, 11 variables, MAX_SAMPLES=200,000, MIN_SAMPLES=100
 - **Features**: 7 (lat, lon, year, month, day_of_year, sin_doy, cos_doy)
 - **Splits**: 5 unique GroupKFold partitions by station_id, 5 deterministic repetitions with seeds [42, 123, 256, 512, 1024]
-- **Models**: 7 classical (Linear, Ridge, Lasso, ElasticNet, RF, ExtraTrees, GradientBoosting)
+- **Models**: 7 classical sklearn models with specified hyperparameters
 - **Metrics**: MAE, RMSE, R², MAPE, MedAE
-- **Statistics**: Kruskal-Wallis, Wilcoxon, Cliff's Delta, Holm-Bonferroni
+- **Statistics**: Corrected 95% CIs (n=5, df=4, t=2.776); statistical testing reserved for v1.1+
 
 **Any deviation is a protocol violation.**
 
@@ -175,16 +185,25 @@ The frozen protocol (`benchmark/protocol/01_HWIN_BENCH_PROTOCOL_v1.0.md`) specif
 
 The certified canonical execution produced results for 11 variables × 7 models across 5 unique GroupKFold partitions × 5 deterministic repetitions (1,925 historical fits). Summary:
 
-| Variable | Best Model | Best R² (mean) | Best RMSE (mean) |
-|----------|------------|----------------|------------------|
-| Water Temperature | Gradient Boosting | 0.89 | 1.23 °C |
-| pH | Random Forest | 0.67 | 0.34 |
-| Dissolved Oxygen | Extra Trees | 0.71 | 0.89 mg/L |
-| ... | ... | ... | ... |
+| Variable | Best Model | Best R² (mean) | 95% CI (corrected, n=5) | Best RMSE (mean) |
+|----------|------------|----------------|--------------------------|------------------|
+| Water Temperature | Extra Trees | 0.6048 | [0.424, 0.786] | 6.586 |
+| pH | Gradient Boosting | 0.0278 | [-0.078, 0.134] | 0.454 |
+| Dissolved Oxygen | Ridge | 0.1575 | [0.052, 0.263] | 1.997 |
+| Nitrate Nitrogen | Random Forest | 0.3293 | [0.257, 0.402] | 0.839 |
+| Ammonium Nitrogen | Ridge | 0.0011 | [-0.002, 0.004] | 0.392 |
+| Phosphate Phosphorus | Linear Regression | 0.0026 | [-0.001, 0.007] | 0.399 |
+| DO Percent Saturation | Linear Regression | 0.0008 | [-0.001, 0.002] | 17.820 |
+| Total Suspended Solids | Linear Regression | 0.0005 | [-0.000, 0.001] | 187.242 |
+| Total Nitrogen | Gradient Boosting | 0.0216 | [-0.103, 0.146] | 1.969 |
+| Total Ammonia Nitrogen | Lasso | 0.0042 | [0.001, 0.007] | 0.718 |
+| Nitrite Nitrogen | Random Forest | 0.1703 | [0.082, 0.258] | 0.057 |
 
-Full results: `benchmark/results/GRQA_full_benchmark_complete.json`  
+**All confidence intervals are CORRECTED** to use n=5 (5 unique GroupKFold partitions), df=4, t=2.776. Original intervals used n=25 (df=24) and were approximately 3× too narrow.
+
+Full results: `benchmark/results/GRQA_full_benchmark_complete_CORRECTED.json`  
 Per-variable: `benchmark/results/HWIN-VAR-XXX_results.json`  
-Statistical tests: `benchmark/results/statistical_test_results.json`  
+Statistical tests: Reserved for v1.1+ (not executed in v1.0)  
 Certification: `benchmark/reproducibility/CANONICAL_EXECUTION_CERTIFICATE.md`
 
 ---
@@ -200,7 +219,7 @@ If you use HWIN-Bench, please cite:
   year = {2026},
   version = {1.0.0},
   doi = {10.5281/zenodo.XXXXXXX},
-  url = {https://github.com/HWIN-Bench/HWIN-Bench-v1.0}
+  url = {https://github.com/Zakariya-Q/HWIN-Bench}
 }
 ```
 
@@ -219,7 +238,7 @@ See `CITATION.cff` for machine-readable citation metadata.
 | Dataset | License | Attribution Required |
 |---------|---------|---------------------|
 | GRQA v1.4 | CC-BY-4.0 | Yes — see `licenses/ATTRIBUTION.md` |
-| WQP/STORET | Public Domain | No legal requirement; recommended attribution in `licenses/ATTRIBUTION.md` |
+| WQP/STORET | Public Domain (17 USC §105) | No legal requirement; recommended attribution in `licenses/ATTRIBUTION.md` |
 
 Full license audit: `licenses/DATASET_LICENSE_AUDIT.csv`  
 Attribution details: `licenses/ATTRIBUTION.md`
@@ -228,17 +247,21 @@ Attribution details: `licenses/ATTRIBUTION.md`
 
 ## Limitations
 
-1. **GRQA-only regression benchmark**: Only GRQA v1.4 is used for the canonical regression benchmark (protocol §3.3). STORET/WQP datasets are for transfer learning evaluation (protocol §16).
+1. **GRQA-only regression benchmark**: Only GRQA v1.4 is used for the canonical regression benchmark. STORET/WQP datasets are for transfer learning evaluation (known NaN bug — not certified).
 
 2. **Classical ML only**: v1.0 includes 7 sklearn models. Deep learning (HWIN-Net), XGBoost, LightGBM, CatBoost are reserved for v1.1+.
 
-3. **MAX_SAMPLES cap**: 200,000 observations per variable (12 of 11 variables affected). This is a computational constraint, not a scientific decision.
+3. **MAX_SAMPLES cap**: 200,000 observations per variable (10 of 11 variables affected). This is a computational constraint, not a scientific decision.
 
 4. **Spatial/temporal bias**: GRQA overrepresents Europe/North America; tropical/southern hemisphere underrepresented.
 
 5. **No causal claims**: Benchmark measures predictive performance, not causal mechanisms.
 
-6. **Transfer learning NaN bug**: Known issue in transfer evaluation (protocol §16) — must be fixed before v1.1.
+6. **Transfer learning NaN bug**: Known issue in transfer evaluation — must be fixed before v1.1.
+
+7. **Statistical testing reserved for v1.1+**: Kruskal-Wallis, Wilcoxon, Cliff's Delta, and Holm-Bonferroni correction are specified in the protocol but NOT implemented in v1.0. Only corrected CIs (n=5, df=4) are provided.
+
+8. **Five seed repetitions are deterministic**: The five seed repetitions produce computationally identical GroupKFold partitions. Only 5 unique fold evaluations exist. CIs correctly use n=5 (df=4).
 
 Full limitations: `docs/LIMITATIONS.md`
 

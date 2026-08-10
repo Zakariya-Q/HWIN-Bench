@@ -26,7 +26,7 @@ Explicit documentation of known limitations, scope boundaries, and caveats for H
 
 ### 3. MAX_SAMPLES Computational Cap
 **200,000 observations per variable** (Protocol §4.1) applied to GRQA data:
-- 12 of 11 benchmarkable variables are capped
+- 10 of 11 benchmarkable variables are capped
 - Only Chemical Oxygen Demand (HWIN-VAR-023, 119K obs) uses all data
 - This is a **computational constraint**, not a scientific decision
 
@@ -73,7 +73,7 @@ GRQA v1.4 has **strong geographic bias**:
 
 **Implication**: Models trained on historical data may not reflect current conditions (climate change, land use change).
 
-### 8. Variable Coverage Imbalance
+### 6. Variable Coverage Imbalance
 | Variable | GRQA Observations | Coverage |
 |----------|-------------------|----------|
 | Water Temperature | 5.5M | Excellent |
@@ -91,7 +91,7 @@ GRQA v1.4 has **strong geographic bias**:
 **Implication**: Benchmark reliability varies by variable. COD/BOD results have higher uncertainty.
 
 ### 9. Harmonization Information Loss
-Mapping 100+ source variables to 51 canonical variables involves:
+Mapping 100+ source variables to 49 canonical variables involves:
 - **Unit conversions** (with rounding/precision loss)
 - **Synonym resolution** (Tier 3 mappings involve expert judgment)
 - **Aggregation** (e.g., multiple nitrogen forms → Total Nitrogen)
@@ -143,13 +143,13 @@ Protocol §18 explicitly **prohibits numeric FAIR scores**. Only qualitative A-/
 
 ## Statistical Limitations
 
-### 16. Multiple Testing Correction
-Holm-Bonferroni correction applied to **91 comparisons** (7 models × 11 benchmark variables).
+### 16. Statistical Testing Not Implemented in v1.0
+The protocol (§9.3) specifies Kruskal-Wallis, Wilcoxon signed-rank, Cliff's Delta, and Holm-Bonferroni correction, but **these were NOT implemented or executed in v1.0**. The protocol's statistical testing requirements are reserved for v1.1+.
 
-**Implication**: Conservative correction; some true differences may not reach significance.
+**Implication**: No statistical hypothesis testing was performed on the canonical benchmark outputs. Only corrected confidence intervals (n=5, df=4) are provided.
 
 ### 17. Confidence Intervals Assumptions
-95% CIs use **t-distribution on 5 unique fold means** (Protocol §10, corrected).
+95% CIs use **t-distribution on 5 unique fold means** (corrected from n=25 to n=5).
 
 **Assumptions**:
 - Fold means approximately normally distributed (CLT with n=5)
@@ -213,4 +213,4 @@ If you discover additional limitations not documented here, please open a GitHub
 
 **Version**: 1.0.0  
 **Protocol**: Frozen v1.0 — limitations are documented, not fixed  
-**Last Updated**: 2026-08-09
+**Last Updated**: 2026-08-11

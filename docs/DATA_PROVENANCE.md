@@ -69,7 +69,7 @@ Each transition references the actual code or documented procedure.
 
 ### Harmonization
 **Code**: `src/hwin_bench/hwin_bench/canonicalization/mapper.py` + `engine.py`
-**Reference**: CVO v1.0 (`/c/Users/lenovo/knowledge/canonical_variable_ontology.csv`), Synonym Dictionary (`variable_synonym_dictionary.csv`), Unit Rules (`unit_harmonization_rules.csv`)
+**Reference**: CVO v1.0 (`ontology/canonical_variable_ontology.csv`), Synonym Dictionary (`variable_synonym_dictionary.csv`), Unit Rules (`unit_harmonization_rules.csv`)
 
 **Process per observation**:
 1. **Variable Mapping**: Source parameter name → CVO ID via synonym dictionary (Tier 1→2→3 priority)
@@ -96,13 +96,13 @@ Each transition references the actual code or documented procedure.
 - **Temporal Consistency (4)**: Timestamps parseable as ISO 8601, within dataset temporal coverage, chronological order per station-variable, no future dates
 - **Spatial Consistency (3)**: Coordinates in valid ranges (lat -90 to 90, lon -180 to 180), country code matches coordinate location, station_type valid
 
-**Certification**: Gold (all rules pass)
+**Certification**: Gold
 
 ### HWIN-Bench Representation
 **Location**: `data/harmonized/HWIN-GRQA-V1-4/`
-- `observations.csv`: 25,850,907 rows, CBS format
+- `observations.csv`: 25,850,907 rows, CBS format (Note: GRQA observations.csv is in Zenodo due to GitHub LFS 2 GB limit)
 - `stations.json`: 107,000 stations
-- `variables.csv`: 11 canonical variables (13 benchmarkable after MIN_SAMPLES≥100)
+- `variables.csv`: 11 canonical variables (11 benchmarkable after MIN_SAMPLES≥100)
 - `dataset.json`: Metadata with checksums, DOI, coverage
 
 **Key Metrics**:
@@ -121,7 +121,7 @@ Each transition references the actual code or documented procedure.
 4. **Models**: 7 classical sklearn models with fixed hyperparameters
 5. **Metrics**: MAE, RMSE, R², MAPE, MedAE per fold
 6. **Aggregation**: Mean, Std, Median, 95% CI (t-distribution, n=5, df=4) across 5 unique fold evaluations (repeated 5 times deterministically)
-7. **Statistics**: Kruskal-Wallis, Wilcoxon, Cliff's Delta, Holm-Bonferroni (not implemented in v1.0 — see Limitations)
+6. **Statistics**: Kruskal-Wallis, Wilcoxon, Cliff's Delta, Holm-Bonferroni (not implemented in v1.0 — see Limitations)
 
 **Output**: `output/benchmark_results/grqa_full_final_groupkfold/GRQA_full_benchmark_complete.json`
 
@@ -337,21 +337,21 @@ Transfer learning evaluation (GRQA Northeast-matched → STORET RI)
 
 ### Canonical Variable Ontology (CVO v1.0)
 - **Source**: Expert curation by HWIN-Bench team
-- **File**: `/c/Users/lenovo/knowledge/canonical_variable_ontology.csv`
-- **Process**: Literature review of water quality parameters across 7 major monitoring programs (GEMStat, WQP, NEON, GLORIA, QUADICA, GRQA, STORET) → consolidate to 51 canonical variables with definitions, synonyms, units, ranges
+- **File**: `ontology/canonical_variable_ontology.csv`
+- **Process**: Literature review of water quality parameters across 7 major monitoring programs (GEMStat, WQP, NEON, GLORIA, QUADICA, GRQA, STORET) → consolidate to 49 canonical variables with definitions, synonyms, units, ranges
 - **Version**: 1.0 (frozen for v1.0)
 - **License**: CC0-1.0 (original expert curation)
 
 ### Variable Synonym Dictionary
 - **Source**: Expert mapping by HWIN-Bench team
-- **File**: `/c/Users/lenovo/knowledge/variable_synonym_dictionary.csv`
+- **File**: `ontology/variable_synonym_dictionary.csv`
 - **Process**: For each source dataset, map every parameter name to CVO ID using Tier 1/2/3 classification
 - **Entries**: 89 mappings (52 Tier 1, 28 Tier 2, 9 Tier 3)
 - **License**: CC0-1.0
 
 ### Unit Harmonization Rules
 - **Source**: Physical constants, standard conversion factors
-- **File**: `/c/Users/lenovo/knowledge/unit_harmonization_rules.csv`
+- **File**: `ontology/unit_harmonization_rules.csv`
 - **Process**: For each CVO variable, document all source units encountered and conversion to SI/canonical unit
 - **Entries**: 92 rules
 - **License**: CC0-1.0
@@ -382,7 +382,7 @@ Transfer learning evaluation (GRQA Northeast-matched → STORET RI)
 - **Script**: `benchmark/run_full_benchmark_fixed.py` (ONLY)
 - **Protocol**: `benchmark/protocol/01_HWIN_BENCH_PROTOCOL_v1.0.md` (frozen v1.0)
 - **Date**: 2026-07-24
-- **Duration**: 15.5 hours
+- **Duration**: 15.5 hours (wall-clock)
 - **Hardware**: CPU (8-core), 32 GB RAM
 - **Environment**: Python 3.11, scikit-learn 1.5.x, numpy 1.26.x, pandas 2.2.x
 - **Seeds**: [42, 123, 256, 512, 1024] (GroupKFold), 42 (sampling, models)
@@ -400,8 +400,7 @@ Transfer learning evaluation (GRQA Northeast-matched → STORET RI)
 
 All code referenced above is from the **HWIN_Bench_v1_RELEASE** repository at the tagged commit for v1.0.
 
-**Tag**: `v1.0.0` (to be created at release)
-
+**Tag**: `v1.0.0` 
 **Key Commit**: Canonical pipeline freeze after COMP-006 fix (GroupKFold correction)
 
 ---
@@ -414,4 +413,4 @@ For provenance questions or corrections, open a GitHub Issue with label `provena
 
 **Version**: 1.0.0  
 **Protocol**: Frozen v1.0  
-**Last Updated**: 2026-08-09
+**Last Updated**: 2026-08-11

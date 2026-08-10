@@ -12,8 +12,8 @@ Get up and running in 5 minutes.
 ## 1. Clone & Install
 
 ```bash
-git clone https://github.com/HWIN-Bench/HWIN-Bench-v1.0.git
-cd HWIN-Bench-v1.0
+git clone https://github.com/Zakariya-Q/HWIN-Bench.git
+cd HWIN-Bench
 
 # Using conda (recommended)
 conda env create -f environment.yml
@@ -39,7 +39,7 @@ sha256sum -c manifests/checksums.sha256
 ## 3. Run Smoke Test (30 seconds)
 
 ```bash
-cd code/benchmark
+cd benchmark
 python run_full_benchmark_fixed.py --smoke-test
 ```
 
@@ -48,21 +48,21 @@ Expected output: Quick validation on 1 variable × 1 model × 1 fold.
 ## 4. Run Full Benchmark (5-6 hours)
 
 ```bash
-cd code/benchmark
+cd benchmark
 python run_full_benchmark_fixed.py
 ```
 
 This executes the **frozen protocol**:
-- 11 benchmark variables × 7 models × 5 seeds × 5 folds = 2,275 model fits
+- 11 benchmark variables × 7 models × 5 unique GroupKFold partitions × 5 deterministic repetitions = 1,925 historical fits (385 unique evaluations)
 - GroupKFold by station_id
-- Seeds: [42, 123, 256, 512, 1024]
-- Output: `../../output/benchmark_results/grqa_full_final_groupkfold/GRQA_full_benchmark_complete.json`
+- Seeds: [42, 123, 256, 512, 1024] (5 deterministic repetitions)
+- Output: `../../output/benchmark_results/grqa_full_final_groupkfold/GRQA_full_benchmark_complete_CORRECTED.json`
 
 ## 5. Inspect Results
 
 ```bash
 # View aggregated results
-cat ../../output/benchmark_results/grqa_full_final_groupkfold/GRQA_full_benchmark_complete.json | jq '.'
+cat ../../output/benchmark_results/grqa_full_final_groupkfold/GRQA_full_benchmark_complete_CORRECTED.json | jq '.'
 
 # Or use the analysis notebook
 jupyter lab examples/quickstart/analyze_results.ipynb
@@ -73,9 +73,9 @@ jupyter lab examples/quickstart/analyze_results.ipynb
 | File | Purpose |
 |------|---------|
 | `benchmark/protocol/01_HWIN_BENCH_PROTOCOL_v1.0.md` | Frozen protocol (immutable) |
-| `code/benchmark/run_full_benchmark_fixed.py` | Canonical benchmark runner |
-| `data/harmonized/HWIN-GRQA-V1-4/observations.csv` | Primary benchmark data |
-| `ontology/canonical_variable_ontology.csv` | 51 canonical variables |
+| `benchmark/run_full_benchmark_fixed.py` | Canonical benchmark runner |
+| `data/harmonized/HWIN-GRQA-V1-4/observations.csv` | Primary benchmark data (note: GRQA observations.csv is in Zenodo) |
+| `ontology/canonical_variable_ontology.csv` | 49 canonical variables |
 | `ontology/variable_synonym_dictionary.csv` | 89 source→canonical mappings |
 | `ontology/unit_harmonization_rules.csv` | 92 unit conversion rules |
 
