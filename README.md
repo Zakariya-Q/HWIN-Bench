@@ -2,6 +2,12 @@
 
 **Heterogeneous Water Quality Intelligence Benchmark — Version 1.0**
 
+> **Versioning**: HWIN-Bench **v1.0** is the frozen scientific benchmark and
+> protocol (results, variables, models, splits, and metrics are immutable).
+> Repository maintenance releases (1.0.1, 1.0.2, …) fix packaging,
+> documentation, and infrastructure without touching the scientific content.
+> Current maintenance release: **1.0.2** (see `CHANGELOG.md`).
+
 [![License](https://img.shields.io/badge/License-CC--BY--4.0-green)](LICENSE)
 [![Protocol](https://img.shields.io/badge/Protocol-FROZEN%20v1.0-red)](benchmark/protocol/01_HWIN_BENCH_PROTOCOL_v1.0.md)
 [![Reproducibility](https://img.shields.io/badge/Reproducibility-CERTIFIED-brightgreen)](benchmark/reproducibility/)

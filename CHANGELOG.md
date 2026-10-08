@@ -1,6 +1,10 @@
 # Changelog
 
-All notable changes to HWIN-Bench v1.0 will be documented in this file.
+All notable changes to HWIN-Bench will be documented in this file.
+
+HWIN-Bench **v1.0** is the frozen scientific benchmark/protocol.
+Entries below track **repository maintenance releases** (1.0.x) that do not
+alter the scientific protocol or canonical results.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
