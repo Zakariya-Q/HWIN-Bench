@@ -107,15 +107,51 @@ METRICS = {
     "medae": median_absolute_error,
 }
 
-def ci(vals, confidence=0.95):
-    vals = np.array([v for v in vals if not np.isnan(v)])
-    n = len(vals)
-    if n < 2:
-        return [np.nan, np.nan]
-    m = np.mean(vals)
-    se = stats.sem(vals)
+PROTOCOL_FOLDS = 5  # unique GroupKFold partitions per variable (frozen v1.0 protocol)
+
+
+def ci_unique_folds(all_values, n_folds=PROTOCOL_FOLDS, confidence=0.95):
+    """CI per the frozen v1.0 methodology.
+
+    The benchmark records `n_seeds x n_folds` evaluations, but the seeds are
+    DETERMINISTIC repetitions: the seed value is not consumed by any
+    stochastic operation, so every repetition block is identical. Only the
+    `n_folds` unique fold evaluations count as independent observations.
+
+    - all_values: the full recorded list (provenance, preserved in output)
+    - CI is computed from the first repetition block (the unique folds)
+    - self-check: fails loudly if the repetition blocks are NOT identical,
+      which would mean the deterministic-repetition invariant is broken and
+      the frozen interpretation no longer applies.
+    """
+    vals = [v for v in all_values if not (isinstance(v, float) and np.isnan(v))]
+    n_rec = len(vals)
+    if n_rec < 2:
+        return {"ci_95": [np.nan, np.nan], "n_recorded": n_rec,
+                "n_unique_folds": min(n_rec, n_folds), "ci_n": min(n_rec, n_folds),
+                "ci_df": max(min(n_rec, n_folds) - 1, 0)}
+    if n_rec % n_folds != 0:
+        raise ValueError(
+            f"deterministic-repetition invariant broken: {n_rec} recorded "
+            f"evaluations is not a multiple of {n_folds} folds"
+        )
+    n_reps = n_rec // n_folds
+    blocks = [vals[i * n_folds:(i + 1) * n_folds] for i in range(n_reps)]
+    base = blocks[0]
+    for b in blocks[1:]:
+        if any(abs(x - y) > 1e-9 for x, y in zip(b, base)):
+            raise ValueError(
+                "deterministic-repetition invariant broken: repetition "
+                "blocks differ — seeds are no longer deterministic; the "
+                "frozen v1.0 CI methodology (n=unique folds) does not apply"
+            )
+    uniq = np.array(base)
+    n = len(uniq)
+    m = float(np.mean(uniq))
+    se = stats.sem(uniq)
     h = se * stats.t.ppf((1 + confidence) / 2., n - 1)
-    return [float(m - h), float(m + h)]
+    return {"ci_95": [float(m - h), float(m + h)], "n_recorded": n_rec,
+            "n_unique_folds": n, "ci_n": n, "ci_df": n - 1}
 
 def feats(df):
     X = pd.DataFrame()
@@ -185,9 +221,14 @@ def cv(var_data, var_name, models, seeds, n_folds, sample_cap):
         for mn, vs in allm.items():
             vs = [v for v in vs if not np.isnan(v)]
             if vs:
-                summ[mn] = {"mean": float(np.mean(vs)), "std": float(np.std(vs)), "median": float(np.median(vs)), "min": float(np.min(vs)), "max": float(np.max(vs)), "ci_95": ci(vs), "n_folds": len(vs), "all_values": vs}
+                ciinfo = ci_unique_folds(vs, n_folds=n_folds)
+                summ[mn] = {"mean": float(np.mean(vs)), "std": float(np.std(vs)), "median": float(np.median(vs)), "min": float(np.min(vs)), "max": float(np.max(vs)),
+                            "ci_95": ciinfo["ci_95"], "n_folds": len(vs),
+                            "n_recorded": ciinfo["n_recorded"], "n_unique_folds": ciinfo["n_unique_folds"],
+                            "ci_n": ciinfo["ci_n"], "ci_df": ciinfo["ci_df"],
+                            "all_values": vs}
             else:
-                summ[mn] = {"mean": np.nan, "std": np.nan, "median": np.nan, "min": np.nan, "max": np.nan, "ci_95": [np.nan, np.nan], "n_folds": 0, "all_values": []}
+                summ[mn] = {"mean": np.nan, "std": np.nan, "median": np.nan, "min": np.nan, "max": np.nan, "ci_95": [np.nan, np.nan], "n_folds": 0, "n_recorded": 0, "n_unique_folds": 0, "ci_n": 0, "ci_df": 0, "all_values": []}
         res[m_name] = {"metrics": summ, "total_time": mt, "avg_fold_time": np.mean(all_t) if all_t else np.nan, "n_folds_completed": sum(1 for v in allm["r2"] if not np.isnan(v))}
         r2m = summ["r2"]["mean"]
         r2ci = summ["r2"]["ci_95"]
