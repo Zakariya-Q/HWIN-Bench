@@ -66,14 +66,14 @@ via CLI or the `HWIN_DATA_PATH` / `HWIN_OUTPUT_DIR` environment variables):
 ```bash
 python benchmark/run_full_benchmark_fixed.py \
   --data <path-to>/HWIN-GRQA-V1-4/observations.csv \
-  --output-dir output/benchmark_results/grqa_full_final_groupkfold
+  --output-dir output/benchmark_results/grqa_recomputation
 ```
 
 **Expected execution:**
 - Wall-clock time: ~15.5 hours (932 min) on 8-core CPU
 - Aggregate model training time: ~8.8 hours (528 min)
-- Output directory: `output/benchmark_results/grqa_full_final_groupkfold/`
-- Main result file: `GRQA_full_benchmark_complete.json`
+- Output directory: `output/benchmark_results/grqa_recomputation/`
+- Main result file: `all_results.json`
 - Per-variable results: `HWIN-VAR-XXX_results.json`
 
 **Do NOT:**
@@ -86,12 +86,12 @@ python benchmark/run_full_benchmark_fixed.py \
 
 ```bash
 # Check result file exists and has correct structure
-ls ../output/benchmark_results/grqa_full_final_groupkfold/
+ls output/benchmark_results/grqa_recomputation/
 
 # Verify key metrics present
 python -c "
 import json
-with open('output/benchmark_results/grqa_full_final_groupkfold/GRQA_full_benchmark_complete.json') as f:
+with open('output/benchmark_results/grqa_recomputation/all_results.json') as f:
     results = json.load(f)
 print(f'Variables: {len(results)}')
 for var_id, var_results in list(results.items())[:3]:
@@ -106,24 +106,24 @@ for var_id, var_results in list(results.items())[:3]:
 
 The canonical execution produced these reference results (stored in `benchmark/results/`):
 
-| Variable | Best Model | R² (mean) | 95% CI (corrected, n=5) | RMSE (mean) |
-|----------|------------|-----------|--------------------------|-------------|
-| Water Temperature | Extra Trees | 0.6048 | [0.424, 0.786] | 6.586 |
-| pH | Gradient Boosting | 0.0278 | [-0.078, 0.134] | 0.454 |
-| Dissolved Oxygen | Ridge | 0.1575 | [0.052, 0.263] | 1.997 |
-| Nitrate Nitrogen | Random Forest | 0.3293 | [0.257, 0.402] | 0.839 |
-| Ammonium Nitrogen | Ridge | 0.0011 | [-0.002, 0.004] | 0.392 |
-| Phosphate Phosphorus | Linear Regression | 0.0026 | [-0.001, 0.007] | 0.399 |
-| DO Percent Saturation | Linear Regression | 0.0008 | [-0.001, 0.002] | 17.820 |
-| Total Suspended Solids | Linear Regression | 0.0005 | [-0.000, 0.001] | 187.242 |
-| Total Nitrogen | Gradient Boosting | 0.0216 | [-0.103, 0.146] | 1.969 |
-| Total Ammonia Nitrogen | Lasso | 0.0042 | [0.001, 0.007] | 0.718 |
-| Nitrite Nitrogen | Random Forest | 0.1703 | [0.082, 0.258] | 0.057 |
+| Variable | Best Model | R² (mean) | 95% CI (n=5, df=4) | RMSE (mean) |
+|----------|------------|-----------|---------------------|-------------|
+| Water Temperature | Extra Trees | 0.6048 | [0.253, 0.957] | 6.713 |
+| pH | Gradient Boosting | 0.0278 | [-0.118, 0.174] | 2.539 |
+| Dissolved Oxygen | Ridge | 0.1575 | [-0.003, 0.318] | 13.151 |
+| Nitrate Nitrogen | Random Forest | 0.3293 | [0.225, 0.433] | 2.181 |
+| Ammonium Nitrogen | Ridge | 0.0011 | [-0.001, 0.003] | 2.092 |
+| Phosphate Phosphorus | Linear Regression | 0.0026 | [-0.001, 0.006] | 4.634 |
+| DO Percent Saturation | Linear Regression | 0.0008 | [-0.001, 0.002] | 378.648 |
+| Total Suspended Solids | Linear Regression | 0.0005 | [-0.001, 0.002] | 3814.820 |
+| Total Nitrogen | Gradient Boosting | 0.0216 | [-0.188, 0.231] | 8.618 |
+| Total Ammonia Nitrogen | Lasso | 0.0042 | [0.000, 0.008] | 2.981 |
+| Nitrite Nitrogen | Random Forest | 0.1703 | [0.036, 0.304] | 0.707 |
 
 **All confidence intervals are CORRECTED** to use n=5 (5 unique GroupKFold partitions), df=4, t=2.776. Original intervals used n=25 (df=24) and were approximately 3× too narrow.
 
-Full results: `benchmark/results/grqa_full_final_groupkfold/GRQA_full_benchmark_complete.json`
-Per-variable: `benchmark/results/grqa_full_final_groupkfold/HWIN-VAR-XXX.json`
+Full results: `benchmark/results/grqa_recomputation/all_results.json` (canonical run, per-fold values stored)
+Per-variable: `benchmark/results/grqa_recomputation/HWIN-VAR-XXX_results.json`
 Statistical tests: Reserved for v1.1+ (not executed in v1.0)  
 Certification: `benchmark/reproducibility/CANONICAL_EXECUTION_CERTIFICATE.md`
 

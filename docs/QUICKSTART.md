@@ -55,20 +55,20 @@ Expected output: Quick validation on 1 variable × 1 model × 1 fold.
 cd benchmark
 python run_full_benchmark_fixed.py \
   --data <path-to>/HWIN-GRQA-V1-4/observations.csv \
-  --output-dir ../output/benchmark_results/grqa_full_final_groupkfold
+  --output-dir ../output/benchmark_results/grqa_recomputation
 ```
 
 This executes the **frozen protocol**:
 - 11 benchmark variables × 7 models × 5 unique GroupKFold partitions × 5 deterministic repetitions = 1,925 historical fits (385 unique evaluations)
 - GroupKFold by station_id
 - Seeds: [42, 123, 256, 512, 1024] (5 deterministic repetitions of the fixed partition set)
-- Output: `GRQA_full_benchmark_complete.json` + per-variable `HWIN-VAR-XXX_results.json`
+- Output: `all_results.json` + per-variable `HWIN-VAR-XXX_results.json` (schema of the shipped canonical results)
 
 ## 5. Inspect Results
 
 ```bash
 # Canonical reference results are shipped in the repo:
-cat benchmark/results/grqa_full_final_groupkfold/GRQA_full_benchmark_complete.json | jq '.'
+cat benchmark/results/grqa_recomputation/all_results.json | jq '.'
 
 # Or use the analysis notebook
 jupyter lab examples/quickstart/analyze_results.ipynb

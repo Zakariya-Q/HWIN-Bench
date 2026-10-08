@@ -1,21 +1,21 @@
 \begin{table}
-\caption{GRQA v1.4 benchmark results (11 canonical variables). R2 with 95% CI over 5 unique GroupKFold partitions (n=5, df=4). CI corrected from original n=25 calculation.}
+\caption{GRQA v1.4 benchmark results (11 canonical variables). R2 with 95\% CI over 5 unique GroupKFold partitions (n=5, df=4, t=2.776), computed from the canonical run's stored fold values.}
 \label{tab:grqa}
 \begin{tabular}{lllcc}
 \toprule
 Variable & Best Model & R2 & R2\_CI (95\%, n=5) & MAE & Tier \\
 \midrule
-HWIN-VAR-001 (Temp) & Extra Trees & 0.621392 & [0.308, 0.935] & 2.379312 & Easy \\
-HWIN-VAR-002 (pH) & Gradient Boosting & 0.076972 & [-0.035, 0.189] & 0.454189 & Medium \\
-HWIN-VAR-003 (DO) & Ridge & 0.074584 & [0.006, 0.144] & 1.997389 & Medium \\
-HWIN-VAR-008 (Nitrate-N) & Random Forest & 0.286310 & [0.084, 0.489] & 0.839289 & Medium \\
-HWIN-VAR-009 (Ammonium-N) & Ridge & 0.001032 & [-0.000, 0.003] & 0.391533 & Hard \\
-HWIN-VAR-010 (Phosphate-P) & Linear Regression & 0.002425 & [-0.000, 0.005] & 0.399087 & Hard \\
-HWIN-VAR-014 (DO \% Sat) & Linear Regression & 0.000815 & [-0.001, 0.002] & 17.820236 & Hard \\
-HWIN-VAR-015 (TSS) & Linear Regression & -0.000274 & [-0.002, 0.001] & 187.241521 & Hard \\
-HWIN-VAR-028 (Total N) & Gradient Boosting & 0.021654 & [-0.189, 0.232] & 1.968556 & Hard \\
-HWIN-VAR-031 (Total NH4-N) & Lasso & -0.015626 & [-0.038, 0.007] & 0.718070 & Hard \\
-HWIN-VAR-033 (Nitrite-N) & Random Forest & 0.152109 & [-0.005, 0.309] & 0.057481 & Medium \\
+HWIN-VAR-001 (Temp) & Extra Trees & 0.604814 & [0.253, 0.957] & 2.414 & Easy \\
+HWIN-VAR-002 (pH) & Gradient Boosting & 0.027842 & [-0.118, 0.174] & 0.453 & Medium \\
+HWIN-VAR-003 (DO) & Ridge & 0.157460 & [-0.003, 0.318] & 1.688 & Medium \\
+HWIN-VAR-008 (Nitrate-N) & Random Forest & 0.329267 & [0.225, 0.433] & 0.838 & Medium \\
+HWIN-VAR-009 (Ammonium-N) & Ridge & 0.001093 & [-0.001, 0.003] & 0.391 & Hard \\
+HWIN-VAR-010 (Phosphate-P) & Linear Regression & 0.002629 & [-0.001, 0.006] & 0.399 & Hard \\
+HWIN-VAR-014 (DO \% Sat) & Linear Regression & 0.000835 & [-0.001, 0.002] & 17.816 & Hard \\
+HWIN-VAR-015 (TSS) & Linear Regression & 0.000478 & [-0.001, 0.002] & 184.498 & Hard \\
+HWIN-VAR-028 (Total N) & Gradient Boosting & 0.021607 & [-0.188, 0.231] & 1.915 & Hard \\
+HWIN-VAR-031 (Total NH4-N) & Lasso & 0.004191 & [0.000, 0.008] & 0.475 & Hard \\
+HWIN-VAR-033 (Nitrite-N) & Random Forest & 0.170297 & [0.036, 0.304] & 0.056 & Medium \\
 \bottomrule
 \end{tabular}
 \end{table}

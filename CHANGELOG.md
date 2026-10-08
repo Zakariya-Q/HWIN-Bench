@@ -9,6 +9,25 @@ alter the scientific protocol or canonical results.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.3] - 2026-10-08
+
+### Fixed — canonical-run realignment (benchmark-author decision)
+- **Canonical run designation**: `grqa_recomputation` (2026-08-06/07, full
+  per-fold values) is the canonical v1.0 execution per benchmark-author
+  decision. The previously shipped `grqa_full_final_groupkfold` JSONs
+  (2026-07-08/09, aggregated means only, different values) removed from
+  `benchmark/results/`; both runs' provenance documented in
+  BENCHMARK_STATISTICS.md.
+- **Confidence intervals recomputed** from the canonical run's stored fold
+  values (n=5 unique partitions, df=4, t=2.776). Prior CI figures in summary
+  documents matched no stored artifact (width ratio ~1.74 vs the frozen
+  3.008 correction ratio) — replaced with values computed directly from data.
+- BENCHMARK_STATISTICS.md regenerated; README/docs result tables aligned;
+  paper Table5 regenerated; analysis notebook rewritten for the canonical
+  schema (executes end-to-end in a clean environment).
+- Execution certificates bannered as historical records (R²/best-model
+  values canonical; their CI column predates the recomputation).
+
 ## [1.0.2] - 2026-10-06
 
 ### Repository Hardening (2026-10-08)

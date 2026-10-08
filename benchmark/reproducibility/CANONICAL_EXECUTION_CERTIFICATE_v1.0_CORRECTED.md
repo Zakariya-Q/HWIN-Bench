@@ -1,5 +1,11 @@
 # CANONICAL EXECUTION CERTIFICATE — HWIN-Bench v1.0 (CI CORRECTED)
 
+> **Historical record (2026-08-10).** The R² point estimates and best-model
+> assignments below reflect the canonical run. The CI column predates the
+> definitive n=5 recomputation from stored fold values (2026-10-08, see
+> `BENCHMARK_STATISTICS.md` §2) and is superseded by it. Retained unmodified
+> as audit evidence.
+
 **Certificate ID:** HWIN-BENCH-v1.0-20250807-001-CORRECTED  
 **Issued:** 2026-08-10 (CI Correction Applied)  
 **Original Certificate:** HWIN-BENCH-v1.0-20250807-001 (2025-08-07 23:00:00 UTC)  

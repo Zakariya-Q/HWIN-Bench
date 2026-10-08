@@ -249,7 +249,7 @@ No variables were eligible for benchmarking but excluded from the canonical exec
 | `ontology/variable_synonym_dictionary.csv` | Source mappings (GRQA: 36 vars) |
 | `scripts/archive/output_real_hwin_bench_rc1/canonical/HWIN-GRQA-V1-4/observations/observations.csv` | Harmonized data (source of truth for counts) |
 | `benchmark/run_full_benchmark_fixed.py` | Canonical runner (auto-selection logic) |
-| `output/benchmark_results/grqa_full_final_groupkfold/` | Canonical results (11 vars) |
+| `output/benchmark_results/grqa_recomputation/` | Canonical results (11 vars) |
 | `benchmark/protocol/01_HWIN_BENCH_PROTOCOL_v1.0.md` | Frozen protocol (historical 13-var claim) |
 
 ---
