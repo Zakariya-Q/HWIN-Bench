@@ -5,6 +5,61 @@ All notable changes to HWIN-Bench v1.0 will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.2] - 2026-10-06
+
+### Fixed
+- **Benchmark runner** (`benchmark/run_full_benchmark_fixed.py`):
+  - Removed hardcoded machine-specific input/output paths; data and output
+    locations are now CLI arguments (`--data`, `--output-dir`) with
+    environment-variable fallbacks (`HWIN_DATA_PATH`, `HWIN_OUTPUT_DIR`,
+    `HWIN_VARIABLES`). The runner is now portable across machines.
+  - Implemented the `--smoke-test` mode that the README documented but the
+    script never had (1 variable, 2 models, 1 seed, 3 folds, subsampled read).
+  - Eliminated the duplicate full read of the 6 GB observations CSV
+    (auto-selection previously loaded the entire file a second time).
+  - Added `--variables` and `--no-auto-select` for explicit variable control.
+- **CBS validator** (`code/validation/cbs_validator.py`):
+  - The validator crashed (KeyError / timestamp ValueError) on every shipped
+    dataset. All checks now guard missing columns and report structured
+    errors instead of raising; timestamp parsing uses `errors='coerce'` and
+    reports counts. Required columns are split into Tier 1 (core) and
+    Tier 2 (CBS-full) with distinct error classes.
+  - Full first-run validation results are documented in
+    `docs/DATA_QUALITY_VALIDATION_REPORT.md`.
+- **STORET timestamps** (RI, CA, TX observations.csv): repaired the
+  harmonizer's strftime bug (`T0920:00` → `T09:20:00`, ~383k rows total),
+  STORET hour-25 unknown-time sentinels (→ `T00:00:00` + `HOUR25` flag),
+  hour-24 end-of-day stamps (→ next-day midnight, instant preserved),
+  and corrupt minute values (→ `T00:00:00` + `TIME_CORRUPT`). All repairs
+  preserve rows and record provenance in `quality_flag`. Post-repair
+  ISO 8601 parseability: RI 2294/2294, CA 172103/172103, TX 210614/210614.
+- **dataset.json ×5**: removed invalid null ORCID `0000-0000-0000-0000`,
+  removed `[FUNDER NAME TO BE ADDED]` placeholder funding entries, replaced
+  placeholder DOIs with the reserved Zenodo DOI 10.5281/zenodo.21877825
+  (deposit still unpublished — see `ZENODO_DOI_PENDING.md`).
+- **Release integrity**: restored `HWIN-STORET-CA/observations.csv`,
+  `HWIN-STORET-TX/observations.csv`, and `HWIN-GRQA-V1-4/stations.json` to
+  git tracking (LFS) — they were silently dropped from the tree by the
+  v1.0.1-hardening commit while still listed in the release manifests.
+  Checksums match the original release manifest.
+
+### Added
+- **Canonical benchmark results** (`benchmark/results/grqa_full_final_groupkfold/`):
+  the certified 15.5 h run's master JSON + 11 per-variable result files —
+  previously referenced by documentation but absent from the repository.
+- **CI workflow** (`.github/workflows/ci.yml`): compiles all sources, runs
+  CBS validation on shipped datasets, runs the benchmark smoke test on
+  in-repo data (no download required), and verifies the checksum manifest.
+- **Data quality validation report** (`docs/DATA_QUALITY_VALIDATION_REPORT.md`):
+  honest accounting of the CBS findings for each shipped dataset.
+- `code/benchmark/__init__.py` (listed in release manifests, was missing).
+
+## [1.0.1] - 2026-08-11
+
+### Fixed
+- Documentation, citation, reproducibility, and statistical claims per
+  zero-trust audit (see 6998fc1 commit message for the itemized list).
+
 ## [1.0.0] - 2026-08-09
 
 ### Added

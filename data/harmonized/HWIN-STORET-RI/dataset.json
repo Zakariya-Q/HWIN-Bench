@@ -10,18 +10,12 @@
   "creators": [
     {
       "name": "HWIN-Bench Team",
-      "affiliation": "HWIN-Bench Consortium",
-      "orcid": "0000-0000-0000-0000"
+      "affiliation": "HWIN-Bench Consortium"
     }
   ],
   "publication_year": 2026,
   "publisher": "Zenodo",
-  "funding": [
-    {
-      "funder": "[FUNDER NAME TO BE ADDED]",
-      "award_number": "[AWARD NUMBER TO BE ADDED]"
-    }
-  ],
+  "funding": [],
   "related_identifiers": [
     {
       "relation": "isDerivedFrom",
@@ -64,6 +58,6 @@
       "changes": "Initial harmonized release for HWIN-Bench v1.0"
     }
   ],
-  "doi": "10.5281/zenodo.XXXXX",
+  "doi": "10.5281/zenodo.21877825",
   "is_published": false
 }

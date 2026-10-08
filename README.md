@@ -150,21 +150,37 @@ python -m hwin_bench.cli pipeline --all
 
 ## Reproducing the Benchmark
 
-### Quick Smoke Test (5 minutes)
+### Quick Smoke Test (< 1 minute, no download needed)
 
 ```bash
-cd benchmark
-python run_full_benchmark_fixed.py --smoke-test
+# Against an in-repo dataset (STORET Rhode Island, full schema):
+python benchmark/run_full_benchmark_fixed.py \
+  --data data/harmonized/HWIN-STORET-RI/observations.csv \
+  --output-dir output/smoke_results \
+  --smoke-test
+
+# Or against the canonical GRQA data once downloaded (see Data section):
+python benchmark/run_full_benchmark_fixed.py \
+  --data <path-to>/HWIN-GRQA-V1-4/observations.csv \
+  --output-dir output/benchmark_results \
+  --smoke-test
 ```
+
+Paths can also be set via environment variables `HWIN_DATA_PATH` and
+`HWIN_OUTPUT_DIR`.
 
 ### Full Canonical Benchmark (5-6 hours on CPU)
 
 ```bash
-cd benchmark
-python run_full_benchmark_fixed.py
+python benchmark/run_full_benchmark_fixed.py \
+  --data <path-to>/HWIN-GRQA-V1-4/observations.csv \
+  --output-dir output/benchmark_results/grqa_full_final_groupkfold
 ```
 
-**Expected output**: `output/benchmark_results/grqa_full_final_groupkfold/GRQA_full_benchmark_complete_CORRECTED.json`
+**Canonical reference results** (from the certified 15.5 h run):
+`benchmark/results/grqa_full_final_groupkfold/GRQA_full_benchmark_complete.json`.
+Raw fold-level values in that file report n=25 CIs; the corrected n=5 (df=4)
+statistics are in `BENCHMARK_STATISTICS.md` and `CI_CORRECTION_REVIEW/`.
 
 ### Protocol Compliance
 

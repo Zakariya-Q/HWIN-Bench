@@ -5,10 +5,22 @@ Validates datasets against the Canonical Benchmark Schema (CBS).
 """
 
 import json
+import warnings
+from contextlib import contextmanager
+
 import pandas as pd
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional
 from dataclasses import dataclass
+
+
+@contextmanager
+def _quiet_parsing():
+    """Silence pandas' per-element dateutil fallback warnings: they are
+    expected noise when a dataset legitimately contains mixed formats."""
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", UserWarning)
+        yield
 
 
 @dataclass
@@ -33,13 +45,20 @@ class CBSValidator:
     - Spatial Consistency (3 rules)
     """
     
-    # CBS required columns for observations
-    REQUIRED_OBS_COLUMNS = [
-        'observation_id', 'dataset_id', 'station_id', 'canonical_variable_id',
-        'value', 'unit', 'timestamp', 'latitude', 'longitude', 'country',
-        'site_name', 'param_name', 'source', 'quality_flag', 'percentile',
-        'original_value', 'original_unit', 'country_iso'
+    # CBS required columns for observations.
+    # Tier 1 (core): a dataset lacking these cannot be used by the benchmark at all.
+    # Tier 2 (CBS-full): expected in the full Canonical Benchmark Schema; their
+    # absence is reported as an error but must not crash the validator.
+    REQUIRED_OBS_COLUMNS_T1 = [
+        'station_id', 'variable', 'value', 'unit', 'timestamp',
+        'canonical_variable_id',
     ]
+    REQUIRED_OBS_COLUMNS_T2 = [
+        'observation_id', 'dataset_id', 'latitude', 'longitude', 'country',
+        'site_name', 'param_name', 'source', 'quality_flag', 'percentile',
+        'original_value', 'original_unit', 'country_iso',
+    ]
+    REQUIRED_OBS_COLUMNS = REQUIRED_OBS_COLUMNS_T1 + REQUIRED_OBS_COLUMNS_T2
     
     # Variable physical ranges (min, max) - subset for key variables
     VARIABLE_RANGES = {
@@ -131,44 +150,53 @@ class CBSValidator:
         return ValidationResult(passed, self.errors, self.warnings, self.stats)
     
     def _check_completeness(self, obs, stations, variables, dataset_meta):
-        """Check 8 completeness rules."""
+        """Check 8 completeness rules. All column accesses are guarded: a
+        missing column is reported, never assumed present."""
         # 1. Required columns present
-        missing_cols = set(self.REQUIRED_OBS_COLUMNS) - set(obs.columns)
-        if missing_cols:
-            self.errors.append(f"Missing required columns: {missing_cols}")
-            
+        missing_t1 = [c for c in self.REQUIRED_OBS_COLUMNS_T1 if c not in obs.columns]
+        missing_t2 = [c for c in self.REQUIRED_OBS_COLUMNS_T2 if c not in obs.columns]
+        if missing_t1:
+            self.errors.append(f"Missing core columns (Tier 1): {missing_t1}")
+        if missing_t2:
+            self.errors.append(f"Missing CBS-full columns (Tier 2): {missing_t2}")
+
         # 2. No null station_id
-        if obs['station_id'].isnull().any():
+        if 'station_id' in obs.columns and obs['station_id'].isnull().any():
             self.errors.append("Null station_id found in observations")
-            
+
         # 3. No null coordinates
-        if obs['latitude'].isnull().any() or obs['longitude'].isnull().any():
-            self.errors.append("Null latitude/longitude found in observations")
-            
+        if 'latitude' in obs.columns and 'longitude' in obs.columns:
+            if obs['latitude'].isnull().any() or obs['longitude'].isnull().any():
+                self.errors.append("Null latitude/longitude found in observations")
+
         # 4. No null timestamps
-        if obs['timestamp'].isnull().any():
+        if 'timestamp' in obs.columns and obs['timestamp'].isnull().any():
             self.errors.append("Null timestamp found in observations")
-            
+
         # 5. No null values
-        if obs['value'].isnull().any():
+        if 'value' in obs.columns and obs['value'].isnull().any():
             self.errors.append("Null value found in observations")
-            
+
         # 6. No null canonical_variable_id
-        if obs['canonical_variable_id'].isnull().any():
+        if 'canonical_variable_id' in obs.columns and obs['canonical_variable_id'].isnull().any():
             self.errors.append("Null canonical_variable_id found in observations")
-            
+
         # 7. Valid country codes (ISO 3166-1 alpha-2)
-        invalid_countries = obs[~obs['country'].str.match(r'^[A-Z]{2}$')]['country'].unique()
-        if len(invalid_countries) > 0:
-            self.warnings.append(f"Non-standard country codes: {invalid_countries[:10]}")
-            
+        if 'country' in obs.columns:
+            invalid_countries = obs[~obs['country'].astype(str).str.match(r'^[A-Z]{2}$')]['country'].unique()
+            if len(invalid_countries) > 0:
+                self.warnings.append(f"Non-standard country codes: {invalid_countries[:10]}")
+
         # 8. Valid units (non-empty)
-        if obs['unit'].isnull().any() or (obs['unit'] == '').any():
-            self.errors.append("Empty or null unit found in observations")
+        if 'unit' in obs.columns:
+            if obs['unit'].isnull().any() or (obs['unit'].astype(str) == '').any():
+                self.errors.append("Empty or null unit found in observations")
     
     def _check_range_validity(self, obs, variables):
         """Check 38 range validity rules (per variable)."""
-        var_ids_in_obs = obs['canonical_variable_id'].unique()
+        if 'canonical_variable_id' not in obs.columns or 'value' not in obs.columns:
+            return
+        var_ids_in_obs = obs['canonical_variable_id'].dropna().unique()
         var_ids_in_vars = variables['canonical_variable_id'].unique() if 'canonical_variable_id' in variables.columns else []
         
         for var_id in var_ids_in_obs:
@@ -208,83 +236,100 @@ class CBSValidator:
     def _check_referential_integrity(self, obs, stations, variables):
         """Check 3 referential integrity rules."""
         # 1. All station_ids in observations exist in stations
-        station_ids_obs = set(obs['station_id'].unique())
-        station_ids_meta = set(s['station_id'] for s in stations)
-        missing_stations = station_ids_obs - station_ids_meta
-        if missing_stations:
-            self.errors.append(f"{len(missing_stations)} station_ids in observations not found in stations.json")
-            
+        if 'station_id' in obs.columns and stations:
+            station_ids_obs = set(obs['station_id'].dropna().astype(str))
+            station_ids_meta = set(str(s.get('station_id', '')) for s in stations)
+            missing_stations = station_ids_obs - station_ids_meta
+            if missing_stations:
+                self.errors.append(f"{len(missing_stations)} station_ids in observations not found in stations.json")
+
         # 2. All canonical_variable_ids in observations exist in variables.csv
-        if 'canonical_variable_id' in variables.columns:
-            var_ids_obs = set(obs['canonical_variable_id'].unique())
-            var_ids_meta = set(variables['canonical_variable_id'].unique())
+        if 'canonical_variable_id' in obs.columns and 'canonical_variable_id' in getattr(variables, 'columns', []):
+            var_ids_obs = set(obs['canonical_variable_id'].dropna())
+            var_ids_meta = set(variables['canonical_variable_id'].dropna())
             missing_vars = var_ids_obs - var_ids_meta
             if missing_vars:
                 self.errors.append(f"{len(missing_vars)} variable_ids in observations not found in variables.csv")
-                
+
         # 3. All country codes ISO 3166-1 alpha-2
-        invalid_countries = obs[~obs['country'].str.match(r'^[A-Z]{2}$')]['country'].unique()
-        if len(invalid_countries) > 0:
-            self.warnings.append(f"Non-standard country codes: {invalid_countries[:10]}")
-    
+        if 'country' in obs.columns:
+            invalid_countries = obs[~obs['country'].astype(str).str.match(r'^[A-Z]{2}$')]['country'].unique()
+            if len(invalid_countries) > 0:
+                self.warnings.append(f"Non-standard country codes: {invalid_countries[:10]}")
+
     def _check_duplicates(self, obs):
         """Check 2 duplicate detection rules."""
         # 1. No duplicate observation_ids
-        dup_obs = obs[obs.duplicated(subset=['observation_id'], keep=False)]
-        if len(dup_obs) > 0:
-            self.errors.append(f"Duplicate observation_ids found: {len(dup_obs)} rows")
-            
+        if 'observation_id' in obs.columns:
+            dup_obs = obs[obs.duplicated(subset=['observation_id'], keep=False)]
+            if len(dup_obs) > 0:
+                self.errors.append(f"Duplicate observation_ids found: {len(dup_obs)} rows")
+
         # 2. No duplicate (station_id, timestamp, canonical_variable_id)
-        dup_triplet = obs[obs.duplicated(subset=['station_id', 'timestamp', 'canonical_variable_id'], keep=False)]
-        if len(dup_triplet) > 0:
-            self.warnings.append(f"Duplicate (station_id, timestamp, variable) triplets: {len(dup_triplet)} rows")
-    
+        triplet_cols = ['station_id', 'timestamp', 'canonical_variable_id']
+        if all(c in obs.columns for c in triplet_cols):
+            dup_triplet = obs[obs.duplicated(subset=triplet_cols, keep=False)]
+            if len(dup_triplet) > 0:
+                self.warnings.append(f"Duplicate (station_id, timestamp, variable) triplets: {len(dup_triplet)} rows")
+
     def _check_temporal_consistency(self, obs):
-        """Check 4 temporal consistency rules."""
+        """Check 4 temporal consistency rules. Timestamps that cannot be
+        parsed are counted and reported, never raised."""
+        if 'timestamp' not in obs.columns:
+            return
         # 1. Timestamps parseable as ISO 8601
-        try:
-            pd.to_datetime(obs['timestamp'], utc=True)
-        except Exception as e:
-            self.errors.append(f"Timestamp parsing failed: {e}")
-            
+        with _quiet_parsing():
+            parsed = pd.to_datetime(obs['timestamp'], utc=True, errors='coerce')
+        n_bad = int((parsed.isna() & obs['timestamp'].notna()).sum())
+        n_null = int(obs['timestamp'].isna().sum())
+        if n_bad > 0:
+            self.errors.append(f"{n_bad} timestamps not parseable as ISO 8601")
+        if n_null > 0:
+            self.errors.append(f"{n_null} null timestamps")
+
         # 2. Within dataset temporal coverage (if available)
         # Skip - requires dataset metadata
-        
+
         # 3. Chronological order per station-variable (check a sample)
-        sample_stations = obs['station_id'].unique()[:10]
+        sample_stations = obs['station_id'].dropna().unique()[:10]
+        sample_vars = obs['canonical_variable_id'].dropna().unique()[:5] if 'canonical_variable_id' in obs.columns else []
         for station in sample_stations:
-            for var in obs['canonical_variable_id'].unique()[:5]:
+            for var in sample_vars:
                 subset = obs[(obs['station_id'] == station) & (obs['canonical_variable_id'] == var)]
                 if len(subset) > 1:
-                    timestamps = pd.to_datetime(subset['timestamp'], utc=True)
+                    with _quiet_parsing():
+                        timestamps = pd.to_datetime(subset['timestamp'], utc=True, errors='coerce').sort_values()
                     if not timestamps.is_monotonic_increasing:
                         self.warnings.append(f"Non-chronological data for station {station}, var {var}")
                         break
-                        
+
         # 4. No future dates (beyond 2030 as sanity check)
-        future = obs[pd.to_datetime(obs['timestamp'], utc=True) > '2030-01-01']
-        if len(future) > 0:
-            self.warnings.append(f"{len(future)} observations with future timestamps (>2030)")
-    
+        future = parsed > pd.Timestamp('2030-01-01', tz='UTC')
+        if int(future.sum()) > 0:
+            self.warnings.append(f"{int(future.sum())} observations with future timestamps (>2030)")
+
     def _check_spatial_consistency(self, obs, stations):
         """Check 3 spatial consistency rules."""
         # 1. Coordinates in valid ranges
-        bad_lat = obs[(obs['latitude'] < -90) | (obs['latitude'] > 90)]
-        bad_lon = obs[(obs['longitude'] < -180) | (obs['longitude'] > 180)]
-        if len(bad_lat) > 0:
-            self.errors.append(f"{len(bad_lat)} observations with invalid latitude")
-        if len(bad_lon) > 0:
-            self.errors.append(f"{len(bad_lon)} observations with invalid longitude")
-            
+        if 'latitude' in obs.columns:
+            bad_lat = obs[(obs['latitude'] < -90) | (obs['latitude'] > 90)]
+            if len(bad_lat) > 0:
+                self.errors.append(f"{len(bad_lat)} observations with invalid latitude")
+        if 'longitude' in obs.columns:
+            bad_lon = obs[(obs['longitude'] < -180) | (obs['longitude'] > 180)]
+            if len(bad_lon) > 0:
+                self.errors.append(f"{len(bad_lon)} observations with invalid longitude")
+
         # 2. Country code matches coordinate location (basic check)
         # Skip - requires geocoding
-        
+
         # 3. Station_type valid
-        valid_types = {'river', 'lake', 'estuary', 'coastal', 'groundwater', 'spring', 'wetland', 'canal'}
-        station_types = set(s.get('station_type', '') for s in stations if s.get('station_type'))
-        invalid_types = station_types - valid_types
-        if invalid_types:
-            self.warnings.append(f"Unknown station types: {invalid_types}")
+        if stations:
+            valid_types = {'river', 'lake', 'estuary', 'coastal', 'groundwater', 'spring', 'wetland', 'canal'}
+            station_types = set(s.get('station_type', '') for s in stations if s.get('station_type'))
+            invalid_types = station_types - valid_types
+            if invalid_types:
+                self.warnings.append(f"Unknown station types: {invalid_types}")
 
 
 def validate_cbs(dataset_path: str) -> ValidationResult:

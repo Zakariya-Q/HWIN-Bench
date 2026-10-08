@@ -1,3 +1,4 @@
+import argparse
 import os
 import sys
 import json
@@ -14,23 +15,38 @@ from scipy import stats
 
 warnings.filterwarnings("ignore")
 
+
+def parse_args(argv=None):
+    """CLI configuration. Environment variables provide defaults so the frozen
+    canonical protocol can also be driven by CI without flags."""
+    p = argparse.ArgumentParser(
+        description="HWIN-Bench v1.0 canonical GRQA regression benchmark runner"
+    )
+    default_data = os.environ.get(
+        "HWIN_DATA_PATH",
+        "data/harmonized/HWIN-GRQA-V1-4/observations.csv",
+    )
+    default_out = os.environ.get("HWIN_OUTPUT_DIR", "output/benchmark_results")
+    p.add_argument("--data", default=default_data,
+                   help="Path to harmonized observations.csv (env: HWIN_DATA_PATH)")
+    p.add_argument("--output-dir", default=default_out,
+                   help="Directory for results JSON (env: HWIN_OUTPUT_DIR)")
+    p.add_argument("--smoke-test", action="store_true",
+                   help="Fast sanity run: 1 variable, 2 models, 1 seed, 3 folds, "
+                        "500-row cap, subsampled CSV read")
+    p.add_argument("--variables", default=os.environ.get("HWIN_VARIABLES"),
+                   help="Comma-separated canonical variable IDs (default: auto-select "
+                        ">= MIN_SAMPLES; env: HWIN_VARIABLES)")
+    p.add_argument("--no-auto-select", action="store_true",
+                   help="Use the frozen 11-variable canonical list instead of auto-selection")
+    return p.parse_args(argv)
+
+
+ARGS = parse_args()
+
 # Configuration constants - can be overridden via environment variables or config
 MIN_SAMPLES = int(os.environ.get("HWIN_MIN_SAMPLES", "100"))
 MAX_SAMPLES_PER_VAR = int(os.environ.get("HWIN_MAX_SAMPLES_PER_VAR", "200000"))
-
-# Variable selection: auto-select variables with >= MIN_SAMPLES observations
-# If VARIABLES env var is set, use that list; otherwise auto-select from data
-def get_variables(data_path, min_samples=MIN_SAMPLES):
-    """Auto-select variables with at least min_samples observations."""
-    dtypes_check = {"variable": str, "value": float}
-    chunks = []
-    cs = 100000
-    for c in pd.read_csv(DATA_PATH, chunksize=cs, dtype={"variable": str, "value": float}, low_memory=False):
-        chunks.append(c)
-    data = pd.concat(chunks, ignore_index=True)
-    counts = data["variable"].value_counts()
-    eligible = counts[counts >= min_samples].index.tolist()
-    return sorted(eligible)
 
 # Default variable list (used if auto-selection disabled or for backward compatibility)
 DEFAULT_VARIABLES = [
@@ -40,17 +56,21 @@ DEFAULT_VARIABLES = [
     "HWIN-VAR-031", "HWIN-VAR-033",
 ]
 
-# Data path (defined before variable selection)
-DATA_PATH = Path(r"C:/Users/lenovo/scripts/archive/output_real_hwin_bench_rc1/canonical/HWIN-GRQA-V1-4/observations/observations.csv")
+DATA_PATH = Path(ARGS.data)
+OUTPUT_DIR = Path(ARGS.output_dir)
 
-# Determine variables to benchmark
-USE_AUTO_SELECT = os.environ.get("HWIN_AUTO_SELECT_VARS", "true").lower() == "true"
-if USE_AUTO_SELECT:
-    VARIABLES = get_variables(DATA_PATH, MIN_SAMPLES)
-    print(f"Auto-selected {len(VARIABLES)} variables with >= {MIN_SAMPLES} samples: {VARIABLES}")
+if ARGS.smoke_test:
+    SMOKE = True
+    MAX_SAMPLES_PER_VAR = min(MAX_SAMPLES_PER_VAR, 500)
+    MIN_SAMPLES = min(MIN_SAMPLES, 100)
+    SEEDS = [42]
+    N_FOLDS = 3
 else:
-    VARIABLES = DEFAULT_VARIABLES
-    print(f"Using default variable list ({len(VARIABLES)} variables): {VARIABLES}")
+    SMOKE = False
+    SEEDS = [42, 123, 256, 512, 1024]
+    N_FOLDS = 5
+
+SMOKE_NROWS = 50000  # CSV rows read in smoke-test mode
 
 MODELS = {
     "linear_regression": {"model": LinearRegression, "params": {}},
@@ -62,13 +82,15 @@ MODELS = {
     "gradient_boosting": {"model": GradientBoostingRegressor, "params": {"n_estimators": 200, "learning_rate": 0.1, "max_depth": 3, "random_state": 42}},
 }
 
-SEEDS = [42, 123, 256, 512, 1024]
-N_FOLDS = 5
-SAMPLE_CAP = MAX_SAMPLES_PER_VAR
+if ARGS.smoke_test:
+    # Keep the run fast: linear head + one tree ensemble is enough to exercise
+    # the full pipeline (features, GroupKFold, metrics, JSON output)
+    MODELS = {
+        "linear_regression": MODELS["linear_regression"],
+        "extra_trees": {"model": ExtraTreesRegressor, "params": {"n_estimators": 10, "max_depth": 6, "random_state": 42, "n_jobs": -1}},
+    }
 
-DATA_PATH = Path(r"C:/Users/lenovo/scripts/archive/output_real_hwin_bench_rc1/canonical/HWIN-GRQA-V1-4/observations/observations.csv")
-OUTPUT_DIR = Path(r"C:/Users/lenovo/output/benchmark_results/grqa_recomputation")
-OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+SAMPLE_CAP = MAX_SAMPLES_PER_VAR
 
 def mape(y_true, y_pred):
     y_true, y_pred = np.array(y_true), np.array(y_pred)
@@ -177,17 +199,13 @@ def conv(obj):
 print("="*60)
 print("HWIN-Bench GRQA Full Benchmark Recomputation")
 print("="*60)
-print("Variables:", len(VARIABLES))
-print("Models:", len(MODELS))
-print("Seeds:", len(SEEDS), "x Folds:", N_FOLDS, "=", len(SEEDS) * N_FOLDS, "evals/var")
-print("Total fits:", len(VARIABLES) * len(MODELS) * len(SEEDS) * N_FOLDS)
-print("Sample cap:", SAMPLE_CAP)
-print("Data:", DATA_PATH)
-print("Output:", OUTPUT_DIR)
 
 if not DATA_PATH.exists():
     print("ERROR: Data not found at", DATA_PATH)
+    print("Usage: python run_full_benchmark_fixed.py --data <observations.csv> [--smoke-test]")
     sys.exit(1)
+
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 print()
 print("Loading data...")
@@ -195,26 +213,58 @@ dtypes = {"station_id": str, "variable": str, "value": float, "latitude": float,
 chunks = []
 cs = 100000
 tr = 0
-for c in pd.read_csv(DATA_PATH, chunksize=cs, low_memory=False, dtype=dtypes):
+nrows = SMOKE_NROWS if SMOKE else None
+for c in pd.read_csv(DATA_PATH, chunksize=cs, nrows=nrows, low_memory=False, dtype=dtypes):
     chunks.append(c)
     tr += len(c)
     if tr % 1000000 == 0:
         print("  Loaded", tr, "rows...")
 data = pd.concat(chunks, ignore_index=True)
 print("Total observations:", len(data))
-print("Variables:", data["variable"].unique())
 print("Stations:", data["station_id"].nunique())
-print("Date range:", data["timestamp"].min(), "to", data["timestamp"].max())
+if "timestamp" in data.columns:
+    print("Date range:", data["timestamp"].min(), "to", data["timestamp"].max())
 
-tv = set(VARIABLES) & set(data["variable"].unique())
+# Variable selection (single pass over loaded data):
+#   --variables / HWIN_VARIABLES  -> explicit list
+#   --no-auto-select              -> frozen canonical 11-variable list
+#   default (auto-select)         -> variables with >= MIN_SAMPLES observations
+counts = data["variable"].value_counts()
+if ARGS.variables:
+    VARIABLES = [v.strip() for v in ARGS.variables.split(",") if v.strip()]
+    print(f"Using explicit variable list ({len(VARIABLES)} variables): {VARIABLES}")
+elif ARGS.no_auto_select:
+    VARIABLES = DEFAULT_VARIABLES
+    print(f"Using default variable list ({len(VARIABLES)} variables): {VARIABLES}")
+else:
+    eligible = counts[counts >= MIN_SAMPLES].index.tolist()
+    VARIABLES = sorted(eligible)
+    print(f"Auto-selected {len(VARIABLES)} variables with >= {MIN_SAMPLES} samples: {VARIABLES}")
+
+tv = set(VARIABLES) & set(counts.index)
 missing = set(VARIABLES) - tv
 if missing:
-    print("WARNING: Missing:", missing)
+    print("WARNING: Missing from data:", sorted(missing))
 tv = sorted(tv)
 print("Processing:", tv)
 
 data = data[data["variable"].isin(tv)].reset_index(drop=True)
 print("Filtered:", len(data))
+
+# Smoke-test variable subset: 1 variable is enough to exercise the pipeline
+if SMOKE and len(tv) > 1:
+    tv = tv[:1]
+    data = data[data["variable"].isin(tv)].reset_index(drop=True)
+    print("Smoke test: restricted to", tv)
+
+print()
+print("Variables:", len(tv))
+print("Models:", len(MODELS))
+print("Seeds:", len(SEEDS), "x Folds:", N_FOLDS, "=", len(SEEDS) * N_FOLDS, "evals/var")
+print("Total fits:", len(tv) * len(MODELS) * len(SEEDS) * N_FOLDS)
+print("Sample cap:", SAMPLE_CAP)
+print("Data:", DATA_PATH)
+print("Output:", OUTPUT_DIR)
 
 # Check which variables already have results
 existing_results = set()
