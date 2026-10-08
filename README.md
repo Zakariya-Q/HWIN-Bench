@@ -200,9 +200,10 @@ python benchmark/run_full_benchmark_fixed.py \
 ```
 
 **Canonical reference results** (from the certified 15.5 h run):
-`benchmark/results/grqa_recomputation/all_results.json` (per-fold values stored).
-Raw fold-level values in that file report n=25 CIs; the corrected n=5 (df=4)
-statistics are in `BENCHMARK_STATISTICS.md` and `CI_CORRECTION_REVIEW/`.
+`benchmark/results/grqa_recomputation/all_results.json` (per-fold values
+stored). Since maintenance release 1.0.4 the stored `ci_95` values are
+themselves computed from the 5 unique GroupKFold folds (n=5, df=4) —
+consistent with `BENCHMARK_STATISTICS.md` and `CI_CORRECTION_REVIEW/`.
 
 ### Protocol Compliance
 
