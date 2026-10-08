@@ -33,6 +33,30 @@ TEXT_SUFFIXES = {
     ".html", ".css", ".js", ".sh", ".bat", ".ps1", ".rst", ".tex", ".bib",
     ".cfg", ".ini", ".conf", ".toml", ".lock",
 }
+BINARY_SUFFIXES = {
+    ".png", ".jpg", ".jpeg", ".gif", ".ico", ".pdf", ".zip", ".gz", ".tar",
+    ".tgz", ".whl", ".so", ".dll", ".exe", ".pkl", ".npy", ".npz", ".h5",
+    ".hdf5", ".parquet", ".feather", ".ipynb", ".docx", ".xlsx", ".pptx",
+}
+
+
+def is_text_file(rel, lfs):
+    """Checksum normalization policy (matches .gitattributes intent):
+    - LFS-tracked files      -> raw bytes (LFS never normalizes content)
+    - known binary suffixes  -> raw bytes
+    - known text suffixes    -> LF-normalized bytes
+    - unknown suffix         -> LF-normalized bytes (safe default for this
+      repository: every non-LFS tracked file with an unknown suffix is a
+      text config/source file; if a new binary type is ever added with an
+      unlisted suffix, regeneration + this function must be updated together)
+    """
+    rel = rel.replace("\\", "/")
+    if rel in lfs:
+        return False
+    suffix = Path(rel).suffix.lower()
+    if suffix in BINARY_SUFFIXES:
+        return False
+    return True
 
 
 def lfs_files():
@@ -67,7 +91,7 @@ def main():
             missing += 1
             continue
         raw = f.read_bytes()
-        if rel.replace("\\", "/") not in lfs:
+        if is_text_file(rel, lfs):
             raw = raw.replace(b"\r\n", b"\n")  # text files: LF-normalized
         actual = hashlib.sha256(raw).hexdigest()
         if actual == expected:
