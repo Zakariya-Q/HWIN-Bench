@@ -11,6 +11,8 @@ Get up and running in 5 minutes.
 
 ## 1. Clone & Install
 
+HWIN-Bench is a research repository — scripts run directly, no package install.
+
 ```bash
 git clone https://github.com/Zakariya-Q/HWIN-Bench.git
 cd HWIN-Bench
@@ -19,9 +21,8 @@ cd HWIN-Bench
 conda env create -f environment.yml
 conda activate hwin-bench
 
-# Or using pip
-pip install -r requirements.txt
-pip install -e .
+# Or using pip (dependency spec)
+pip install -r code/requirements/requirements.txt
 ```
 
 ## 2. Verify Data
@@ -31,16 +32,19 @@ pip install -e .
 ls data/harmonized/
 # Should show: HWIN-GRQA-V1-4/  HWIN-WQP-SFBAY/  HWIN-STORET-CA/  HWIN-STORET-TX/  HWIN-STORET-RI/
 
-# Verify checksums
-cd data/
-sha256sum -c manifests/checksums.sha256
+# Verify checksums (from the repository root; cross-platform)
+python code/requirements/verify_checksums.py --quiet
+# On Linux, sha256sum -c data/manifests/checksums.sha256 also works
 ```
 
 ## 3. Run Smoke Test (30 seconds)
 
 ```bash
-cd benchmark
-python run_full_benchmark_fixed.py --smoke-test
+# No download needed — runs on the in-repo STORET-RI dataset
+python benchmark/run_full_benchmark_fixed.py \
+  --data data/harmonized/HWIN-STORET-RI/observations.csv \
+  --output-dir output/smoke_results \
+  --smoke-test
 ```
 
 Expected output: Quick validation on 1 variable × 1 model × 1 fold.
@@ -49,20 +53,22 @@ Expected output: Quick validation on 1 variable × 1 model × 1 fold.
 
 ```bash
 cd benchmark
-python run_full_benchmark_fixed.py
+python run_full_benchmark_fixed.py \
+  --data <path-to>/HWIN-GRQA-V1-4/observations.csv \
+  --output-dir ../output/benchmark_results/grqa_full_final_groupkfold
 ```
 
 This executes the **frozen protocol**:
 - 11 benchmark variables × 7 models × 5 unique GroupKFold partitions × 5 deterministic repetitions = 1,925 historical fits (385 unique evaluations)
 - GroupKFold by station_id
-- Seeds: [42, 123, 256, 512, 1024] (5 deterministic repetitions)
-- Output: `../../output/benchmark_results/grqa_full_final_groupkfold/GRQA_full_benchmark_complete_CORRECTED.json`
+- Seeds: [42, 123, 256, 512, 1024] (5 deterministic repetitions of the fixed partition set)
+- Output: `GRQA_full_benchmark_complete.json` + per-variable `HWIN-VAR-XXX_results.json`
 
 ## 5. Inspect Results
 
 ```bash
-# View aggregated results
-cat ../../output/benchmark_results/grqa_full_final_groupkfold/GRQA_full_benchmark_complete_CORRECTED.json | jq '.'
+# Canonical reference results are shipped in the repo:
+cat benchmark/results/grqa_full_final_groupkfold/GRQA_full_benchmark_complete.json | jq '.'
 
 # Or use the analysis notebook
 jupyter lab examples/quickstart/analyze_results.ipynb
@@ -90,7 +96,7 @@ jupyter lab examples/quickstart/analyze_results.ipynb
 
 | Issue | Solution |
 |-------|----------|
-| `ModuleNotFoundError` | Run `pip install -e .` from repo root |
+| `ModuleNotFoundError` | Ensure the conda env is active, or run `pip install -r code/requirements/requirements.txt` |
 | Data not found | Check `data/harmonized/` exists; re-run checksum verification |
 | Memory error | Reduce `n_jobs` in RandomForest/ExtraTrees/GradientBoosting |
 | Protocol violation | Do not modify `run_full_benchmark_fixed.py` or protocol parameters |

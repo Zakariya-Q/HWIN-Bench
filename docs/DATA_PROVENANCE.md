@@ -2,6 +2,12 @@
 
 Complete provenance chains for all five canonical datasets, from original source through HWIN-Bench representation to benchmark use.
 
+> **Code-path note**: Path references of the form `src/hwin_bench/...` point to the
+> original development repository (`HWIN_Bench_v1_RELEASE`), which produced the
+> harmonized datasets shipped here. That pipeline is **not part of this public
+> release**; the shipped `data/harmonized/` files are the canonical artifacts, and
+> their SHA-256 checksums are recorded in `data/manifests/checksums.sha256`.
+
 ---
 
 ## Provenance Chain Overview

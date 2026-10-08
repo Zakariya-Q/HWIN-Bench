@@ -14,17 +14,20 @@ Step-by-step instructions to exactly reproduce the canonical HWIN-Bench v1.0 ben
 ### Software Environment
 
 ```bash
-# Create conda environment
+# Create conda environment (recommended)
 conda env create -f environment.yml
 conda activate hwin-bench
 
-# Or with pip
-pip install -r requirements.txt
-pip install -e .
+# Or with pip (dependency spec)
+pip install -r code/requirements/requirements.txt
 
-# Verify installation
-python -c "import hwin_bench; print(hwin_bench.__version__)"
+# Verify dependencies
+python -c "import numpy, pandas, sklearn, scipy; print('dependencies OK')"
 ```
+
+HWIN-Bench is a research repository — the runner and validator are executed
+directly (`python benchmark/...`, `python code/...`); there is no
+`hwin_bench` package to install.
 
 ## Exact Reproduction Steps
 
@@ -38,9 +41,8 @@ ls data/harmonized/
 # Must show 5 directories: HWIN-GRQA-V1-4, HWIN-WQP-SFBAY, HWIN-STORET-CA, HWIN-STORET-TX, HWIN-STORET-RI
 
 # Verify checksums
-cd data/
-sha256sum -c manifests/checksums.sha256
-# All must report OK
+python code/requirements/verify_checksums.py --quiet
+# All must report OK (Linux alternative: sha256sum -c data/manifests/checksums.sha256)
 
 # Verify key dataset properties
 python -c "
@@ -58,18 +60,20 @@ print(f'Benchmarkable vars (MIN_SAMPLES>=100): {len(vars)}')
 
 ### 2. Run Canonical Benchmark
 
-**This is the ONLY command for canonical reproduction:**
+**This is the ONLY command for canonical reproduction** (paths may be passed
+via CLI or the `HWIN_DATA_PATH` / `HWIN_OUTPUT_DIR` environment variables):
 
 ```bash
-cd benchmark
-python run_full_benchmark_fixed.py
+python benchmark/run_full_benchmark_fixed.py \
+  --data <path-to>/HWIN-GRQA-V1-4/observations.csv \
+  --output-dir output/benchmark_results/grqa_full_final_groupkfold
 ```
 
 **Expected execution:**
 - Wall-clock time: ~15.5 hours (932 min) on 8-core CPU
 - Aggregate model training time: ~8.8 hours (528 min)
-- Output directory: `../output/benchmark_results/grqa_full_final_groupkfold/`
-- Main result file: `GRQA_full_benchmark_complete_CORRECTED.json`
+- Output directory: `output/benchmark_results/grqa_full_final_groupkfold/`
+- Main result file: `GRQA_full_benchmark_complete.json`
 - Per-variable results: `HWIN-VAR-XXX_results.json`
 
 **Do NOT:**
@@ -87,7 +91,7 @@ ls ../output/benchmark_results/grqa_full_final_groupkfold/
 # Verify key metrics present
 python -c "
 import json
-with open('../output/benchmark_results/grqa_full_final_groupkfold/GRQA_full_benchmark_complete_CORRECTED.json') as f:
+with open('output/benchmark_results/grqa_full_final_groupkfold/GRQA_full_benchmark_complete.json') as f:
     results = json.load(f)
 print(f'Variables: {len(results)}')
 for var_id, var_results in list(results.items())[:3]:
@@ -118,8 +122,8 @@ The canonical execution produced these reference results (stored in `benchmark/r
 
 **All confidence intervals are CORRECTED** to use n=5 (5 unique GroupKFold partitions), df=4, t=2.776. Original intervals used n=25 (df=24) and were approximately 3× too narrow.
 
-Full results: `benchmark/results/GRQA_full_benchmark_complete_CORRECTED.json`  
-Per-variable: `benchmark/results/HWIN-VAR-XXX_results.json`  
+Full results: `benchmark/results/grqa_full_final_groupkfold/GRQA_full_benchmark_complete.json`
+Per-variable: `benchmark/results/grqa_full_final_groupkfold/HWIN-VAR-XXX.json`
 Statistical tests: Reserved for v1.1+ (not executed in v1.0)  
 Certification: `benchmark/reproducibility/CANONICAL_EXECUTION_CERTIFICATE.md`
 

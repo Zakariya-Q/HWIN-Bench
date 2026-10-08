@@ -187,14 +187,21 @@ with open('data/harmonized/HWIN-GRQA-V1-4/dataset.json') as f:
 temp_data = obs[obs['canonical_variable_id'] == 'HWIN-VAR-001']
 ```
 
-### Using the HWIN-Bench Loader
+### Loading Directly (pandas)
+
+The datasets are plain CSV/JSON — load them directly:
 
 ```python
-from hwin_bench import load_dataset
+import json
+import pandas as pd
 
-# Load canonical GRQA dataset for benchmark
-ds = load_dataset('HWIN-GRQA-V1-4', root='data/harmonized')
-# Returns: observations DataFrame, stations list, variables DataFrame, metadata dict
+ds = 'HWIN-GRQA-V1-4'
+obs = pd.read_csv(f'data/harmonized/{ds}/observations.csv')
+with open(f'data/harmonized/{ds}/stations.json') as f:
+    stations = json.load(f)
+variables = pd.read_csv(f'data/harmonized/{ds}/variables.csv')
+with open(f'data/harmonized/{ds}/dataset.json') as f:
+    meta = json.load(f)
 ```
 
 ## Verification Checklist

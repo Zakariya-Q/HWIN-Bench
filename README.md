@@ -93,21 +93,29 @@ HWIN-Bench maps 100+ source variable names across 5 datasets to **49 canonical v
 
 ## Installation
 
+HWIN-Bench is a research repository — the benchmark runner and validator are
+executed directly, no package installation is required.
+
 ```bash
 # Clone the repository
 git clone https://github.com/Zakariya-Q/HWIN-Bench.git
 cd HWIN-Bench
 
-# Create environment (Python 3.11+)
+# Create the environment (Python 3.11+)
 conda env create -f environment.yml
 conda activate hwin-bench
 
-# Or with pip
-pip install -r requirements.txt
-
-# Install HWIN-Bench package
-pip install -e .
+# Or with pip — dependency spec at code/requirements/requirements.txt
+pip install -r code/requirements/requirements.txt
 ```
+
+Runtime dependencies for the benchmark and validator: numpy, pandas,
+scikit-learn, scipy (see `environment.yml` for the pinned versions used in
+the certified run).
+
+**Note**: `code/requirements/requirements.txt` lists the fuller development
+dependency set from the original harmonization pipeline. The core benchmark
+and validation need only numpy/pandas/scikit-learn/scipy.
 
 ---
 
@@ -118,9 +126,16 @@ pip install -e .
 The `data/harmonized/` directory contains all 5 datasets in the **Canonical Benchmark Schema (CBS)** format — ready for benchmark execution.
 
 ```bash
-# Verify checksums
-cd data/harmonized
-sha256sum -c manifests/checksums.sha256
+# Verify checksums (from the repository root)
+sha256sum -c data/manifests/checksums.sha256
+```
+
+**Cross-platform note (Windows)**: git may check text files out with CRLF
+line endings. The manifest stores LF-normalized checksums for text files,
+so on Windows use the provided verification script instead:
+
+```bash
+python code/requirements/verify_checksums.py
 ```
 
 **Note**: GRQA v1.4 `observations.csv` (5.7 GB) is **not included** in this GitHub repository due to GitHub's 2 GB LFS file size limit. It is available in the Zenodo deposition.
@@ -139,12 +154,13 @@ For production use, download the latest versions:
 - GRQA: v1.4 (DOI: 10.5281/zenodo.15335450)
 - WQP/STORET: As accessed 2026-07-08 (documented in dataset metadata)
 
-### Option 3: Run the Canonical Pipeline
+### Option 3: Re-Harmonize from Raw Sources
 
-```bash
-# Full canonical pipeline: download → harmonize → validate → benchmark
-python -m hwin_bench.cli pipeline --all
-```
+The harmonization pipeline used to produce `data/harmonized/` from raw
+provider downloads is part of the original development repository and is
+**not shipped in this release**; its design is documented in
+`docs/DATA_PROVENANCE.md`. For reproducing the benchmark itself, use the
+harmonized datasets above (Option 1).
 
 ---
 

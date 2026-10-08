@@ -93,9 +93,9 @@ data/
 ## Verification
 
 ```bash
-# Verify all checksums
-cd data/
-sha256sum -c manifests/checksums.sha256
+# Verify all checksums (from the repository root; cross-platform)
+python code/requirements/verify_checksums.py --quiet
+# Linux alternative: sha256sum -c data/manifests/checksums.sha256
 
 # Check dataset properties
 python -c "
