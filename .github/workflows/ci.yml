@@ -58,15 +58,21 @@ jobs:
         shell: bash
         run: |
           python - <<'EOF'
-          import hashlib, pathlib, sys
+          import hashlib, pathlib, subprocess, sys
+          root = pathlib.Path('.')
+          lfs = set(subprocess.run(
+              ['git', 'lfs', 'ls-files', '--name-only'],
+              capture_output=True, text=True).stdout.splitlines())
           ok = bad = 0
           for line in open('data/manifests/checksums.sha256'):
               h, p = line.strip().split(None, 1)
-              f = pathlib.Path(p)
+              f = root / p
               if not f.exists():
                   print('MISSING:', p); bad += 1; continue
-              actual = hashlib.sha256(f.read_bytes()).hexdigest()
-              if actual == h: ok += 1
+              raw = f.read_bytes()
+              if p not in lfs and p.replace('\\', '/') not in lfs:
+                  raw = raw.replace(b'\r\n', b'\n')  # cross-platform text files
+              if hashlib.sha256(raw).hexdigest() == h: ok += 1
               else: bad += 1; print('MISMATCH:', p)
           print(f'{ok} OK, {bad} bad')
           sys.exit(1 if bad else 0)
