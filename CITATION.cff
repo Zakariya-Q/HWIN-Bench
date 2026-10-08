@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use HWIN-Bench, please cite it as below."
 title: "HWIN-Bench v1.0: Heterogeneous Water Quality Intelligence Benchmark"
-version: 1.0.3
+version: 1.0.4
 doi: "10.5281/zenodo.21877825"
 date-released: 2026-10-08
 authors:
@@ -28,7 +28,7 @@ preferred-citation:
       given-names: ""
       affiliation: "HWIN-Bench Consortium"
   year: 2026
-  version: "1.0.3"
+  version: "1.0.4"
   doi: "10.5281/zenodo.21877825"
   url: "https://github.com/Zakariya-Q/HWIN-Bench"
 references:

@@ -9,6 +9,38 @@ alter the scientific protocol or canonical results.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.4] - 2026-10-08
+
+Maintenance release. The frozen scientific benchmark (v1.0), its canonical
+Run-B point estimates, the 25 recorded fold evaluations, model definitions,
+protocol parameters, and source datasets are all unchanged.
+
+### Fixed
+- **Canonical Run-B JSON CIs synchronized** with the corrected n=5
+  methodology: all 385 metric combinations in
+  `benchmark/results/grqa_recomputation/` now report `ci_95` computed from
+  the 5 unique GroupKFold folds (n=5, df=4, t=2.7764451051977934) instead of
+  the stale n=25 intervals. Point estimates, the 25 recorded fold values,
+  and all other statistics are preserved; explicit `n_recorded`,
+  `n_unique_folds`, `ci_n`, `ci_df` metadata documents recorded-vs-unique
+  counts. Example: VAR-001 extra_trees R²=0.604814 (unchanged), CI
+  [0.4979, 0.7117] → [0.2525, 0.9571].
+- **Benchmark runner aligned** with the frozen CI methodology: `ci()` is
+  replaced by `ci_unique_folds()`, so a fresh full execution reports the same
+  n=5 CIs as the canonical artifacts and fails loudly (ValueError) if the
+  deterministic-repetition invariant is ever broken. Verified against the
+  canonical Run-B fold values (exact reproduction) and the smoke test.
+- **CI correction evidence rebuilt from Run B** (`CI_CORRECTION_REVIEW/`):
+  the review tables previously carried Run-A-derived figures; they now
+  contain the 385 Run-B combinations with two-method verification (direct
+  t-formula vs `scipy.stats.t.interval`, max |diff| 9.1e-13 ≤ 1e-12).
+- **Checksum verification hardened**: the verifier now LF-normalizes only
+  text files — LFS-tracked files and binary suffixes are hashed raw.
+  Manifest regenerated under the corrected policy (115 entries), verified
+  115/115 locally; Linux CI verifies the same manifest.
+
+No benchmark rerun was required or performed.
+
 ## [1.0.3] - 2026-10-08
 
 ### Fixed — canonical-run realignment (benchmark-author decision)
