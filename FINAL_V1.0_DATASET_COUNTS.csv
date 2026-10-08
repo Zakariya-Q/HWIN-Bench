@@ -1,0 +1,6 @@
+dataset_id,role,raw_observations,harmonized_observations,valid_observations,benchmark_sample,stations,variables_cvo,variables_mapped,variables_eligible,variables_benchmarked,file_size_bytes,file_size_human,sha256_observations
+HWIN-GRQA-V1-4,canonical_regression_benchmark,17000000,25850907,25850907,2519220,107000,49,36,11,11,6016295802,6.0 GB,989e5a6ba07499d81443c8819ef7f1e786fdef8a52661474a2bf5cc4a2ed6f8f
+HWIN-WQP-SFBAY,transfer_learning_supplementary,51000,51000,51000,0,1000,49,19,0,0,4577185,4.6 MB,
+HWIN-STORET-CA,transfer_learning_supplementary,180000,180000,180000,0,3000,49,22,0,0,42727476,41 MB,
+HWIN-STORET-TX,transfer_learning_supplementary,175000,175000,175000,0,2000,49,21,0,0,46517845,45 MB,
+HWIN-STORET-RI,transfer_learning_supplementary,2500,2500,2500,0,50,49,18,0,0,528440,0.5 MB,

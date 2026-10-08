@@ -27,7 +27,6 @@ Explicit documentation of known limitations, scope boundaries, and caveats for H
 ### 3. MAX_SAMPLES Computational Cap
 **200,000 observations per variable** (Protocol §4.1) applied to GRQA data:
 - 10 of 11 benchmarkable variables are capped
-- Only Chemical Oxygen Demand (HWIN-VAR-023, 119K obs) uses all data
 - This is a **computational constraint**, not a scientific decision
 
 **Implication**: Models are not trained on the full GRQA dataset (25.8M observations). Performance may improve with more data.
@@ -73,7 +72,7 @@ GRQA v1.4 has **strong geographic bias**:
 
 **Implication**: Models trained on historical data may not reflect current conditions (climate change, land use change).
 
-### 6. Variable Coverage Imbalance
+### 8. Variable Coverage Imbalance
 | Variable | GRQA Observations | Coverage |
 |----------|-------------------|----------|
 | Water Temperature | 5.5M | Excellent |
@@ -85,10 +84,8 @@ GRQA v1.4 has **strong geographic bias**:
 | TSS | 1.3M | Moderate |
 | Nitrite Nitrogen | 1.3M | Moderate |
 | Ammonium Nitrogen | 1.0M | Moderate |
-| COD | 119K | Limited |
-| BOD | <100K | Very Limited |
 
-**Implication**: Benchmark reliability varies by variable. COD/BOD results have higher uncertainty.
+**Implication**: Benchmark reliability varies by variable. Variables with fewer observations have higher uncertainty.
 
 ### 9. Harmonization Information Loss
 Mapping 100+ source variables to 49 canonical variables involves:

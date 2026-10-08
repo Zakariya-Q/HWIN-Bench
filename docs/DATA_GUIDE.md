@@ -127,7 +127,7 @@ HWIN-VAR-001,Water Temperature,The intensity of heat present in water,K,Float,-2
 **Variables**: 21 canonical  
 **Observations**: 175K total
 
-### 4. HWIN-STORET-RI — EPA STORET Rhode Island
+### 5. HWIN-STORET-RI — EPA STORET Rhode Island
 
 **Source**: Water Quality Portal API (statecode=US:44)  
 **License**: Public Domain (EPA STORET/WQX)  
@@ -224,7 +224,7 @@ When using these data, cite both HWIN-Bench and the original datasets:
 ```bibtex
 @software{hwin_bench_v1,
   title = {HWIN-Bench v1.0},
-  doi = {10.5281/zenodo.XXXXXXX}
+  doi = {10.5281/zenodo.21877825}
 }
 
 @dataset{grqa_v14,
