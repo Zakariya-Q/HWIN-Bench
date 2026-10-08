@@ -6,7 +6,7 @@
 > protocol (results, variables, models, splits, and metrics are immutable).
 > Repository maintenance releases (1.0.1, 1.0.2, …) fix packaging,
 > documentation, and infrastructure without touching the scientific content.
-> Current maintenance release: **1.0.2** (see `CHANGELOG.md`).
+> Current maintenance release: **1.0.3** (see `CHANGELOG.md`).
 
 [![License](https://img.shields.io/badge/License-CC--BY--4.0-green)](LICENSE)
 [![Protocol](https://img.shields.io/badge/Protocol-FROZEN%20v1.0-red)](benchmark/protocol/01_HWIN_BENCH_PROTOCOL_v1.0.md)
