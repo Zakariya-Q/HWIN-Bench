@@ -1,5 +1,11 @@
 # Checksum Verification Report — HWIN-Bench v1.0
 
+> **Historical release-audit record (2026-08).** This document reflects the
+> validation state at the time of the original v1.0 release audit. It is
+> superseded for current dataset-validation status by
+> `docs/DATA_QUALITY_VALIDATION_REPORT.md` (v1.0.2), which documents known CBS
+> findings for the shipped datasets. Retained unmodified as audit evidence.
+
 **Date**: 2026-08-09  
 **Status**: PASS
 
