@@ -125,7 +125,7 @@ When publishing work that uses HWIN-Bench v1.0 data or results, include:
 > 2. **USGS/EPA Water Quality Portal (WQP)** — San Francisco Bay subset, Public Domain (17 USC §105), https://www.waterqualitydata.us/
 > 3. **EPA STORET/WQX** — California, Texas, and Rhode Island subsets, Public Domain (17 USC §105), https://www.epa.gov/waterdata/storage-and-retrieval-and-water-quality-exchange
 > 
-> HWIN-Bench v1.0 is licensed under CC-BY-4.0. See https://github.com/HWIN-Bench/HWIN-Bench-v1.0 for full attribution and license details.
+> HWIN-Bench v1.0 is licensed under CC-BY-4.0. See https://github.com/Zakariya-Q/HWIN-Bench for full attribution and license details.
 
 ---
 
@@ -137,8 +137,8 @@ When publishing work that uses HWIN-Bench v1.0 data or results, include:
   author = {HWIN-Bench Consortium},
   year = {2026},
   version = {1.0.0},
-  doi = {10.5281/zenodo.XXXXXXX},
-  url = {https://github.com/HWIN-Bench/HWIN-Bench-v1.0},
+  doi = {10.5281/zenodo.21877825},
+  url = {https://github.com/Zakariya-Q/HWIN-Bench},
   license = {CC-BY-4.0}
 }
 ```
