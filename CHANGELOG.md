@@ -11,7 +11,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.2] - 2026-10-06
 
-### Fixed
+### Repository Hardening (2026-10-08)
+- **Installation truthfulness**: HWIN-Bench is a research repository — removed all
+  references to the nonexistent `hwin_bench` package, root `requirements.txt`,
+  `pip install -e .`, and the broken `hwin-bench @ file:./src` entry in
+  `environment.yml`. Conda env is authoritative; pip path points to the real spec.
+- **`code/requirements/verify_checksums.py`**: shipped cross-platform SHA-256
+  verifier (LF-normalized text, raw LFS) — now the documented verification
+  procedure everywhere, replacing incorrect `cd data/ + sha256sum -c` recipes.
+- **Canonical execution certificates restored** to `benchmark/reproducibility/`
+  (referenced by 9+ documents, directory previously shipped empty).
+- **Versioning semantics**: v1.0 = frozen scientific benchmark; 1.0.x = repository
+  maintenance. Stated in README, CHANGELOG, CITATION.cff (→ 1.0.2), repo description.
+- **CI semantics**: steps labeled `[REQUIRED]` (compile, smoke, checksums — hard
+  gates) vs `[INFORMATIONAL]` (CBS validation — documented known findings).
+- **Deterministic-repetition clarification**: the canonical seed list produces
+  deterministic repetitions of the fixed GroupKFold partition set (5 unique folds);
+  documented in the runner docstring and README instead of implying stochastic
+  independence.
+- **Historical audit docs** (5 files) marked as historical release-audit records,
+  superseded for dataset-validation status by
+  `docs/DATA_QUALITY_VALIDATION_REPORT.md`.
+- **Checksum manifest regenerated** (116 entries) and verified independently.
+
+### Fixed (original v1.0.2 fixes, 2026-10-06)
+
 - **Benchmark runner** (`benchmark/run_full_benchmark_fixed.py`):
   - Removed hardcoded machine-specific input/output paths; data and output
     locations are now CLI arguments (`--data`, `--output-dir`) with
