@@ -1,19 +1,14 @@
 file_path,contains_fold_values,contains_seed_values,contains_predictions,contains_group_assignments,usable_for_ci,reason
-/c/Users/lenovo/HWIN_Bench_v1_RELEASE/output/benchmark_results/grqa_full_final_groupkfold/GRQA_full_benchmark_complete.json,NO,YES (seeds list),NO,NO,NO,"Only aggregated metrics (mean, ci_95, n_folds=25). No per-fold values stored."
-/c/Users/lenovo/HWIN_Bench_v1_RELEASE/output/benchmark_results/grqa_full_final_groupkfold/HWIN-VAR-001.json,NO,NO,NO,NO,NO,"Only aggregated metrics (mean, ci_95, n_folds=25). No per-fold values stored."
-/c/Users/lenovo/HWIN_Bench_v1_RELEASE/output/benchmark_results/grqa_full_final_groupkfold/HWIN-VAR-002.json,NO,NO,NO,NO,NO,"Only aggregated metrics (mean, ci_95, n_folds=25). No per-fold values stored."
-/c/Users/lenovo/HWIN_Bench_v1_RELEASE/output/benchmark_results/grqa_full_final_groupkfold/HWIN-VAR-003.json,NO,NO,NO,NO,NO,"Only aggregated metrics (mean, ci_95, n_folds=25). No per-fold values stored."
-/c/Users/lenovo/HWIN_Bench_v1_RELEASE/output/benchmark_results/grqa_full_final_groupkfold/HWIN-VAR-008.json,NO,NO,NO,NO,NO,"Only aggregated metrics (mean, ci_95, n_folds=25). No per-fold values stored."
-/c/Users/lenovo/HWIN_Bench_v1_RELEASE/output/benchmark_results/grqa_full_final_groupkfold/HWIN-VAR-009.json,NO,NO,NO,NO,NO,"Only aggregated metrics (mean, ci_95, n_folds=25). No per-fold values stored."
-/c/Users/lenovo/HWIN_Bench_v1_RELEASE/output/benchmark_results/grqa_full_final_groupkfold/HWIN-VAR-010.json,NO,NO,NO,NO,NO,"Only aggregated metrics (mean, ci_95, n_folds=25). No per-fold values stored."
-/c/Users/lenovo/HWIN_Bench_v1_RELEASE/output/benchmark_results/grqa_full_final_groupkfold/HWIN-VAR-014.json,NO,NO,NO,NO,NO,"Only aggregated metrics (mean, ci_95, n_folds=25). No per-fold values stored."
-/c/Users/lenovo/HWIN_Bench_v1_RELEASE/output/benchmark_results/grqa_full_final_groupkfold/HWIN-VAR-015.json,NO,NO,NO,NO,NO,"Only aggregated metrics (mean, ci_95, n_folds=25). No per-fold values stored."
-/c/Users/lenovo/HWIN_Bench_v1_RELEASE/output/benchmark_results/grqa_full_final_groupkfold/HWIN-VAR-028.json,NO,NO,NO,NO,NO,"Only aggregated metrics (mean, ci_95, n_folds=25). No per-fold values stored."
-/c/Users/lenovo/HWIN_Bench_v1_RELEASE/output/benchmark_results/grqa_full_final_groupkfold/HWIN-VAR-031.json,NO,NO,NO,NO,NO,"Only aggregated metrics (mean, ci_95, n_folds=25). No per-fold values stored."
-/c/Users/lenovo/HWIN_Bench_v1_RELEASE/output/benchmark_results/grqa_full_final_groupkfold/HWIN-VAR-033.json,NO,NO,NO,NO,NO,"Only aggregated metrics (mean, ci_95, n_folds=25). No per-fold values stored."
-/c/Users/lenovo/HWIN_Bench_v1_RELEASE/output/benchmark_results/grqa_full_final_groupkfold/variable_counts.json,NO,NO,NO,NO,NO,"Only counts of completed evaluations per variable."
-/c/Users/lenovo/HWIN_Bench_v1_RELEASE/output/benchmark_results/grqa_full_final_groupkfold/progress.log,NO,NO,NO,NO,NO,"Execution log with timestamps and final aggregated CIs. No per-fold values."
-/c/Users/lenovo/HWIN_Bench_v1_RELEASE/output/cross_validation_accounting.csv,NO,NO,NO,NO,NO,"High-level accounting of cross-validation structure. No per-fold metric values."
-/c/Users/lenovo/HWIN_Bench_v1_RELEASE/output/grqa_observation_accounting.csv,NO,NO,NO,NO,NO,"Observation counts per variable. No metric values."
-/c/Users/lenovo/HWIN_Bench_v1_RELEASE/output/dataset_variable_inventory.csv,NO,NO,NO,NO,NO,"Dataset-variable mapping. No metric values."
-/c/Users/lenovo/HWIN_Bench_v1_RELEASE/MASTER_BENCHMARK_SUMMARY.csv,NO,NO,NO,NO,NO,"Summary statistics from aggregated outputs. No per-fold values."
+benchmark/results/grqa_recomputation/all_results.json,"YES (all_values, 25 recorded, 5 unique)",NO,NO,NO,YES,Canonical Run-B artifact; per-fold values stored; CI computed from 5 unique folds
+benchmark/results/grqa_recomputation/HWIN-VAR-001_results.json,"YES (all_values, 25 recorded, 5 unique)",NO,NO,NO,YES,Canonical Run-B artifact; per-fold values stored; CI computed from 5 unique folds
+benchmark/results/grqa_recomputation/HWIN-VAR-002_results.json,"YES (all_values, 25 recorded, 5 unique)",NO,NO,NO,YES,Canonical Run-B artifact; per-fold values stored; CI computed from 5 unique folds
+benchmark/results/grqa_recomputation/HWIN-VAR-003_results.json,"YES (all_values, 25 recorded, 5 unique)",NO,NO,NO,YES,Canonical Run-B artifact; per-fold values stored; CI computed from 5 unique folds
+benchmark/results/grqa_recomputation/HWIN-VAR-008_results.json,"YES (all_values, 25 recorded, 5 unique)",NO,NO,NO,YES,Canonical Run-B artifact; per-fold values stored; CI computed from 5 unique folds
+benchmark/results/grqa_recomputation/HWIN-VAR-009_results.json,"YES (all_values, 25 recorded, 5 unique)",NO,NO,NO,YES,Canonical Run-B artifact; per-fold values stored; CI computed from 5 unique folds
+benchmark/results/grqa_recomputation/HWIN-VAR-010_results.json,"YES (all_values, 25 recorded, 5 unique)",NO,NO,NO,YES,Canonical Run-B artifact; per-fold values stored; CI computed from 5 unique folds
+benchmark/results/grqa_recomputation/HWIN-VAR-014_results.json,"YES (all_values, 25 recorded, 5 unique)",NO,NO,NO,YES,Canonical Run-B artifact; per-fold values stored; CI computed from 5 unique folds
+benchmark/results/grqa_recomputation/HWIN-VAR-015_results.json,"YES (all_values, 25 recorded, 5 unique)",NO,NO,NO,YES,Canonical Run-B artifact; per-fold values stored; CI computed from 5 unique folds
+benchmark/results/grqa_recomputation/HWIN-VAR-028_results.json,"YES (all_values, 25 recorded, 5 unique)",NO,NO,NO,YES,Canonical Run-B artifact; per-fold values stored; CI computed from 5 unique folds
+benchmark/results/grqa_recomputation/HWIN-VAR-031_results.json,"YES (all_values, 25 recorded, 5 unique)",NO,NO,NO,YES,Canonical Run-B artifact; per-fold values stored; CI computed from 5 unique folds
+benchmark/results/grqa_recomputation/HWIN-VAR-033_results.json,"YES (all_values, 25 recorded, 5 unique)",NO,NO,NO,YES,Canonical Run-B artifact; per-fold values stored; CI computed from 5 unique folds
+benchmark/results/grqa_full_final_groupkfold/ (REMOVED),NO (historical Run A — aggregated means only),NO,NO,NO,NO,Run A is HISTORICAL (2026-07-08/09); removed from the repository in 1.0.3; not the canonical run

@@ -1,80 +1,56 @@
-# CI Calculation Verification
+# CI Calculation Verification — Run B (Canonical)
 
-**Date**: 2026-08-09  
-**Purpose**: Independent verification of CI calculation using two methods
-
----
-
-## Methods Tested
-
-### Method A: Direct Formula Implementation
-```python
-def ci_direct(vals, confidence=0.95):
-    vals = np.array([v for v in vals if not np.isnan(v)])
-    n = len(vals)
-    if n < 2:
-        return [np.nan, np.nan]
-    m = np.mean(vals)
-    se = stats.sem(vals)
-    h = se * stats.t.ppf((1 + confidence) / 2., n - 1)
-    return [float(m - h), float(m + h)]
-```
-
-### Method B: SciPy's `stats.t.interval`
-```python
-def ci_scipy(vals, confidence=0.95):
-    vals = np.array([v for v in vals if not np.isnan(v)])
-    n = len(vals)
-    if n < 2:
-        return [np.nan, np.nan]
-    return list(stats.t.interval(confidence, n-1, loc=np.mean(vals), scale=stats.sem(vals)))
-```
+**Date**: 2026-10-08 (v1.0.4 rebuild)
+**Canonical run**: `benchmark/results/grqa_recomputation/` (Run B, 2026-08-06/07)
+**Scope**: all 11 variables x 7 models x 5 metrics = 385 combinations
 
 ---
 
-## Test Results
+## Methodology
 
-### Test 1: Sample Data `[0.1, 0.2, 0.3, 0.4, 0.5]`
-| Method | Lower CI | Upper CI |
-|--------|----------|----------|
-| Method A | 0.1036756838522443 | 0.4963243161477557 |
-| Method B | 0.1036756838522443 | 0.4963243161477557 |
+The canonical Run-B artifacts record 25 fold-level evaluations per
+model-variable-metric: 5 deterministic repetitions x 5 GroupKFold folds.
+The 5 repetitions are computationally identical (the seed variable is never
+consumed by any stochastic operation), so only **5 unique fold evaluations**
+exist for uncertainty estimation.
 
-**Difference**: 0.0 (identical)
+- CI sample size: **n = 5**
+- Degrees of freedom: **df = 4**
+- t critical (95%): **2.7764451051977987**
+- CI basis: the first repetition block (`all_values[:5]`), i.e. the unique folds
 
-### Test 2: HWIN-VAR-001 Linear Regression R² (recovered stats)
-| Parameter | Value |
-|-----------|-------|
-| Mean | 0.07652779978140505 |
-| Recovered Std | 0.02822605358173085 |
-| n | 5 |
-| t_{0.975, 4} | 2.7764451051977934 |
-| SE | 0.012623074909060318 |
-| Half-width | 0.0350472745438056 |
-| CI | [0.041480525237599444, 0.11157507432521065] |
+Point estimates are unchanged: the 5 identical repetitions share the same
+mean, so mean(25 values) == mean(5 unique values) exactly (verified to 1e-12
+for all 385 combinations).
 
-Both methods produce identical results.
+## Two independent verification methods
 
----
+- **Method A**: direct t-interval formula — mean +/- t * sem(unique)
+- **Method B**: `scipy.stats.t.interval(0.95, df=4, loc=mean, scale=sem)`
 
-## Verification on All 385 Metric Combinations
+Both methods were applied to all 385 combinations. The recomputed values were
+also compared against the stored (repaired) `ci_95` in the canonical JSONs.
 
-For each of the 385 metric combinations (11 variables × 7 models × 5 metrics):
-1. Recover std from reported CI (n=25)
-2. Compute corrected CI using n=5 with both methods
-3. Compare results
+| Check | Combinations | Max absolute difference | Required |
+|-------|--------------|--------------------------|----------|
+| Method A vs Method B | 385 | 9.095e-13 | <= 1e-12 |
+| Recomputed vs stored ci_95 | 385 | 9.095e-13 | <= 1e-12 |
 
-**Result**: All 385 combinations show **zero difference** between Method A and Method B (absolute difference ≤ 1e-15).
+**All 385 combinations pass.**
 
----
+## Example (HWIN-VAR-001, extra_trees, r2)
 
-## Tolerance Check
+- Recorded evaluations: 25 (5 repetitions x 5 folds)
+- Unique fold values: [0.23762671898040466, 0.35753964709848607, 0.8030374851303783, 0.8043807879945226, 0.8214831503362005]
+- Mean: 0.6048135579079985
+- Corrected 95% CI (n=5, df=4): [0.25250243212638696, 0.9571246836896099]
 
-**Required tolerance**: absolute difference ≤ 1e-12  
-**Actual maximum difference**: 0.0 (well within tolerance)
+## Provenance
 
----
-
-## Conclusion
-
-**Both CI calculation methods are mathematically equivalent and produce identical results.** The CI calculation in the canonical code (Method A) is correct. The only issue is the incorrect sample size (n=25 instead of n=5).
+- Canonical results: `benchmark/results/grqa_recomputation/all_results.json` and
+  the 11 per-variable `HWIN-VAR-*_results.json` files
+- Run A (`grqa_full_final_groupkfold`, 2026-07-08/09) is **historical**: it
+  stored aggregated means only (no fold values), carried different point
+  estimates, and was removed from the repository in maintenance release 1.0.3
+- No full benchmark rerun was required or performed: the corrected CIs are
+  recomputed directly from the stored Run-B fold values
