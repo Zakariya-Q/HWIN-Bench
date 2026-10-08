@@ -210,7 +210,11 @@ The frozen protocol (`benchmark/protocol/01_HWIN_BENCH_PROTOCOL_v1.0.md`) specif
 
 - **Data**: GRQA v1.4, 11 variables, MAX_SAMPLES=200,000, MIN_SAMPLES=100
 - **Features**: 7 (lat, lon, year, month, day_of_year, sin_doy, cos_doy)
-- **Splits**: 5 unique GroupKFold partitions by station_id, 5 deterministic repetitions with seeds [42, 123, 256, 512, 1024]
+- **Splits**: 5 unique GroupKFold partitions by station_id. The canonical seed list
+  [42, 123, 256, 512, 1024] produces **five deterministic repetitions of the fixed
+  partition set** — the seed value is not consumed by any stochastic operation, so
+  the 25 recorded evaluations contain 5 unique fold values. Confidence intervals
+  are computed on the n=5 unique partitions (df=4) — see `CI_CORRECTION_REVIEW/`.
 - **Models**: 7 classical sklearn models with specified hyperparameters
 - **Metrics**: MAE, RMSE, R², MAPE, MedAE
 - **Statistics**: Corrected 95% CIs (n=5, df=4, t=2.776); statistical testing reserved for v1.1+

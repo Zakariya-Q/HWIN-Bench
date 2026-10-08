@@ -130,6 +130,14 @@ def feats(df):
     return X.values.astype(np.float32)
 
 def cv(var_data, var_name, models, seeds, n_folds, sample_cap):
+    """Cross-validation loop. NOTE on the seed loop: `seeds` iterates the
+    canonical seed list [42, 123, 256, 512, 1024], but the seed value is NOT
+    consumed by any stochastic operation here — GroupKFold is deterministic
+    given groups, and models use fixed random_state=42. The five iterations
+    are therefore DETERMINISTIC REPETITIONS of the same 5-fold partition set
+    (25 evaluations of which 5 are unique). This is the frozen v1.0 protocol;
+    reported confidence intervals use the corrected n=5 (unique partitions)
+    statistics — see CI_CORRECTION_REVIEW/."""
     print("\n" + "="*60)
     print("Variable: " + var_name + " (" + str(len(var_data)) + " observations)")
     print("="*60)
