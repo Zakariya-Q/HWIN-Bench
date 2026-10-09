@@ -191,13 +191,18 @@ python benchmark/run_full_benchmark_fixed.py \
 Paths can also be set via environment variables `HWIN_DATA_PATH` and
 `HWIN_OUTPUT_DIR`.
 
-### Full Canonical Benchmark (5-6 hours on CPU)
+### Full Canonical Benchmark (certified run: approximately 15.5 hours)
 
 ```bash
 python benchmark/run_full_benchmark_fixed.py \
   --data <path-to>/HWIN-GRQA-V1-4/observations.csv \
   --output-dir output/benchmark_results/grqa_recomputation
 ```
+
+Actual execution time depends on hardware, software versions, system load,
+and environment; the certified canonical execution recorded ~15.5 hours
+(932.4 min) wall-clock on an 8-core CPU (see
+`benchmark/reproducibility/CANONICAL_EXECUTION_CERTIFICATE.md`).
 
 **Canonical reference results** (from the certified 15.5 h run):
 `benchmark/results/grqa_recomputation/all_results.json` (per-fold values
