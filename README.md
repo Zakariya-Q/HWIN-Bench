@@ -64,7 +64,7 @@ Counts are based on the current audit and the report at `docs/DATA_QUALITY_VALID
 - **Water Quality Portal / STORET / WQX** includes records from multiple contributing agencies. Do not label the full aggregated HWIN subset as automatically public domain. Review the applicable source and contributor terms before redistributing each subset. The current source-license assessment needs source-specific review.
 - The HWIN-Bench software, protocol, and documentation license does not override the licenses or terms that apply to source data.
 
-See [`docs/DATA_ACCESS_AND_RELEASE.md`](docs/DATA_ACCESS_AND_RELEASE.md) for the authoritative release/download procedure, exact GRQA hash, repository-snapshot identity, and publication-DOI status. See [`licenses/ATTRIBUTION.md`](licenses/ATTRIBUTION.md) and [`licenses/DATASET_LICENSE_AUDIT.csv`](licenses/DATASET_LICENSE_AUDIT.csv) for data attribution and license review.
+See [`docs/DATA_AVAILABILITY.md`](docs/DATA_AVAILABILITY.md) for the authoritative release/download procedure, exact GRQA hash, repository-snapshot identity, and publication-DOI status. See [`licenses/ATTRIBUTION.md`](licenses/ATTRIBUTION.md) and [`licenses/DATASET_LICENSE_AUDIT.csv`](licenses/DATASET_LICENSE_AUDIT.csv) for data attribution and license review.
 
 ## Harmonized Variables
 
