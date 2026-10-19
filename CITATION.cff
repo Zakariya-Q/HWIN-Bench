@@ -2,14 +2,13 @@ cff-version: 1.2.0
 message: "If you use HWIN-Bench, please cite it as below."
 title: "HWIN-Bench v1.0: Heterogeneous Water Quality Intelligence Benchmark"
 version: 1.0.4
-doi: "10.5281/zenodo.21877825"
 date-released: 2026-10-08
 authors:
   - family-names: "HWIN-Bench Consortium"
     given-names: ""
     affiliation: "HWIN-Bench Consortium"
 repository-code: "https://github.com/Zakariya-Q/HWIN-Bench"
-url: "https://github.com/Zakariya-Q/HWIN-Bench"
+url: "https://github.com/Zakariya-Q/HWIN-Bench/releases/tag/v1.0.4"
 license: "CC-BY-4.0"
 keywords:
   - "water quality"
@@ -29,8 +28,7 @@ preferred-citation:
       affiliation: "HWIN-Bench Consortium"
   year: 2026
   version: "1.0.4"
-  doi: "10.5281/zenodo.21877825"
-  url: "https://github.com/Zakariya-Q/HWIN-Bench"
+  url: "https://github.com/Zakariya-Q/HWIN-Bench/releases/tag/v1.0.4"
 references:
   - type: "dataset"
     title: "Global River Water Quality Archive (GRQA) v1.4"
