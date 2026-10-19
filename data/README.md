@@ -36,7 +36,7 @@ Expected verification values:
 - File size: 6,016,295,802 bytes
 - Line count: 25,850,908 including the header; 25,850,907 observation rows
 
-After verifying the hash, place the reconstructed file at `data/harmonized/HWIN-GRQA-V1-4/observations.csv` in the matching repository snapshot. See [`docs/DATA_ACCESS_AND_RELEASE.md`](../docs/DATA_ACCESS_AND_RELEASE.md) for the release snapshot identity and full access notes.
+After verifying the hash, place the reconstructed file at `data/harmonized/HWIN-GRQA-V1-4/observations.csv` in the matching repository snapshot. See [`docs/DATA_AVAILABILITY.md`](../docs/DATA_AVAILABILITY.md) for the release snapshot identity and full access notes.
 
 ## Integrity verification
 
@@ -56,7 +56,7 @@ GRQA v1.4 requires attribution under its upstream CC-BY-4.0 license. Water Quali
 
 ## Related documentation
 
-- [`docs/DATA_ACCESS_AND_RELEASE.md`](../docs/DATA_ACCESS_AND_RELEASE.md): release, download and DOI status
+- [`docs/DATA_AVAILABILITY.md`](../docs/DATA_AVAILABILITY.md): release, download and DOI status
 - [`docs/DATA_GUIDE.md`](../docs/DATA_GUIDE.md): datasets, schemas and counts
 - [`docs/DATA_PROVENANCE.md`](../docs/DATA_PROVENANCE.md): provenance descriptions
 - [`docs/DATA_QUALITY_VALIDATION_REPORT.md`](../docs/DATA_QUALITY_VALIDATION_REPORT.md): strict CBS findings
