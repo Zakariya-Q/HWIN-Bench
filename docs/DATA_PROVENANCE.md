@@ -62,7 +62,7 @@ Each transition references the actual code or documented procedure.
 - **Format**: CSV files per variable (43 parameters) + metadata
 - **Structure**: Station metadata, observation time series per parameter
 - **Variables**: 43 water quality parameters (nutrients, carbon, oxygen, sediments)
-- **Stations**: ~107,000 across 69 countries
+- **Stations**: ~107,828 across 69 countries
 - **Temporal**: 1894–2023
 - **Observations**: ~17M in original GRQA; 25.8M after HWIN-Bench processing
 
@@ -108,8 +108,8 @@ Each transition references the actual code or documented procedure.
 
 ### HWIN-Bench Representation
 **Location**: `data/harmonized/HWIN-GRQA-V1-4/`
-- `observations.csv`: 25,850,907 rows, CBS format (Note: GRQA observations.csv is in Zenodo due to GitHub LFS 2 GB limit)
-- `stations.json`: 107,000 stations
+- `observations.csv`: 25,850,907 rows, CBS format (Note: GRQA observations.csv is distributed through GitHub Release v1.0.4 due to GitHub LFS 2 GB limit)
+- `stations.json`: 107,828 stations
 - `variables.csv`: 13 rows in current `variables.csv`; 11 variables appear in canonical benchmark result artifacts
 - `dataset.json`: Metadata with checksums, DOI, coverage
 
@@ -271,7 +271,7 @@ Same CBS validation engine
 ### HWIN-Bench Representation
 **Location**: `data/harmonized/HWIN-STORET-CA/`
 - `observations.csv`: 172,103 rows
-- `stations.json`: 3,000 stations
+- `stations.json`: 48,338 station IDs represented in the current observations CSV
 - `variables.csv`: 22 canonical variables
 - `dataset.json`: Metadata
 
