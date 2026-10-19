@@ -24,17 +24,33 @@ wc -c -l observations.csv
 
 ### PowerShell alternative
 
+Download all ten parts:
+
 ~~~powershell
 $repo = 'Zakariya-Q/HWIN-Bench'
 $release = 'v1.0.4'
 $names = 0..9 | ForEach-Object { 'hwin-grqa-v1-4_observations.csv.gz.part-{0:D2}' -f $_ }
 New-Item -ItemType Directory -Force hwin-grqa-release | Out-Null
 foreach ($name in $names) { gh release download $release --repo $repo --pattern $name --dir hwin-grqa-release }
-$out = [System.IO.File]::Create('observations.csv.gz')
-try { foreach ($name in $names) { $bytes = [System.IO.File]::ReadAllBytes((Join-Path 'hwin-grqa-release' $name)); $out.Write($bytes, 0, $bytes.Length) } } finally { $out.Dispose() }
-gzip -t observations.csv.gz
-gzip -dc observations.csv.gz > observations.csv
+~~~
+
+Then concatenate and decompress using .NET streams without loading a 100 MB part into memory at once:
+
+~~~powershell
+$archive = [System.IO.File]::Create('observations.csv.gz')
+try {
+  foreach ($name in $names) {
+    $part = [System.IO.File]::OpenRead((Join-Path 'hwin-grqa-release' $name))
+    try { $part.CopyTo($archive) } finally { $part.Dispose() }
+  }
+} finally { $archive.Dispose() }
+
+$input = [System.IO.File]::OpenRead('observations.csv.gz')
+$gzip = [System.IO.Compression.GzipStream]::new($input, [System.IO.Compression.CompressionMode]::Decompress)
+$output = [System.IO.File]::Create('observations.csv')
+try { $gzip.CopyTo($output) } finally { $output.Dispose(); $gzip.Dispose(); $input.Dispose() }
 Get-FileHash observations.csv -Algorithm SHA256
+(Get-Item observations.csv).Length
 ~~~
 
 ### Python alternative
@@ -86,6 +102,24 @@ The complete documented release rejoin test passed during the release audit and 
 | `hwin-grqa-v1-4_stations_variables.tar.gz` | GRQA station/variable and dataset metadata files |
 | `HWIN-BENCH_v1.0.4_SHA256_MANIFEST.txt` | Asset checksums |
 | `REJOIN_INSTRUCTIONS.md`, `README_BATCHES.md` | Release-provided chunk instructions and scope notes |
+
+| Release asset | SHA-256 |
+|---|---|
+| `hwin-bench-v1.0.4_batch1_repo_and_metadata.tar.gz` | `e02aff428ff7173b0ba6bdf4020e9b6a2e98e956208280aca1dc2a235e53d957` |
+| `hwin-grqa-v1-4_stations_variables.tar.gz` | `35296ffef3235db433be69905a6b36ad7c880ea156e494575189c70ddaa5c7f5` |
+| `HWIN-BENCH_v1.0.4_SHA256_MANIFEST.txt` | `c4efc031b7e749b84d116cea0e23cf6fea943e57927adfb83c1ebf7dfdfaa9c2` |
+| `REJOIN_INSTRUCTIONS.md` | `f02197140174a059fcbbe1227400ad24ad3fd2152cc220e752194722e95125e8` |
+| `README_BATCHES.md` | `d1ffb305211bcc867939f9730f4a0c9619a8177eb60dec1feea8ca36ebe3a387` |
+| `hwin-grqa-v1-4_observations.csv.gz.part-00` | `4c45f629d788b29916ba15d32c0b449e8fe6c69570ac3d0f85a965b184e1c87c` |
+| `hwin-grqa-v1-4_observations.csv.gz.part-01` | `138fcc896e1f2fa036996dafaf0139ab634ed82b54dfc0a001a21d4169458c7d` |
+| `hwin-grqa-v1-4_observations.csv.gz.part-02` | `587c9b9d8a8e919a425e7228d9fac279671de4cf531c409805f6b78165b25b6c` |
+| `hwin-grqa-v1-4_observations.csv.gz.part-03` | `1668982db25df0b23d278d88473c7656f0e93948d4990448d774e31352401407` |
+| `hwin-grqa-v1-4_observations.csv.gz.part-04` | `be0a184448e603be775294db0448c9e2c0d952d4cc4ef816399df42ae37a9e58` |
+| `hwin-grqa-v1-4_observations.csv.gz.part-05` | `1d8be381a0083c8463c3a135bc1c450ca7d2bddfab0b3c4837e96921197d58cc` |
+| `hwin-grqa-v1-4_observations.csv.gz.part-06` | `b5b2bab59aadaf011227879400f0c44fa45884c24c62c6c9678628fad295d18f` |
+| `hwin-grqa-v1-4_observations.csv.gz.part-07` | `9f9c3542d2b760cbb91768cd5a7dc9064e4f5dd80db5f0a59a781c9f2f5564ca` |
+| `hwin-grqa-v1-4_observations.csv.gz.part-08` | `ea81f2f55b15efb04356c1432870e4bf26ecdab60f824b3b87564ce726906801` |
+| `hwin-grqa-v1-4_observations.csv.gz.part-09` | `c7396581d3cf5cad638b2dc74cb50cbc7bf667b8f385cfa2abec304c02ccab0a` |
 
 GitHub reports 15 assets (ten observation chunks and five additional assets). Verify asset checksums using the release manifest/digests and verify decompressed CSV separately using the canonical hash.
 
