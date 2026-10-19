@@ -10,7 +10,7 @@
 
 [![License](https://img.shields.io/badge/License-CC--BY--4.0-green)](LICENSE)
 [![Protocol](https://img.shields.io/badge/Protocol-FROZEN%20v1.0-red)](benchmark/protocol/01_HWIN_BENCH_PROTOCOL_v1.0.md)
-[![Reproducibility](https://img.shields.io/badge/Reproducibility-CERTIFIED-brightgreen)](benchmark/reproducibility/)
+[![Canonical run](https://img.shields.io/badge/Canonical%20run-recorded-lightgrey)](benchmark/reproducibility/)
 [![Release](https://img.shields.io/github/v/release/Zakariya-Q/HWIN-Bench)](https://github.com/Zakariya-Q/HWIN-Bench/releases/tag/v1.0.4)
 
 ---
@@ -40,7 +40,7 @@ Water quality modeling is essential for environmental management, public health,
 3. **Reproducibility crisis** — results cannot be verified or compared
 4. **Transfer learning untested** — can models trained on global data predict in data-scarce regions?
 
-HWIN-Bench solves this by providing a **single, frozen, immutable benchmark protocol** that any researcher can execute and verify.
+HWIN-Bench provides a versioned protocol and released result artifacts intended to support comparable evaluation. The variable-scope discrepancy documented below currently limits any claim of complete protocol compliance.
 
 ---
 
@@ -182,7 +182,7 @@ python benchmark/run_full_benchmark_fixed.py \
 Paths can also be set via environment variables `HWIN_DATA_PATH` and
 `HWIN_OUTPUT_DIR`.
 
-### Full Canonical Benchmark (certified run: approximately 15.5 hours)
+### Full Canonical Benchmark (historical execution: approximately 15.5 hours)
 
 ```bash
 python benchmark/run_full_benchmark_fixed.py \
@@ -195,7 +195,7 @@ and environment; the certified canonical execution recorded ~15.5 hours
 (932.4 min) wall-clock on an 8-core CPU (see
 `benchmark/reproducibility/CANONICAL_EXECUTION_CERTIFICATE.md`).
 
-**Canonical reference results** (from the certified 15.5 h run):
+**Historical canonical reference results** (from the recorded ~15.5 h execution; the protocol-scope discrepancy remains unresolved):
 `benchmark/results/grqa_recomputation/all_results.json` (per-fold values
 stored). Since maintenance release 1.0.4 the stored `ci_95` values are
 themselves computed from the 5 unique GroupKFold folds (n=5, df=4) —
