@@ -1,5 +1,7 @@
 # Attribution — HWIN-Bench v1.0
 
+> **License review note (2026-10-19):** GRQA v1.4 retains its upstream CC-BY-4.0 attribution. Water Quality Portal aggregates records from many contributing agencies, so this file does not assert a blanket public-domain status for all WQP/STORET-derived data. Review contributor/source terms before redistribution. The software/documentation license does not override source-data terms.
+
 Required attribution for all source datasets used in HWIN-Bench v1.0.
 
 ---
@@ -33,7 +35,7 @@ When sharing GRQA data or derivatives, you must:
 ## Dataset 2: USGS/EPA Water Quality Portal — San Francisco Bay Subset
 
 **Provider**: U.S. Geological Survey (USGS) / Environmental Protection Agency (EPA)  
-**License**: Public Domain (17 USC §105 — US Government works)  
+**License status**: Source-specific review required; no blanket license assigned to the full WQP aggregate  
 **Official Source**: https://www.waterqualitydata.us/  
 **Access Date**: 2026-07-08  
 **Query**: bbox=-123.5,37.0,-121.5,38.5; startDateLo=1950-01-01; startDateHi=2024-12-31; dataSource=NWIS,WQX
@@ -54,7 +56,7 @@ When sharing GRQA data or derivatives, you must:
 ## Dataset 3: EPA STORET California (HWIN-STORET-CA)
 
 **Provider**: U.S. Environmental Protection Agency (EPA)  
-**License**: Public Domain (17 USC §105 — US Government works)  
+**License status**: Source-specific review required; no blanket license assigned to the full WQP aggregate  
 **Official Source**: https://www.epa.gov/waterdata/storage-and-retrieval-and-water-quality-exchange  
 **Access Date**: 2026-07-08  
 **Query**: statecode=US:06; startDateLo=1950-01-01; startDateHi=2024-12-31; dataSource=WQX
@@ -70,7 +72,7 @@ When sharing GRQA data or derivatives, you must:
 ## Dataset 4: EPA STORET Texas (HWIN-STORET-TX)
 
 **Provider**: U.S. Environmental Protection Agency (EPA)  
-**License**: Public Domain (17 USC §105 — US Government works)  
+**License status**: Source-specific review required; no blanket license assigned to the full WQP aggregate  
 **Official Source**: https://www.epa.gov/waterdata/storage-and-retrieval-and-water-quality-exchange  
 **Access Date**: 2026-07-08  
 **Query**: statecode=US:48; startDateLo=1950-01-01; startDateHi=2024-12-31; dataSource=WQX
@@ -86,7 +88,7 @@ When sharing GRQA data or derivatives, you must:
 ## Dataset 5: EPA STORET Rhode Island (HWIN-STORET-RI)
 
 **Provider**: U.S. Environmental Protection Agency (EPA)  
-**License**: Public Domain (17 USC §105 — US Government works)  
+**License status**: Source-specific review required; no blanket license assigned to the full WQP aggregate  
 **Official Source**: https://www.epa.gov/waterdata/storage-and-retrieval-and-water-quality-exchange  
 **Access Date**: 2026-07-08  
 **Query**: statecode=US:44; startDateLo=1950-01-01; startDateHi=2024-12-31; dataSource=WQX
@@ -122,8 +124,8 @@ When publishing work that uses HWIN-Bench v1.0 data or results, include:
 > This work uses HWIN-Bench v1.0 (Heterogeneous Water Quality Intelligence Benchmark), which integrates and harmonizes data from:
 > 
 > 1. **Global River Water Quality Archive (GRQA) v1.4** — Virro et al. (2025), CC-BY-4.0, https://doi.org/10.5281/zenodo.15335450
-> 2. **USGS/EPA Water Quality Portal (WQP)** — San Francisco Bay subset, Public Domain (17 USC §105), https://www.waterqualitydata.us/
-> 3. **EPA STORET/WQX** — California, Texas, and Rhode Island subsets, Public Domain (17 USC §105), https://www.epa.gov/waterdata/storage-and-retrieval-and-water-quality-exchange
+> 2. **USGS/EPA Water Quality Portal (WQP)** — San Francisco Bay subset; review terms for contributing source agencies, https://www.waterqualitydata.us/
+> 3. **EPA STORET/WQX** — California, Texas, and Rhode Island subsets; review terms for contributing source agencies, https://www.epa.gov/waterdata/storage-and-retrieval-and-water-quality-exchange
 > 
 > HWIN-Bench v1.0 is licensed under CC-BY-4.0. See https://github.com/Zakariya-Q/HWIN-Bench for full attribution and license details.
 
@@ -137,7 +139,6 @@ When publishing work that uses HWIN-Bench v1.0 data or results, include:
   author = {HWIN-Bench Consortium},
   year = {2026},
   version = {1.0.0},
-  doi = {10.5281/zenodo.21877825},
   url = {https://github.com/Zakariya-Q/HWIN-Bench},
   license = {CC-BY-4.0}
 }

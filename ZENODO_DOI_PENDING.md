@@ -1,39 +1,29 @@
-# Zenodo DOI Status — HWIN-Bench v1.0
+# Zenodo DOI status — HWIN-Bench
 
-**Status (updated 2026-10-06)**: DOI `10.5281/zenodo.21877825` is **reserved on Zenodo but the deposit is NOT yet published** — the DOI does not resolve yet (Zenodo API: "The persistent identifier is not registered").
+**Status checked 2026-10-19:** the project deposit DOI `10.5281/zenodo.21877825` is reserved but the deposit is **unpublished**. It must not be presented as a resolving publication DOI or used as the current data-download location.
 
-**One remaining human step**: log in to Zenodo, open the draft/reserved deposit for `21877825`, complete metadata, upload the release archive, and click **Publish**. Once published, the DOI resolves and the badge below can be enabled.
+## Current public access route
 
----
+The current public HWIN-Bench maintenance release is [v1.0.4 on GitHub](https://github.com/Zakariya-Q/HWIN-Bench/releases/tag/v1.0.4). The harmonized GRQA observation CSV is distributed there as ten sequential byte chunks. Reassembly and integrity verification instructions are in [`docs/DATA_AVAILABILITY.md`](docs/DATA_AVAILABILITY.md).
 
-## Current State of DOI References in This Repo
+The upstream GRQA v1.4 source dataset remains available at [Zenodo record 15335450](https://zenodo.org/records/15335450). This is the upstream source DOI, not the DOI for the HWIN-Bench harmonized release.
 
-| File | Line | Current value | Status |
-|------|------|---------------|--------|
-| `CITATION.cff` | 5 | `10.5281/zenodo.21877825` | ✅ Reserved DOI in place — resolves once published |
-| `CITATION.cff` | 32 | `10.5281/zenodo.21877825` | ✅ Same reserved DOI (preferred-citation) |
-| `README.md` | 8 | Grey "DOI pending" badge | ⏳ Replace with real DOI badge after publishing |
-| `README.md` | ~221 | `10.5281/zenodo.21877825` | ✅ BibTeX in README |
-| `docs/DATA_GUIDE.md` | citation | `10.5281/zenodo.21877825` | ✅ Reserved DOI in place |
-| `licenses/ATTRIBUTION.md` | 140 | `10.5281/zenodo.21877825` | ✅ Reserved DOI in place (fixed 2026-10-06) |
+## Citation until a project DOI is published
 
-> Note: The GitHub repository lives at `Zakariya-Q/HWIN-Bench`, not the originally
-> planned `HWIN-Bench/HWIN-Bench-v1.0` org repo. Citation URLs were corrected accordingly.
+Use the GitHub repository or release URL in project citations and software metadata until the reserved deposit is actually published and the DOI resolves. The project DOI is therefore omitted from `CITATION.cff` and from project BibTeX entries.
 
----
+Do not enable a DOI badge, add the reserved DOI to citation metadata, or tell users that it resolves until all of the following are true:
 
-## How to Finish the Zenodo Publication
+1. The intended Zenodo deposit has complete, accurate metadata.
+2. The final intended release/data package is uploaded and verified.
+3. The deposit is published.
+4. The DOI resolves to the public record and the record describes the distributed artifact.
 
-1. Go to https://zenodo.org/uploads/21877825 (opens the draft if it belongs to your account)
-2. Verify metadata (title, authors, license CC-BY-4.0, keywords)
-3. Upload the `HWIN_Bench_v1_PUBLIC_RELEASE/` archive (or connect via the GitHub–Zenodo integration: https://zenodo.org/account/settings/github/ → enable `Zakariya-Q/HWIN-Bench`)
-4. Click **Publish**
-5. Back here: update the README badge (line 8) from the grey "pending" badge to the real DOI badge:
-   `[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21877825-blue)](https://doi.org/10.5281/zenodo.21877825)`
+## Release identity note
 
----
+The v1.0.4 release has 15 uploaded assets. Its repository-snapshot asset represents commit `a70033d`; the annotated `v1.0.4` tag peels to commit `1def10f`. Do not describe the asset snapshot as identical to the tagged tree.
 
 ## History
 
-- 2026-08-11: v1.0.0 release package prepared; `zenodo.XXXXXXX` placeholders used pending deposition
-- 2026-10-06: Release branch merged to main; reserved DOI `21877825` propagated; invalid ORCID removed from CITATION.cff; attribution URLs corrected to the actual repository
+- 2026-10-06: reserved project DOI recorded in the repository; deposit remained unpublished.
+- 2026-10-19: GitHub Release v1.0.4 verified as the active public access route; project DOI remains reserved/unpublished.

@@ -4,7 +4,7 @@ Complete reference for accessing, understanding, and using HWIN-Bench data.
 
 ## Overview
 
-HWIN-Bench v1.0 uses **5 canonical datasets** harmonized to a common **Canonical Benchmark Schema (CBS)**. All data is provided in two forms:
+HWIN-Bench v1.0 distributes five harmonized dataset collections. Availability differs by dataset: the GRQA observations input is a GitHub Release asset, while the four regional observations files are in the repository tree. The regional datasets do not fully pass strict CBS validation; consult `DATA_QUALITY_VALIDATION_REPORT.md`. See `DATA_AVAILABILITY.md` for current download instructions and measured file counts.
 1. **Raw source data** (`data/datasets/`) — as downloaded from original providers
 2. **Harmonized CBS data** (`data/harmonized/`) — ready for benchmark execution
 
@@ -82,9 +82,9 @@ HWIN-VAR-001,Water Temperature,The intensity of heat present in water,K,Float,-2
 
 ### 1. HWIN-GRQA-V1-4 — Global River Quality Archive v1.4
 
-**Source**: Zenodo (doi:10.5281/zenodo.15335450)  
+**Upstream source**: GRQA v1.4, [Zenodo record 15335450](https://zenodo.org/records/15335450). Use the HWIN-Bench v1.0.4 GitHub Release for the harmonized benchmark CSV.  
 **License**: CC-BY-4.0  
-**Coverage**: Global, 69 countries, 107,000 stations, 1894-2023  
+**Coverage**: Global, 69 countries, 107,828 station IDs represented in the current observations CSV, 1894-2023  
 **Variables**: 11 canonical (11 benchmarkable after MIN_SAMPLES filter)  
 **Observations**: 25.8M canonical, 2.5M benchmarked (MAX_SAMPLES=200K cap)
 
@@ -104,8 +104,8 @@ HWIN-VAR-001,Water Temperature,The intensity of heat present in water,K,Float,-2
 ### 2. HWIN-WQP-SFBAY — Water Quality Portal: San Francisco Bay
 
 **Source**: Water Quality Portal API (bbox: -123.5,37.0,-121.5,38.5)  
-**License**: Public Domain (USGS NWIS + EPA WQX)  
-**Coverage**: San Francisco Bay, CA, USA; 1,000+ stations, 1950-2024  
+**License status**: Source-specific review required; WQP aggregates data from multiple contributors, so no blanket license is assumed  
+**Coverage**: San Francisco Bay, CA, USA; 642 station IDs represented in the current observations CSV, 1950-2024  
 **Variables**: 19 canonical  
 **Observations**: 51K total
 
@@ -114,24 +114,24 @@ HWIN-VAR-001,Water Temperature,The intensity of heat present in water,K,Float,-2
 ### 3. HWIN-STORET-CA — EPA STORET California
 
 **Source**: Water Quality Portal API (statecode=US:06)  
-**License**: Public Domain (EPA STORET/WQX)  
-**Coverage**: California, USA; 3,000 stations, 1950-2024  
+**License status**: Source-specific review required; do not infer blanket public-domain status for the aggregate  
+**Coverage**: California, USA; 48,338 station IDs represented in the current observations CSV, 1950-2024  
 **Variables**: 22 canonical  
 **Observations**: 180K total
 
 ### 4. HWIN-STORET-TX — EPA STORET Texas
 
 **Source**: Water Quality Portal API (statecode=US:48)  
-**License**: Public Domain (EPA STORET/WQX)  
-**Coverage**: Texas, USA; 2,000 stations, 1950-2024  
+**License status**: Source-specific review required; do not infer blanket public-domain status for the aggregate  
+**Coverage**: Texas, USA; 4,988 station IDs represented in the current observations CSV, 1950-2024  
 **Variables**: 21 canonical  
 **Observations**: 175K total
 
 ### 5. HWIN-STORET-RI — EPA STORET Rhode Island
 
 **Source**: Water Quality Portal API (statecode=US:44)  
-**License**: Public Domain (EPA STORET/WQX)  
-**Coverage**: Rhode Island, USA; 50 stations, 1950-2024  
+**License status**: Source-specific review required; do not infer blanket public-domain status for the aggregate  
+**Coverage**: Rhode Island, USA; 95 station IDs represented in the current observations CSV, 1950-2024  
 **Variables**: 18 canonical  
 **Observations**: 2.5K total
 
@@ -231,7 +231,6 @@ When using these data, cite both HWIN-Bench and the original datasets:
 ```bibtex
 @software{hwin_bench_v1,
   title = {HWIN-Bench v1.0},
-  doi = {10.5281/zenodo.21877825}
 }
 
 @dataset{grqa_v14,

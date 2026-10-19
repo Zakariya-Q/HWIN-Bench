@@ -1,106 +1,93 @@
-# Quickstart Guide — HWIN-Bench v1.0
+# Quickstart — HWIN-Bench v1.0
 
-Get up and running in 5 minutes.
+This guide separates the no-download smoke test from the full canonical benchmark. The full run requires the harmonized GRQA observation payload from GitHub Release v1.0.4; it is not included as a normal file in the repository tree.
 
-## Prerequisites
+## Requirements
 
-- Python 3.11+
-- 8+ GB RAM (16 GB recommended for full benchmark)
-- 10 GB free disk space
-- Git
+- Python 3.11 or later
+- Git and Git LFS installed
+- For the full benchmark, 32 GB RAM is recommended; the certified run used an 8-core CPU and 32 GB RAM. A 16 GB machine may run out of memory with the current in-memory data-loading path.
+- Enough free storage for the 6.02 GB GRQA observations CSV, intermediate files and results; reserve at least 15 GB.
+- GitHub CLI (`gh`) for downloading release assets, plus a Bash-compatible shell (Linux, macOS, WSL, or Git Bash).
 
-## 1. Clone & Install
+## 1. Clone and install
 
-HWIN-Bench is a research repository — scripts run directly, no package install.
-
-```bash
+~~~bash
 git clone https://github.com/Zakariya-Q/HWIN-Bench.git
 cd HWIN-Bench
-
-# Using conda (recommended)
 conda env create -f environment.yml
 conda activate hwin-bench
+~~~
 
-# Or using pip (dependency spec)
-pip install -r code/requirements/requirements.txt
-```
+Alternatively, install dependencies with `pip install -r code/requirements/requirements.txt` in a suitable Python environment.
 
-## 2. Verify Data
+## 2. Verify checked-in files
 
-```bash
-# Check that harmonized data is present
-ls data/harmonized/
-# Should show: HWIN-GRQA-V1-4/  HWIN-WQP-SFBAY/  HWIN-STORET-CA/  HWIN-STORET-TX/  HWIN-STORET-RI/
+With Git LFS installed and its objects materialized, run this from the repository root:
 
-# Verify checksums (from the repository root; cross-platform)
-python code/requirements/verify_checksums.py --quiet
-# On Linux, sha256sum -c data/manifests/checksums.sha256 also works
-```
+~~~bash
+python code/requirements/verify_checksums.py
+~~~
 
-## 3. Run Smoke Test (30 seconds)
+## 3. Run the smoke test (no GRQA download required)
 
-```bash
-# No download needed — runs on the in-repo STORET-RI dataset
+~~~bash
 python benchmark/run_full_benchmark_fixed.py \
   --data data/harmonized/HWIN-STORET-RI/observations.csv \
   --output-dir output/smoke_results \
   --smoke-test
-```
+~~~
 
-Expected output: Quick validation on 1 variable × 1 model × 1 fold.
+This is a short execution check, not a data-quality certification. STORET-RI has known strict-CBS validation findings; see `docs/DATA_QUALITY_VALIDATION_REPORT.md`.
 
-## 4. Run Full Benchmark (5-6 hours)
+## 4. Download and restore GRQA observations
 
-```bash
-cd benchmark
-python run_full_benchmark_fixed.py \
-  --data <path-to>/HWIN-GRQA-V1-4/observations.csv \
-  --output-dir ../output/benchmark_results/grqa_recomputation
-```
+~~~bash
+mkdir -p hwin-grqa-release
+gh release download v1.0.4 --repo Zakariya-Q/HWIN-Bench \
+  --pattern 'hwin-grqa-v1-4_observations.csv.gz.part-*' --dir hwin-grqa-release
+cat hwin-grqa-release/hwin-grqa-v1-4_observations.csv.gz.part-* | gzip -t
+cat hwin-grqa-release/hwin-grqa-v1-4_observations.csv.gz.part-* | gzip -dc > data/harmonized/HWIN-GRQA-V1-4/observations.csv
+sha256sum data/harmonized/HWIN-GRQA-V1-4/observations.csv
+~~~
 
-This executes the **frozen protocol**:
-- 11 benchmark variables × 7 models × 5 unique GroupKFold partitions × 5 deterministic repetitions = 1,925 historical fits (385 unique evaluations)
-- GroupKFold by station_id
-- Seeds: [42, 123, 256, 512, 1024] (5 deterministic repetitions of the fixed partition set)
-- Output: `all_results.json` + per-variable `HWIN-VAR-XXX_results.json` (schema of the shipped canonical results)
+Expected SHA-256: `989e5a6ba07499d81443c8819ef7f1e786fdef8a52661474a2bf5cc4a2ed6f8f`; expected size 6,016,295,802 bytes and 25,850,907 observation rows (25,850,908 lines including the header). See `docs/DATA_AVAILABILITY.md` for release asset details.
 
-## 5. Inspect Results
+## 5. Full benchmark execution
 
-```bash
-# Canonical reference results are shipped in the repo:
-cat benchmark/results/grqa_recomputation/all_results.json | jq '.'
+Run from the repository root with a clean output directory:
 
-# Or use the analysis notebook
-jupyter lab examples/quickstart/analyze_results.ipynb
-```
+~~~bash
+python benchmark/run_full_benchmark_fixed.py \
+  --data data/harmonized/HWIN-GRQA-V1-4/observations.csv \
+  --output-dir output/benchmark_results/grqa_recomputation
+~~~
 
-## Key Files
+The certified canonical execution recorded approximately **15.5 hours (932.4 minutes) wall-clock** on an 8-core CPU with 32 GB RAM. This is total execution time; the approximately 8.8-hour aggregate model-training time reported elsewhere is a component of the total, not additional time. Actual runtime depends on hardware and software.
 
-| File | Purpose |
-|------|---------|
-| `benchmark/protocol/01_HWIN_BENCH_PROTOCOL_v1.0.md` | Frozen protocol (immutable) |
-| `benchmark/run_full_benchmark_fixed.py` | Canonical benchmark runner |
-| `data/harmonized/HWIN-GRQA-V1-4/observations.csv` | Primary benchmark data (note: GRQA observations.csv is in Zenodo) |
-| `ontology/canonical_variable_ontology.csv` | 49 canonical variables |
-| `ontology/variable_synonym_dictionary.csv` | 89 source→canonical mappings |
-| `ontology/unit_harmonization_rules.csv` | 92 unit conversion rules |
+### Important scientific-scope note
 
-## Next Steps
+The frozen v1.0 protocol document currently states a 13-variable scope, while the released canonical result artifacts contain 11 variables. This discrepancy is unresolved. This documentation update does not modify the frozen protocol, model results, or claim complete protocol compliance. Resolve the scope through a formally versioned protocol decision and, if needed, a new run before making a final ESSD reproducibility claim.
 
-- Read `docs/DATA_GUIDE.md` for complete data documentation
-- Read `docs/REPRODUCIBILITY.md` for exact reproduction steps
-- Read `docs/LIMITATIONS.md` for scope and known issues
-- See `examples/quickstart/` for download and analysis scripts
+## 6. Reference results
+
+Current historical canonical result artifacts are under `benchmark/results/grqa_recomputation/`. They are not a substitute for documenting the protocol-scope discrepancy. Corrected confidence intervals use five unique GroupKFold partitions (`n=5`, `df=4`) because five recorded seed repetitions recreate the same deterministic partitions.
 
 ## Troubleshooting
 
-| Issue | Solution |
-|-------|----------|
-| `ModuleNotFoundError` | Ensure the conda env is active, or run `pip install -r code/requirements/requirements.txt` |
-| Data not found | Check `data/harmonized/` exists; re-run checksum verification |
-| Memory error | Reduce `n_jobs` in RandomForest/ExtraTrees/GradientBoosting |
-| Protocol violation | Do not modify `run_full_benchmark_fixed.py` or protocol parameters |
+| Problem | Action |
+|---|---|
+| GRQA observations file missing | Download all ten observation parts from GitHub Release v1.0.4 and reassemble as above. |
+| Checksum mismatch | Confirm every part was downloaded, concatenated in filename order, and decompressed with gzip; compare against the canonical hash. |
+| Memory failure | Use a machine with more RAM or optimize the runner's memory-loading path before a full run. Do not change protocol parameters silently. |
+| Regional validation failure | Consult `docs/DATA_QUALITY_VALIDATION_REPORT.md`; smoke-test completion does not imply strict CBS compliance. |
+| Runtime estimate | Use 15.5 hours as the recorded canonical wall-clock reference, not 5–6 hours. |
 
----
+## Further reading
 
-**Need help?** Open a GitHub Issue or see `docs/REPRODUCIBILITY.md`.
+- `docs/DATA_AVAILABILITY.md`
+- `docs/DATA_GUIDE.md`
+- `docs/REPRODUCIBILITY.md`
+- `docs/DATA_QUALITY_VALIDATION_REPORT.md`
+- `docs/LIMITATIONS.md`
+- `benchmark/protocol/01_HWIN_BENCH_PROTOCOL_v1.0.md` (frozen protocol; do not edit as part of documentation maintenance)

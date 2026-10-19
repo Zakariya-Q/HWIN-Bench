@@ -56,7 +56,7 @@ print(f'Benchmarkable vars (MIN_SAMPLES>=100): {len(vars)}')
 "
 ```
 
-**Note**: GRQA `observations.csv` (5.7 GB) is not included in the GitHub repository due to GitHub's 2 GB LFS file size limit. Download from Zenodo or use the smoke test for quick validation.
+**Data access**: the harmonized GRQA `observations.csv` is distributed through the [GitHub Release v1.0.4](https://github.com/Zakariya-Q/HWIN-Bench/releases/tag/v1.0.4) as ten sequential byte chunks of one gzip stream. Reassemble and verify the output using `docs/DATA_AVAILABILITY.md`; expected decompressed SHA-256 is `989e5a6ba07499d81443c8819ef7f1e786fdef8a52661474a2bf5cc4a2ed6f8f`. The original upstream GRQA archive on Zenodo is not byte-identical to this harmonized benchmark input.
 
 ### 2. Run Canonical Benchmark
 
@@ -149,7 +149,7 @@ The frozen protocol (`benchmark/protocol/01_HWIN_BENCH_PROTOCOL_v1.0.md`) requir
 
 | Issue | Check |
 |-------|-------|
-| Different R² values | Verify GRQA version (must be v1.4 from Zenodo 15335450) |
+| Different R² values | Verify the HWIN-Bench harmonized input hash against `docs/DATA_AVAILABILITY.md`; the upstream GRQA DOI identifies source data, not the exact derived CSV |
 | Different fold counts | Verify GroupKFold by station_id (not random split) |
 | Missing variables | Verify MIN_SAMPLES=100 filter applied after harmonization |
 | Memory errors | Reduce n_jobs for RF/ET/GB; use chunked processing |
