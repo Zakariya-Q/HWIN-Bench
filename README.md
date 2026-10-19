@@ -11,7 +11,7 @@
 [![License](https://img.shields.io/badge/License-CC--BY--4.0-green)](LICENSE)
 [![Protocol](https://img.shields.io/badge/Protocol-FROZEN%20v1.0-red)](benchmark/protocol/01_HWIN_BENCH_PROTOCOL_v1.0.md)
 [![Reproducibility](https://img.shields.io/badge/Reproducibility-CERTIFIED-brightgreen)](benchmark/reproducibility/)
-[![DOI](https://img.shields.io/badge/DOI-pending-lightgrey)](https://zenodo.org)
+[![Release](https://img.shields.io/github/v/release/Zakariya-Q/HWIN-Bench)](https://github.com/Zakariya-Q/HWIN-Bench/releases/tag/v1.0.4)
 
 ---
 
@@ -21,13 +21,13 @@ HWIN-Bench (Heterogeneous Water quality Intelligence Benchmark) is a **curated, 
 
 **HWIN-Bench v1.0** provides:
 
-- **5 canonical datasets** harmonized to a common schema (Canonical Benchmark Schema - CBS)
+- **Five harmonized dataset collections**, with dataset-specific data-quality findings documented in `docs/DATA_QUALITY_VALIDATION_REPORT.md`
 - **49-variable ontology** (Canonical Variable Ontology - CVO) with 89 cross-dataset synonym mappings
-- **Frozen benchmark protocol** (v1.0) specifying every computational parameter
-- **11 benchmarkable water quality variables** on the Global River Quality Archive (GRQA v1.4)
+- **Versioned v1.0 protocol and released result artifacts**; the protocol's stated variable scope and the 11 variables in the canonical result bundle are not yet reconciled
+- **11 variables** represented in the current canonical regression result artifacts for GRQA v1.4
 - **7 classical ML models** evaluated via 5 unique GroupKFold partitions × 5 deterministic repetitions (1,925 historical fits)
 - **Corrected confidence intervals** (n=5, df=4) — all CIs ~3× wider than originally reported
-- **Certified reproducibility**: Canonical execution completed and independently verified
+- Canonical execution artifacts and verification records are included in the repository
 
 ---
 
@@ -44,32 +44,27 @@ HWIN-Bench solves this by providing a **single, frozen, immutable benchmark prot
 
 ---
 
-## The Five Canonical Datasets
+## The Five Dataset Collections
 
-| Dataset ID | Name | Provider | Version | License | Raw Redistributable | Size (Raw) |
-|------------|------|----------|---------|---------|---------------------|------------|
-| **HWIN-GRQA-V1-4** | Global River Quality Archive | Virro et al. (ESSD) | 1.4 | CC-BY-4.0 | ✅ YES | 6.0 GB |
-| **HWIN-WQP-SFBAY** | USGS/EPA WQP — San Francisco Bay | USGS / EPA | 2024 | Public Domain (17 USC 105) | ✅ YES | 4.6 MB |
-| **HWIN-STORET-CA** | EPA STORET — California | US EPA | 2024.1 | Public Domain (17 USC 105) | ✅ YES | 42.7 MB |
-| **HWIN-STORET-TX** | EPA STORET — Texas | US EPA | 2024.1 | Public Domain (17 USC 105) | ✅ YES | 46.5 MB |
-| **HWIN-STORET-RI** | EPA STORET — Rhode Island | US EPA | 2024.1 | Public Domain (17 USC 105) | ✅ YES | 0.5 MB |
+Dataset counts below describe the current harmonized files, not total records held by the upstream providers. Observation rows exclude the CSV header; station counts are distinct station IDs represented in the observation rows; variable counts are data rows in each `variables.csv` catalogue.
 
-### Data Redistribution Policy
+| Dataset ID | Observation rows | Distinct station IDs in observations | Variable catalogue rows | Distribution and status |
+|---|---:|---:|---:|---|
+| **HWIN-GRQA-V1-4** | 25,850,907 | 107,828 | 13 | Observations are provided as ten byte-chunks in [GitHub Release v1.0.4](https://github.com/Zakariya-Q/HWIN-Bench/releases/tag/v1.0.4); 11 variables appear in the canonical benchmark results |
+| **HWIN-WQP-SFBAY** | 51,050 | 642 | 18 | Included in `data/harmonized/`; reduced 8-column observations schema; does not fully pass strict CBS validation |
+| **HWIN-STORET-CA** | 172,103 | 48,338 | 22 | Included in `data/harmonized/`; does not fully pass strict CBS validation |
+| **HWIN-STORET-TX** | 210,614 | 4,988 | 22 | Included in `data/harmonized/`; does not fully pass strict CBS validation |
+| **HWIN-STORET-RI** | 2,294 | 95 | 19 | Included in `data/harmonized/`; does not fully pass strict CBS validation |
 
-**All five datasets CAN be redistributed in raw form** through this GitHub repository (and Zenodo):
+Counts are based on the current audit and the report at `docs/DATA_QUALITY_VALIDATION_REPORT.md`; do not reuse the older rounded counts in historical audit inventories. The four regional datasets have known strict-CBS validation failures. Their presence in the repository is not a statement that they are fully CBS-compliant.
 
-- **GRQA v1.4**: Licensed CC-BY-4.0 by the authors (Zenodo record [15335450](https://zenodo.org/records/15335450)). Redistribution permitted with attribution.
-- **WQP / STORET (CA, TX, RI)**: US Government works (USGS NWIS + EPA STORET/WQX) — **public domain** under 17 USC §105. No copyright restrictions.
+### Source and redistribution notes
 
-**However**, to respect original providers and ensure users get the latest versions:
+- **GRQA v1.4** is an upstream dataset with a CC-BY-4.0 attribution requirement. The GitHub Release contains the HWIN-Bench harmonized benchmark input; downloading the original GRQA archive alone does not reproduce this exact derived CSV.
+- **Water Quality Portal / STORET / WQX** includes records from multiple contributing agencies. Do not label the full aggregated HWIN subset as automatically public domain. Review the applicable source and contributor terms before redistributing each subset. The current source-license assessment needs source-specific review.
+- The HWIN-Bench software, protocol, and documentation license does not override the licenses or terms that apply to source data.
 
-- This release includes the **HWIN-Bench harmonized (CBS) versions** of all datasets
-- Raw source data is also included where licenses permit (all 5 datasets)
-- **Exception**: GRQA v1.4 `observations.csv` (5.7 GB) exceeds GitHub's 2 GB LFS file size limit and is **not included in this GitHub repository**. It is deposited separately to Zenodo.
-- Users are encouraged to download fresh copies from original providers for production use
-- See `data/README.md` for download instructions and checksums
-
----
+See [`docs/DATA_ACCESS_AND_RELEASE.md`](docs/DATA_ACCESS_AND_RELEASE.md) for the authoritative release/download procedure, exact GRQA hash, repository-snapshot identity, and publication-DOI status. See [`licenses/ATTRIBUTION.md`](licenses/ATTRIBUTION.md) and [`licenses/DATASET_LICENSE_AUDIT.csv`](licenses/DATASET_LICENSE_AUDIT.csv) for data attribution and license review.
 
 ## Harmonized Variables
 
@@ -127,48 +122,44 @@ and validation need only numpy/pandas/scikit-learn/scipy.
 
 ## Obtaining the Data
 
-### Option 1: Use Included Harmonized Data (Recommended for Reproducibility)
+### Canonical GRQA benchmark input
 
-The `data/harmonized/` directory contains all 5 datasets in the **Canonical Benchmark Schema (CBS)** format — ready for benchmark execution.
+The full HWIN-Bench harmonized GRQA `observations.csv` is **not tracked in the repository tree**. It is published as ten byte-chunks of one gzip stream in the [v1.0.4 GitHub Release](https://github.com/Zakariya-Q/HWIN-Bench/releases/tag/v1.0.4). Use these assets for reproducing the released Run-B input; the original upstream GRQA ZIP is not a byte-identical replacement for the harmonized file.
 
-```bash
-# Verify checksums (from the repository root)
-sha256sum -c data/manifests/checksums.sha256
-```
+From a Bash shell (Linux, macOS, WSL, or Git Bash) with the GitHub CLI installed:
 
-**Cross-platform note (Windows)**: git may check text files out with CRLF
-line endings. The manifest stores LF-normalized checksums for text files,
-so on Windows use the provided verification script instead:
+~~~bash
+mkdir -p hwin-grqa-release
+gh release download v1.0.4 --repo Zakariya-Q/HWIN-Bench \
+  --pattern 'hwin-grqa-v1-4_observations.csv.gz.part-*' --dir hwin-grqa-release
+cat hwin-grqa-release/hwin-grqa-v1-4_observations.csv.gz.part-* | gzip -dc > observations.csv
+sha256sum observations.csv
+wc -l observations.csv
+~~~
 
-```bash
+Expected decompressed CSV SHA-256: `989e5a6ba07499d81443c8819ef7f1e786fdef8a52661474a2bf5cc4a2ed6f8f`. The verified output is 6,016,295,802 bytes and has 25,850,908 lines including the header (25,850,907 data rows). The exact documented chunk-reassembly, gzip-integrity, size/line-count, and checksum round trip was verified during the release audit.
+
+Place the restored file at `data/harmonized/HWIN-GRQA-V1-4/observations.csv` in a checkout of the matching release snapshot before running the full benchmark. The repository archive attached to v1.0.4 is a snapshot at commit `a70033d`; the annotated `v1.0.4` tag peels to commit `1def10f`. These are not the same tree, so use the release-asset instructions and snapshot identity documented above rather than assuming the archive exactly equals the tag tree.
+
+### Regional dataset files
+
+The four smaller regional observation CSVs and their station/variable metadata are present under `data/harmonized/`. Their latest measured counts and strict-CBS findings are in `docs/DATA_QUALITY_VALIDATION_REPORT.md` and `data/manifests/DATASET_RELEASE_INVENTORY.csv`.
+
+To verify repository files from the repository root:
+
+~~~bash
 python code/requirements/verify_checksums.py
-```
+~~~
 
-**Note**: GRQA v1.4 `observations.csv` (5.7 GB) is **not included** in this GitHub repository due to GitHub's 2 GB LFS file size limit. It is available in the Zenodo deposition.
+Install Git LFS before verification so LFS-tracked files are materialized and handled according to the documented checksum policy.
 
-### Option 2: Download Fresh from Original Providers
+### Upstream source archive versus harmonized input
 
-For production use, download the latest versions:
+The original GRQA v1.4 source dataset is available from [Zenodo record 15335450](https://zenodo.org/records/15335450). Cite it as the upstream dataset. For reproducing the released HWIN-Bench benchmark, use the HWIN-Bench Release assets and expected hash above.
 
-| Dataset | Source | Command |
-|---------|--------|---------|
-| GRQA v1.4 | Zenodo | `wget https://zenodo.org/records/15335450/files/GRQA_data_v1.4.zip` |
-| WQP SF Bay | Water Quality Portal | Use WQP API (see `examples/quickstart/download_wqp.py`) |
-| STORET CA/TX/RI | EPA WQP | Use WQP API with state filters |
+### Publication DOI
 
-**Exact versions required for HWIN-Bench v1.0 reproduction:**
-- GRQA: v1.4 (DOI: 10.5281/zenodo.15335450)
-- WQP/STORET: As accessed 2026-07-08 (documented in dataset metadata)
-
-### Option 3: Re-Harmonize from Raw Sources
-
-The harmonization pipeline used to produce `data/harmonized/` from raw
-provider downloads is part of the original development repository and is
-**not shipped in this release**; its design is documented in
-`docs/DATA_PROVENANCE.md`. For reproducing the benchmark itself, use the
-harmonized datasets above (Option 1).
-
----
+The HWIN-Bench deposit DOI `10.5281/zenodo.21877825` remains **reserved but unpublished** as of 2026-10-19. Do not cite it as a live DOI or use it as the current data-download route. Until the deposit is published and the DOI resolves, cite the GitHub repository/release URL. See [`ZENODO_DOI_PENDING.md`](../ZENODO_DOI_PENDING.md).
 
 ## Reproducing the Benchmark
 
@@ -214,7 +205,7 @@ consistent with `BENCHMARK_STATISTICS.md` and `CI_CORRECTION_REVIEW/`.
 
 The frozen protocol (`benchmark/protocol/01_HWIN_BENCH_PROTOCOL_v1.0.md`) specifies:
 
-- **Data**: GRQA v1.4, 11 variables, MAX_SAMPLES=200,000, MIN_SAMPLES=100
+- **Current result artifacts**: GRQA v1.4 results for 11 variables; the frozen protocol document currently specifies a 13-variable scope. This mismatch remains unresolved and must not be represented as full protocol compliance. `MAX_SAMPLES=200,000` and `MIN_SAMPLES=100` are runner eligibility/cap settings.
 - **Features**: 7 (lat, lon, year, month, day_of_year, sin_doy, cos_doy)
 - **Splits**: 5 unique GroupKFold partitions by station_id. The canonical seed list
   [42, 123, 256, 512, 1024] produces **five deterministic repetitions of the fixed
@@ -266,7 +257,6 @@ If you use HWIN-Bench, please cite:
   author = {HWIN-Bench Consortium},
   year = {2026},
   version = {1.0.0},
-  doi = {10.5281/zenodo.21877825},
   url = {https://github.com/Zakariya-Q/HWIN-Bench}
 }
 ```
@@ -275,7 +265,7 @@ Dataset citations (required when using individual datasets):
 
 1. **GRQA v1.4**: Virro, H., Amatulli, G., Kmoch, A., Shen, L., & Uuemaa, E. (2025). *Global River Water Quality Archive (GRQA) (Version 1.4)* [Dataset]. Zenodo. https://doi.org/10.5281/zenodo.15335450
 
-2. **WQP/STORET**: U.S. Geological Survey and Environmental Protection Agency. *Water Quality Portal*. Retrieved [date] from https://www.waterqualitydata.us/
+2. **WQP/STORET**: U.S. Geological Survey and Environmental Protection Agency. *Water Quality Portal*. Retrieved 2026-07-08 from https://www.waterqualitydata.us/
 
 See `CITATION.cff` for machine-readable citation metadata.
 
@@ -286,7 +276,7 @@ See `CITATION.cff` for machine-readable citation metadata.
 | Dataset | License | Attribution Required |
 |---------|---------|---------------------|
 | GRQA v1.4 | CC-BY-4.0 | Yes — see `licenses/ATTRIBUTION.md` |
-| WQP/STORET | Public Domain (17 USC §105) | No legal requirement; recommended attribution in `licenses/ATTRIBUTION.md` |
+| WQP/STORET | Source-specific terms; no blanket license assigned | Review contributing agency/source terms and attribute appropriately; see `licenses/DATASET_LICENSE_AUDIT.csv` |
 
 Full license audit: `licenses/DATASET_LICENSE_AUDIT.csv`  
 Attribution details: `licenses/ATTRIBUTION.md`
