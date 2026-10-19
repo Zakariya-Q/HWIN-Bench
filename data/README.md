@@ -1,120 +1,63 @@
-# Data README — HWIN-Bench v1.0
+# Data Files — HWIN-Bench v1.0
 
-## Overview
+This directory contains the currently checked-in harmonized regional datasets and the small metadata files for the canonical GRQA dataset. The full HWIN-Bench GRQA `observations.csv` is distributed separately through the GitHub Release assets.
 
-The `data/` directory contains all dataset-related files for HWIN-Bench v1.0.
+## Dataset locations
 
-## Structure
+| Dataset | Current observation rows | Distinct station IDs in observations | Rows in variables.csv | Observation payload |
+|---|---:|---:|---:|---|
+| HWIN-GRQA-V1-4 | 25,850,907 | 107,828 | 13 | [GitHub Release v1.0.4, 10 chunks](https://github.com/Zakariya-Q/HWIN-Bench/releases/tag/v1.0.4) |
+| HWIN-WQP-SFBAY | 51,050 | 642 | 18 | In repository tree |
+| HWIN-STORET-CA | 172,103 | 48,338 | 22 | In repository tree |
+| HWIN-STORET-TX | 210,614 | 4,988 | 22 | In repository tree |
+| HWIN-STORET-RI | 2,294 | 95 | 19 | In repository tree |
 
-```
-data/
-├── harmonized/              # Harmonized CBS datasets (5 datasets)
-│   ├── HWIN-GRQA-V1-4/
-│   │   ├── dataset.json
-│   │   ├── stations.json
-│   │   ├── variables.csv
-│   │   └── observations.csv  # NOTE: GRQA observations.csv is in Zenodo (5.7 GB)
-│   ├── HWIN-WQP-SFBAY/
-│   │   ├── dataset.json
-│   │   ├── stations.json
-│   │   ├── variables.csv
-│   │   └── observations.csv
-│   ├── HWIN-STORET-CA/
-│   │   ├── dataset.json
-│   │   ├── stations.json
-│   │   ├── variables.csv
-│   │   └── observations.csv
-│   ├── HWIN-STORET-TX/
-│   │   ├── dataset.json
-│   │   ├── stations.json
-│   │   ├── variables.csv
-│   │   └── observations.csv
-│   └── HWIN-STORET-RI/
-│       ├── dataset.json
-│       ├── stations.json
-│       ├── variables.csv
-│       └── observations.csv
-├── manifests/
-│   ├── checksums.sha256
-│   ├── DATASET_RELEASE_INVENTORY.csv
-│   └── DERIVED_DATA_AUDIT.csv
-└── README.md (this file)
-```
+Counts exclude the CSV header and use distinct station identifiers observed in each observation CSV. They are the measured counts of the current harmonized files, not rounded upstream totals. The GRQA variable catalogue has 13 rows; 11 variables are represented in the current canonical benchmark results. This does not resolve the separate 13-versus-11 scope discrepancy in the frozen protocol.
 
----
+## Restore the canonical GRQA observations
 
-## GRQA v1.4 Data Note
+The v1.0.4 release carries `hwin-grqa-v1-4_observations.csv.gz.part-00` through `part-09`. These are sequential byte ranges of one gzip stream, not ten independent gzip files. Download all parts and concatenate them in filename order.
 
-**Important**: The GRQA v1.4 `observations.csv` file (5.7 GB) **is not included in this GitHub repository** because it exceeds GitHub's 2 GB per-file LFS limit.
+Run the commands below from a Bash-compatible shell with the GitHub CLI installed:
 
-### How to Obtain GRQA observations.csv
+~~~bash
+mkdir -p hwin-grqa-release
+gh release download v1.0.4 --repo Zakariya-Q/HWIN-Bench \
+  --pattern 'hwin-grqa-v1-4_observations.csv.gz.part-*' --dir hwin-grqa-release
+cat hwin-grqa-release/hwin-grqa-v1-4_observations.csv.gz.part-* | gzip -t
+cat hwin-grqa-release/hwin-grqa-v1-4_observations.csv.gz.part-* | gzip -dc > observations.csv
+sha256sum observations.csv
+wc -c -l observations.csv
+~~~
 
-1. **Download from Zenodo** (recommended for reproducibility):
-   ```bash
-   wget https://zenodo.org/records/15335450/files/GRQA_data_v1.4.zip
-   unzip GRQA_data_v1.4.zip
-   # Place observations.csv in data/harmonized/HWIN-GRQA-V1-4/
-   ```
+Expected verification values:
 
-2. **Use the Quickstart Smoke Test** (for quick validation without full data):
-   ```bash
-   cd benchmark
-   python run_full_benchmark_fixed.py --smoke-test
-   ```
+- SHA-256 of decompressed `observations.csv`: `989e5a6ba07499d81443c8819ef7f1e786fdef8a52661474a2bf5cc4a2ed6f8f`
+- File size: 6,016,295,802 bytes
+- Line count: 25,850,908 including the header; 25,850,907 observation rows
 
-3. **Verify Checksum** after download:
-   ```bash
-   sha256sum data/harmonized/HWIN-GRQA-V1-4/observations.csv
-   # Should match: 989e5a6ba07499d81443c8819ef7f1e786fdef8a52661474a2bf5cc4a2ed6f8f
-   ```
+After verifying the hash, place the reconstructed file at `data/harmonized/HWIN-GRQA-V1-4/observations.csv` in the matching repository snapshot. See [`docs/DATA_ACCESS_AND_RELEASE.md`](../docs/DATA_ACCESS_AND_RELEASE.md) for the release snapshot identity and full access notes.
 
----
+## Integrity verification
 
-## Dataset Sizes
+From the repository root, with Git LFS installed and files materialized:
 
-| Dataset | observations.csv | stations.json | variables.csv | dataset.json |
-|---------|------------------|---------------|---------------|--------------|
-| GRQA v1.4 | 5.7 GB (Zenodo) | 23 MB | 1.9 KB | 2.1 KB |
-| WQP SF Bay | 4.6 MB | 24 MB | 1.9 KB | 2.1 KB |
-| STORET CA | 41 MB | 13 MB | 1.9 KB | 2.1 KB |
-| STORET TX | 45 MB | 13 MB | 1.9 KB | 2.1 KB |
-| STORET RI | 0.5 MB | 1.3 MB | 1.9 KB | 2.1 KB |
+~~~bash
+python code/requirements/verify_checksums.py
+~~~
 
----
+`data/manifests/checksums.sha256` covers the checked-in files listed there. The large GRQA observation CSV is a GitHub Release asset, not a normal checked-in file, so verify that reconstructed file separately with the canonical SHA-256 above.
 
-## Manifests
+## Data-quality and licensing status
 
-- `manifests/checksums.sha256` — SHA256 checksums for all files
-- `manifests/DATASET_RELEASE_INVENTORY.csv` — Dataset inventory with row counts, column counts, sizes
-- `manifests/DERIVED_DATA_AUDIT.csv` — Audit of derived data artifacts
+The four regional datasets currently checked into the repository do **not** fully pass strict Canonical Benchmark Schema (CBS) validation. The detailed findings and dataset-specific counts are reported in [`docs/DATA_QUALITY_VALIDATION_REPORT.md`](../docs/DATA_QUALITY_VALIDATION_REPORT.md). Do not describe these datasets as Gold-certified or fully CBS-compliant.
 
----
+GRQA v1.4 requires attribution under its upstream CC-BY-4.0 license. Water Quality Portal (WQP) aggregates data from multiple contributors; do not assume all WQP/STORET-derived records share a blanket public-domain status. Source-specific redistribution terms require review. See [`licenses/DATASET_LICENSE_AUDIT.csv`](../licenses/DATASET_LICENSE_AUDIT.csv) and [`licenses/ATTRIBUTION.md`](../licenses/ATTRIBUTION.md).
 
-## Verification
+## Related documentation
 
-```bash
-# Verify all checksums (from the repository root; cross-platform)
-python code/requirements/verify_checksums.py --quiet
-# Linux alternative: sha256sum -c data/manifests/checksums.sha256
-
-# Check dataset properties
-python -c "
-import pandas as pd
-obs = pd.read_csv('harmonized/HWIN-GRQA-V1-4/observations.csv')
-print(f'GRQA observations: {len(obs)}')
-print(f'GRQA variables: {obs.canonical_variable_id.nunique()}')
-print(f'GRQA stations: {obs.station_id.nunique()}')
-vars = pd.read_csv('harmonized/HWIN-GRQA-V1-4/variables.csv')
-print(f'Benchmarkable vars (MIN_SAMPLES>=100): {len(vars)}')
-"
-```
-
----
-
-## License
-
-Individual datasets retain their original licenses:
-- GRQA v1.4: CC-BY-4.0
-- WQP/STORET: Public Domain (17 USC §105)
-
-See `licenses/DATASET_LICENSE_AUDIT.csv` for full audit.
+- [`docs/DATA_ACCESS_AND_RELEASE.md`](../docs/DATA_ACCESS_AND_RELEASE.md): release, download and DOI status
+- [`docs/DATA_GUIDE.md`](../docs/DATA_GUIDE.md): datasets, schemas and counts
+- [`docs/DATA_PROVENANCE.md`](../docs/DATA_PROVENANCE.md): provenance descriptions
+- [`docs/DATA_QUALITY_VALIDATION_REPORT.md`](../docs/DATA_QUALITY_VALIDATION_REPORT.md): strict CBS findings
+- [`data/manifests/DATASET_RELEASE_INVENTORY.csv`](manifests/DATASET_RELEASE_INVENTORY.csv): current inventory and checksums
