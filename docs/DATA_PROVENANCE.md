@@ -1,5 +1,7 @@
 # Data Provenance — HWIN-Bench v1.0
 
+> **Correction / current-state note (2026-10-19):** Some counts and CBS status labels in the original provenance narrative were based on earlier planning/processing stages. Use `data/manifests/DATASET_RELEASE_INVENTORY.csv` for measured counts of the current harmonized files and `docs/DATA_QUALITY_VALIDATION_REPORT.md` for current strict-CBS findings. The four regional datasets do not fully pass strict CBS validation. The GRQA harmonized observation input is available from GitHub Release v1.0.4, not from the upstream GRQA ZIP; see `docs/DATA_AVAILABILITY.md`. WQP/STORET source licensing must be evaluated by contributing source; no blanket public-domain claim is made here.
+
 Complete provenance chains for all five canonical datasets, from original source through HWIN-Bench representation to benchmark use.
 
 > **Code-path note**: Path references of the form `src/hwin_bench/...` point to the
@@ -102,13 +104,13 @@ Each transition references the actual code or documented procedure.
 - **Temporal Consistency (4)**: Timestamps parseable as ISO 8601, within dataset temporal coverage, chronological order per station-variable, no future dates
 - **Spatial Consistency (3)**: Coordinates in valid ranges (lat -90 to 90, lon -180 to 180), country code matches coordinate location, station_type valid
 
-**Certification**: Gold
+**Validation status**: Not independently certified as fully CBS-compliant by the current release audit; consult `docs/DATA_QUALITY_VALIDATION_REPORT.md`
 
 ### HWIN-Bench Representation
 **Location**: `data/harmonized/HWIN-GRQA-V1-4/`
 - `observations.csv`: 25,850,907 rows, CBS format (Note: GRQA observations.csv is in Zenodo due to GitHub LFS 2 GB limit)
 - `stations.json`: 107,000 stations
-- `variables.csv`: 11 canonical variables (11 benchmarkable after MIN_SAMPLES≥100)
+- `variables.csv`: 13 rows in current `variables.csv`; 11 variables appear in canonical benchmark result artifacts
 - `dataset.json`: Metadata with checksums, DOI, coverage
 
 **Key Metrics**:
@@ -139,7 +141,7 @@ Each transition references the actual code or documented procedure.
 - **Provider**: U.S. Geological Survey (USGS) National Water Information System (NWIS) + Environmental Protection Agency (EPA) Water Quality Exchange (WQX)
 - **Portal**: Water Quality Portal (WQP) — https://www.waterqualitydata.us/
 - **Agencies**: 400+ state, federal, tribal, local agencies
-- **License**: Public Domain (17 USC §105 — US Government works)
+- **License status**: WQP aggregates contributions from multiple agencies; review source-specific terms before redistribution and do not assume blanket public-domain status for the aggregate
 
 ### Download/Retrieval
 - **Date**: 2026-07-08
@@ -151,7 +153,7 @@ Each transition references the actual code or documented procedure.
   - `mimeType=csv`
 - **Authentication**: None required
 - **Code**: `examples/quickstart/download_wqp.py` (function `download_sfbay()`)
-- **Volume**: ~51,000 observations retrieved
+- **Volume**: 51,050 rows in the current harmonized observations CSV
 
 ### Raw Representation
 - **Format**: WQP CSV output (wide format with 100+ columns)
@@ -213,12 +215,12 @@ Each transition references the actual code or documented procedure.
 
 ### Validation
 **Code**: Same CBS validation engine as GRQA
-**Certification**: Gold
+**Validation status**: Does not fully pass strict CBS validation; see `docs/DATA_QUALITY_VALIDATION_REPORT.md`
 
 ### HWIN-Bench Representation
 **Location**: `data/harmonized/HWIN-WQP-SFBAY/`
-- `observations.csv`: 51,000 rows
-- `stations.json`: 1,000+ stations
+- `observations.csv`: 51,050 rows
+- `stations.json`: 642 station IDs represented in current observations CSV
 - `variables.csv`: 19 canonical variables
 - `dataset.json`: Metadata
 
@@ -235,7 +237,7 @@ Each transition references the actual code or documented procedure.
 - **Provider**: U.S. Environmental Protection Agency (EPA) STORET Warehouse / Water Quality Exchange (WQX)
 - **Portal**: https://www.epa.gov/waterdata/storage-and-retrieval-and-water-quality-exchange
 - **Accessed via**: Water Quality Portal (WQP) API
-- **License**: Public Domain (17 USC §105)
+- **License status**: Source/contributor-specific terms require review before redistribution; do not assume blanket public-domain status for the aggregate
 
 ### Download/Retrieval
 - **Date**: 2026-07-08
@@ -245,12 +247,12 @@ Each transition references the actual code or documented procedure.
   - `startDateLo=1950-01-01`, `startDateHi=2024-12-31`
   - `dataSource=WQX` (EPA STORET/WQX only)
 - **Code**: `examples/quickstart/download_wqp.py` (function `download_storet_state()`)
-- **Volume**: ~180,000 observations
+- **Volume**: 172,103 rows in current harmonized observations CSV
 
 ### Raw Representation
 - **Format**: WQP CSV (same structure as WQP SF Bay)
 - **Source**: EPA WQX (STORET) database
-- **Stations**: ~3,000 monitoring locations in California
+- **Stations**: 48,338 station IDs represented in current observations CSV
 
 ### Cleaning
 Same as WQP SF Bay (shared loader code)
@@ -264,11 +266,11 @@ Same as WQP SF Bay (shared loader code)
 
 ### Validation
 Same CBS validation engine
-**Certification**: Gold
+**Validation status**: Does not fully pass strict CBS validation; see `docs/DATA_QUALITY_VALIDATION_REPORT.md`
 
 ### HWIN-Bench Representation
 **Location**: `data/harmonized/HWIN-STORET-CA/`
-- `observations.csv`: 180,000 rows
+- `observations.csv`: 172,103 rows
 - `stations.json`: 3,000 stations
 - `variables.csv`: 22 canonical variables
 - `dataset.json`: Metadata
@@ -283,13 +285,13 @@ Same CBS validation engine
 
 ### Original Source
 - **Provider**: EPA STORET/WQX via WQP
-- **License**: Public Domain (17 USC §105)
+- **License status**: Source/contributor-specific terms require review before redistribution; do not assume blanket public-domain status for the aggregate
 
 ### Download/Retrieval
 - **Date**: 2026-07-08
 - **Method**: WQP REST API
 - **Query**: `statecode=US:48` (Texas FIPS), `dataSource=WQX`, 1950-2024
-- **Volume**: ~175,000 observations, ~2,000 stations
+- **Volume**: 210,614 observation rows and 4,988 station IDs in current harmonized CSV
 
 ### Processing
 Identical to STORET CA (shared pipeline)
@@ -299,7 +301,7 @@ Identical to STORET CA (shared pipeline)
 - Same variable/unit mappings
 
 ### Validation
-CBS validation — Gold
+CBS validation status: does not fully pass strict CBS validation; see `docs/DATA_QUALITY_VALIDATION_REPORT.md`
 
 ### HWIN-Bench Representation
 **Location**: `data/harmonized/HWIN-STORET-TX/`
@@ -313,13 +315,13 @@ Transfer learning evaluation (GRQA Texas-matched → STORET TX)
 
 ### Original Source
 - **Provider**: EPA STORET/WQX via WQP
-- **License**: Public Domain (17 USC §105)
+- **License status**: Source/contributor-specific terms require review before redistribution; do not assume blanket public-domain status for the aggregate
 
 ### Download/Retrieval
 - **Date**: 2026-07-08
 - **Method**: WQP REST API
 - **Query**: `statecode=US:44` (Rhode Island FIPS), `dataSource=WQX`, 1950-2024
-- **Volume**: ~2,500 observations, ~50 stations
+- **Volume**: 2,294 observation rows and 95 station IDs in current harmonized CSV
 
 ### Processing
 Identical pipeline
@@ -329,7 +331,7 @@ Identical pipeline
 - Same mappings
 
 ### Validation
-CBS validation — Gold
+CBS validation status: does not fully pass strict CBS validation; see `docs/DATA_QUALITY_VALIDATION_REPORT.md`
 
 ### HWIN-Bench Representation
 **Location**: `data/harmonized/HWIN-STORET-RI/`
@@ -374,11 +376,11 @@ Transfer learning evaluation (GRQA Northeast-matched → STORET RI)
 
 | Dataset | Original Source | Retrieval Date | Retrieval Method | Cleaning Code | Harmonization Code | Validation Code | CBS Certification |
 |---------|----------------|----------------|------------------|---------------|-------------------|-----------------|-------------------|
-| HWIN-GRQA-V1-4 | Zenodo (doi:10.5281/zenodo.15335450) | 2026-07-08 | HTTPS download | `canonicalization/engine.py` | `canonicalization/mapper.py` + `engine.py` | `canonicalization/engine.py` | Gold |
-| HWIN-WQP-SFBAY | WQP API | 2026-07-08 | REST API (bbox) | `loaders/wqp_loader.py` | `canonicalization/mapper.py` + `engine.py` | `canonicalization/engine.py` | Gold |
-| HWIN-STORET-CA | WQP API | 2026-07-08 | REST API (statecode=US:06) | `loaders/wqp_loader.py` | `canonicalization/mapper.py` + `engine.py` | `canonicalization/engine.py` | Gold |
-| HWIN-STORET-TX | WQP API | 2026-07-08 | REST API (statecode=US:48) | `loaders/wqp_loader.py` | `canonicalization/mapper.py` + `engine.py` | `canonicalization/engine.py` | Gold |
-| HWIN-STORET-RI | WQP API | 2026-07-08 | REST API (statecode=US:44) | `loaders/wqp_loader.py` | `canonicalization/mapper.py` + `engine.py` | `canonicalization/engine.py` | Gold |
+| HWIN-GRQA-V1-4 | Zenodo (doi:10.5281/zenodo.15335450) | 2026-07-08 | HTTPS download | `canonicalization/engine.py` | `canonicalization/mapper.py` + `engine.py` | `canonicalization/engine.py` | Does not fully pass strict CBS validation |
+| HWIN-WQP-SFBAY | WQP API | 2026-07-08 | REST API (bbox) | `loaders/wqp_loader.py` | `canonicalization/mapper.py` + `engine.py` | `canonicalization/engine.py` | Does not fully pass strict CBS validation |
+| HWIN-STORET-CA | WQP API | 2026-07-08 | REST API (statecode=US:06) | `loaders/wqp_loader.py` | `canonicalization/mapper.py` + `engine.py` | `canonicalization/engine.py` | Does not fully pass strict CBS validation |
+| HWIN-STORET-TX | WQP API | 2026-07-08 | REST API (statecode=US:48) | `loaders/wqp_loader.py` | `canonicalization/mapper.py` + `engine.py` | `canonicalization/engine.py` | Does not fully pass strict CBS validation |
+| HWIN-STORET-RI | WQP API | 2026-07-08 | REST API (statecode=US:44) | `loaders/wqp_loader.py` | `canonicalization/mapper.py` + `engine.py` | `canonicalization/engine.py` | Does not fully pass strict CBS validation |
 
 ---
 
